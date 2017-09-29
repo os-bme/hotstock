@@ -1,5 +1,7 @@
 # Hotstock
 
+[![Join the chat at https://gitter.im/os-bme/hotstock](https://badges.gitter.im/os-bme/hotstock.svg)](https://gitter.im/os-bme/hotstock?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Pályázatis portál, ami a [vik.hk által kiírt pályázatok](https://vik.hk/palyazatok) leadására és feldolgozására szolgál.
 
 ## Kezdetleges specifikációja a portálnak
