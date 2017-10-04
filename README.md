@@ -9,3 +9,19 @@ Pályázatis portál, ami a következő [vik.hk által kiírt pályázatok](http
 - Utazási pályázat
 - Konferencia pályázat
 
+## Futtatás
+
+**Futtatáshoz hajtsd végre a következőket:**
+
+###### Install Node.js
+
+```bash
+$ sudo apt-get install nodejs
+```
+
+###### Install Express
+
+```bash
+$ npm install express
+```
+
