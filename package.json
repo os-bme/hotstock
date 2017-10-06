@@ -1,0 +1,21 @@
+{
+  "name": "hotstock",
+  "version": "0.0.0",
+  "description": "Pályázatis portál, ami a következő [vik.hk által kiírt pályázatok](https://vik.hk/palyazatok) leadására és feldolgozására szolgál: - AIT - Jegyzet pályázat - Szakmai KBME - Sportösztöndíj - Konzultáció pályázat - Utazási pályázat - Konferencia pályázat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/os-bme/hotstock.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/os-bme/hotstock/issues"
+  },
+  "dependencies": {
+    "express": "~4.16.1"
+  }
+}

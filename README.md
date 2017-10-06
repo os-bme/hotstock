@@ -20,7 +20,16 @@ $ sudo apt-get install nodejs
 $ npm install express
 ```
 
-Pályázatis portál, ami a [vik.hk által kiírt pályázatok](https://vik.hk/palyazatok) leadására és feldolgozására szolgál.
+###### Install MongoDB 
+
+```bash
+$ sudo apt-get install mongodb
+```
+
+###### Webstorm telepítés - ajánlott
+
+
+###### Robomongo telepítés - ajánlott
 
 ## Kezdetleges specifikációja a portálnak
 
