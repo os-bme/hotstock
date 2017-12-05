@@ -1,9 +1,21 @@
-var express = require('express');
-var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+var updateUser = require('../middlewares/user/updateUser');
 
-module.exports = router;
+var UserModel = require('../models/users');
+
+module.exports = function (app) {
+
+    var objectRepository = {
+        userModel: UserModel
+    };
+
+    /* GET home page. */
+    app.use('/',
+        updateUser(objectRepository),
+        function (req, res, next) {
+            res.send('Test user Created');
+            return;
+        }
+    );
+
+}

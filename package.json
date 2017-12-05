@@ -1,10 +1,11 @@
 {
   "name": "hotstock",
   "version": "0.0.0",
+  "main": "index.js",
   "description": "Pályázatis portál, ami a következő [vik.hk által kiírt pályázatok](https://vik.hk/palyazatok) leadására és feldolgozására szolgál.",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
     "express": "~4.15.5",
     "morgan": "~1.9.0",
     "pug": "2.0.0-beta11",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "mongoose": "^4.13.4"
   }
 }
