@@ -1,13 +1,14 @@
+var Schema = require('mongoose').Schema;
 var db = require( '../db' );
 
 var ScoreModel = db.model( 'Score', {
     value: Number,
     _evaulator: {
-        type: db.Schema.Types.ObjectId,
-        ref: 'Evaulator'
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     },
     _app_part: {
-        type: db.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'AppPart'
     }
 });

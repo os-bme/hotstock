@@ -11,8 +11,15 @@ app.use(function (req, res, next) {
 });
 
 /**
+ * Public directory
+ */
+app.use('/public', express.static('public'));
+
+/**
  * Include routes
  */
+require('./routes/users')(app);
+require('./routes/db')(app);
 require('./routes/index')(app);
 
 /**

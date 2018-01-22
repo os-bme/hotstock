@@ -1,6 +1,5 @@
 
 var updateUser = require('../middlewares/user/updateUser');
-
 var UserModel = require('../models/users');
 
 module.exports = function (app) {
@@ -11,11 +10,9 @@ module.exports = function (app) {
 
     /* GET home page. */
     app.use('/',
-        updateUser(objectRepository),
         function (req, res, next) {
-            res.send('Test user Created');
-            return;
+            return res.send('Main page');
         }
     );
 
-}
+};

@@ -1,3 +1,4 @@
+var Schema = require('mongoose').Schema;
 var db = require( '../db' );
 
 var TenderModel = db.model( 'Tender', {
