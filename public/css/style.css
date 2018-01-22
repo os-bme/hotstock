@@ -21,6 +21,11 @@ html, body{
   height: 100%;
 }
 
+.card-body .container-fluid {
+   padding-top: 0px;
+   height: auto;
+ }
+
 .space-before-20{
   margin-top: 20px;
 }
