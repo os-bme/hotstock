@@ -17,7 +17,7 @@ html, body{
 }
 
 .container-fluid {
-  padding-top: 50px;
+  padding-top: 40px;
   height: 100%;
 }
 
@@ -34,6 +34,10 @@ html, body{
   margin-top: 20px;
 }
 
+.space-before-40{
+  margin-top: 40px;
+}
+
 .space-before-100{
   margin-top: 100px;
 }
@@ -42,7 +46,7 @@ html, body{
   height: 180px;
   padding-left: 5% !important;
   padding-right: 5% !important;
-  padding-top: 25px !important;
+  padding-top: 35px !important;
   background-color: #C8C8C8;
 }
 

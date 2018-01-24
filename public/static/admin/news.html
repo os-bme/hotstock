@@ -25,11 +25,51 @@
             <li class="nav-item">
                 <a class="nav-link" href="main.html">Home</a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="">News <span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+                <div class="btn-group dropdown">
+                    <a class="nav-link text-right active" href="">
+                        <span class="sr-only">(current)</span>
+                        News
+                    </a>
+                    <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropright</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">New</a>
+                    </div>
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="tenders.html">Tenders</a>
+                <div class="btn-group dropdown">
+                    <a class="nav-link text-right" href="tenders.html">
+                        Tenders
+                    </a>
+                    <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropright</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">All</a>
+                        <a class="dropdown-item" href="#">New</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="btn-group dropdown">
+                    <a class="nav-link text-right" href="">
+                        Applications
+                    </a>
+                    <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropright</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Unscored</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="users.html">
+                    Users
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="about.html">About</a>
@@ -40,8 +80,9 @@
                 Firstname Lastname
             </button>
             <div class="dropdown-menu" aria-labelledby="btnGroupUser">
-                <a class="dropdown-item" href="#">My Profile</a>
+                <a class="dropdown-item" href="profile.html">My Profile</a>
                 <a class="dropdown-item" href="#">Applications</a>
+                <div role="separator" class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Log out</a>
             </div>
         </div>
@@ -52,18 +93,19 @@
     <div class="row justify-content-center">
 
         <div class="col-sm-10">
-            <div class="container">
+            <div class="container space-before-10">
                 <div class="row">
                     <div class="col-sm-5 space-before-20">
                         <h1 class="display-4">All news</h1>
                     </div>
                     <div class="col-sm-7 text-right space-before-10">
-                        <button type="button" class="btn btn-outline-info space-before-10 active">BSc</button>
-                        <button type="button" class="btn btn-outline-info space-before-10">Koli</button>
-                        <button type="button" class="btn btn-outline-info space-before-10">Heti</button>
+                        <button type="button" class="btn btn-info space-before-10 btn-sm">BSc</button>
+                        <button type="button" class="btn btn-outline-info space-before-10 btn-sm">Koli</button>
+                        <button type="button" class="btn btn-outline-info space-before-10 btn-sm">Heti</button>
                     </div>
                 </div>
             </div>
+            <div class="space-before-10"></div>
             <div class="card-deck space-before-20">
                 <div class="card card-link">
                     <a href="news_complete.html">
@@ -81,6 +123,92 @@
                     </a>
                 </div>
 
+                <div class="card card-link">
+                    <a href="news_complete.html">
+                        <img class="card-img-top" src="http://via.placeholder.com/259x180" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-title">
+                                <span class="h5">News title </span>
+                                <span class="badge badge-info h6">BSc</span>
+                                <span class="badge badge-info h6">Koli</span>
+                                <span class="badge badge-info h6">Heti</span>
+                            </p>
+                            <p class="card-text short-description">This is a news card with its short version of the full article, the full content.</p>
+                            <p class="card-text"><small class="text-muted">2018-01-01</small></p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card card-link">
+                    <a href="news_complete.html">
+                        <img class="card-img-top" src="http://via.placeholder.com/259x180" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-title">
+                                <span class="h5">News title </span>
+                                <span class="badge badge-info h6">BSc</span>
+                                <span class="badge badge-info h6">Koli</span>
+                                <span class="badge badge-info h6">Heti</span>
+                            </p>
+                            <p class="card-text short-description">This is a news card with its short version of the full article, the full content.</p>
+                            <p class="card-text"><small class="text-muted">2018-01-01</small></p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="card-deck space-before-20">
+                <div class="card card-link">
+                    <a href="news_complete.html">
+                        <img class="card-img-top" src="http://via.placeholder.com/259x180" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-title">
+                                <span class="h5">News title </span>
+                                <span class="badge badge-info h6">BSc</span>
+                                <span class="badge badge-info h6">Koli</span>
+                                <span class="badge badge-info h6">Heti</span>
+                            </p>
+                            <p class="card-text short-description">This is a news card with its short version of the full article, the full content.</p>
+                            <p class="card-text"><small class="text-muted">2018-01-01</small></p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card card-link">
+                    <a href="news_complete.html">
+                        <img class="card-img-top" src="http://via.placeholder.com/259x180" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-title">
+                                <span class="h5">News title </span>
+                                <span class="badge badge-info h6">BSc</span>
+                                <span class="badge badge-info h6">Koli</span>
+                                <span class="badge badge-info h6">Heti</span>
+                            </p>
+                            <p class="card-text short-description">This is a news card with its short version of the full article, the full content.</p>
+                            <p class="card-text"><small class="text-muted">2018-01-01</small></p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="card card-link">
+                    <a href="news_complete.html">
+                        <img class="card-img-top" src="http://via.placeholder.com/259x180" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-title">
+                                <span class="h5">News title </span>
+                                <span class="badge badge-info h6">BSc</span>
+                                <span class="badge badge-info h6">Koli</span>
+                                <span class="badge badge-info h6">Heti</span>
+                            </p>
+                            <p class="card-text short-description">This is a news card with its short version of the full article, the full content.</p>
+                            <p class="card-text"><small class="text-muted">2018-01-01</small></p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="card-deck space-before-20">
                 <div class="card card-link">
                     <a href="news_complete.html">
                         <img class="card-img-top" src="http://via.placeholder.com/259x180" alt="Card image cap">

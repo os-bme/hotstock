@@ -12,7 +12,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="">
+    <a class="navbar-brand" href="#">
         <img src="/public/assets/hotstock-solid.png" width="30" height="30" class="d-inline-block align-top rounded" alt="">
         Hotstock
     </a>
@@ -22,8 +22,8 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+                <a class="nav-link" href="main.html">Home</a>
             </li>
             <li class="nav-item">
                 <div class="btn-group dropdown">
@@ -71,7 +71,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="about.html">About</a>
+                <a class="nav-link" href="about.html">
+                    About
+                </a>
             </li>
         </ul>
         <div class="dropdown">
@@ -79,7 +81,7 @@
                 Firstname Lastname
             </button>
             <div class="dropdown-menu" aria-labelledby="btnGroupUser">
-                <a class="dropdown-item" href="profile.html">My Profile</a>
+                <a class="dropdown-item active" href="">My Profile <span class="sr-only">(current)</span></a>
                 <a class="dropdown-item" href="#">Applications</a>
                 <div role="separator" class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Log out</a>
@@ -89,59 +91,65 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center space-before-40">
 
-        <div class="welcome-card col-sm-12">
-                <h1 class="display-4">Welcome to Hotstock!</h1>
-                <p class="lead">This page is an open source application portal.</p>
-        </div>
+        <div class="col-sm-9">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="display-4">Firstname Lastname</h1>
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img class="card-img-top" src="http://via.placeholder.com/180x259" alt="Card image cap">
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="container-fluid space-before-20">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <p> <strong>Firstname:</strong> Firstname</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Lastname:</strong> Lastname</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Neptun-code:</strong> AAAAAA</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Status:</strong> active/passive</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Date of birth:</strong> YYYY.MM.DD.</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Place of birth:</strong> City</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>E-mail address:</strong> alias@domain.hu</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Mobile:</strong> +36 00 123 4567</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Post type:</strong> post_number</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Permission:</strong> permission_number</p>
+                                        </div>
 
-        <div class="col-sm-11 card-deck">
-            <div class="card card-link">
-                <a href="news_complete.html">
-                    <img class="card-img-top" src="http://via.placeholder.com/259x180" alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-title">
-                            <span class="h5">News title </span>
-                            <span class="badge badge-info h6">BSc</span>
-                            <span class="badge badge-info h6">Koli</span>
-                            <span class="badge badge-info h6">Heti</span>
-                        </p>
-                        <p class="card-text short-description">This is a news card with its short version of the full article, the full content.</p>
+                                        <div class="col-sm-12 text-center space-before-20">
+                                            <button type="button" class="btn btn-outline-dark">Edit datas</button>
+                                            <button type="button" class="btn btn-outline-dark">Change picture</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </a>
+                </div>
             </div>
-
-            <div class="card card-link">
-                <a href="news_complete.html">
-                    <img class="card-img-top" src="http://via.placeholder.com/259x180" alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-title">
-                            <span class="h5">News title </span>
-                            <span class="badge badge-info h6">BSc</span>
-                            <span class="badge badge-info h6">Koli</span>
-                            <span class="badge badge-info h6">Heti</span>
-                        </p>
-                        <p class="card-text short-description">This is a news card with its short version of the full article, the full content.</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="card card-link">
-                <a href="news_complete.html">
-                    <img class="card-img-top" src="http://via.placeholder.com/259x180" alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-title">
-                            <span class="h5">News title </span>
-                            <span class="badge badge-info h6">BSc</span>
-                            <span class="badge badge-info h6">Koli</span>
-                            <span class="badge badge-info h6">Heti</span>
-                        </p>
-                        <p class="card-text short-description">This is a news card with its short version of the full article, the full content.</p>
-                    </div>
-                </a>
-            </div>
-
         </div>
 
     </div>
