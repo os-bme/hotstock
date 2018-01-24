@@ -26,6 +26,10 @@ html, body{
    height: auto;
  }
 
+.space-before-10{
+  margin-top: 10px;
+}
+
 .space-before-20{
   margin-top: 20px;
 }
@@ -66,4 +70,13 @@ html, body{
   -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
   -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
   box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+}
+
+.pagination .active a {
+  background-color: #17A2B8 !important;
+  color: #ffc8af !important;
+}
+
+.pagination a{
+  color: orangered;
 }
