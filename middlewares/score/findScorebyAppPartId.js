@@ -2,15 +2,19 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        res.tpl.score = objectrepository.scoreModel.findOne( { _app_part: res.tpl.app_part._id } );
+        objectrepository.scoreModel.findOne( { _app_part: res.tpl.app_part._id }, function (err, obj) {
 
-        if ( res.tpl.score === null ) {
-            console.log("score find error/none");
-        } else {
-            console.log("score find success");
-        }
+            if ( res.tpl.score === null ) {
+                res.tpl.score = null;
+                console.log("score find error/none");
+            } else {
+                res.tpl.score = obj;
+                console.log("score find success");
+            }
 
-        return next();
+            return next();
+
+        } );
 
     }
 };

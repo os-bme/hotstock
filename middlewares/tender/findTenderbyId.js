@@ -2,15 +2,19 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        res.tpl.tender = objectrepository.tenderModel.findOne( { _id: res.tpl.tender._id } );
+        objectrepository.tenderModel.findOne( { _id: res.tpl.tender._id }, function (err, obj) {
 
-        if ( res.tpl.tender === null ) {
-            console.log("tender find error/none");
-        } else {
-            console.log("tender find success");
-        }
+            if ( res.tpl.tender === null ) {
+                res.tpl.tender = null;
+                console.log("tender find error/none");
+            } else {
+                res.tpl.tender = obj;
+                console.log("tender find success");
+            }
 
-        return next();
+            return next();
+
+        } );
 
     }
 };

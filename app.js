@@ -47,7 +47,7 @@ passport.use(new OAuth2Strategy({
         tokenURL: 'https://auth.sch.bme.hu/oauth2/token',
         clientID: configuration.CLIENT_ID,
         clientSecret: configuration.CLIENT_SECRET,
-        callbackURL: "/auth/example/callback",
+        callbackURL: "/auth/oauth/callback",
         scope: configuration.SCOPE
     },
     function (accessToken, refreshToken, profile, cb) {
@@ -57,7 +57,7 @@ passport.use(new OAuth2Strategy({
             if (!error && response.statusCode == 200) {
                 return cb(null, JSON.parse(body), null);
             } else {
-                return cb(new Error('hello'));
+                return cb(new Error('oauth2 authentication failure'));
             }
         });
     }));
