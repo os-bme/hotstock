@@ -70,13 +70,16 @@
                     Users
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tags.html">Tags</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="tags.html">
+                    Tags
+                    <span class="sr-only">(current)</span>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="about.html">
+                <a class="nav-link" href="about.html">
                     About
-                    <span class="sr-only">(current)</span></a>
+                </a>
             </li>
         </ul>
         <div class="dropdown">
@@ -94,17 +97,43 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="row justify-content-center space-before-100">
+    <div class="row justify-content-center space-before-40">
 
-        <div class="col-sm-10">
-            <div class="card">
-                <div class="card-header">
-                    <h1 class="display-4">About this webpage</h1>
-                </div>
-                <div class="card-body">
-                    <p class="lead text-justify">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur non augue et nisi porttitor pretium. Mauris vel neque vitae orci luctus aliquet. Nulla facilisi. Donec in mi. Curabitur semper massa quis diam. Ut dignissim elit at nisi. Mauris nec ipsum. Nunc ac quam. Donec in diam. Phasellus tempus scelerisque justo.</p>
-                </div>
-            </div>
+        <div class="col-lg-5 col-sm-8">
+            <table class="table table-hover space-before-20">
+                <thead>
+                <tr>
+                    <th scope="col">Full name</th>
+                    <th scope="col" class="text-center">Tag</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Bachelor of Science</td>
+                    <th class="text-center">BSc</th>
+                    <td class="text-right">
+                        <a class="btn btn-outline-danger btn-sm" href="">Delete</a>
+                        <a class="btn btn-secondary btn-sm" href="">Edit</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Master of Science</td>
+                    <th class="text-center">MSc</th>
+                    <td class="text-right">
+                        <a class="btn btn-outline-danger btn-sm" href="">Delete</a>
+                        <a class="btn btn-secondary btn-sm" href="">Edit</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="text-center">
+                        <a class="btn btn-secondary btn-sm" href="">Add</a>
+                    </td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
 
     </div>

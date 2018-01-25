@@ -54,14 +54,14 @@
             </li>
             <li class="nav-item">
                 <div class="btn-group dropdown">
-                    <a class="nav-link text-right" href="">
+                    <a class="nav-link text-right" href="apps_unscored.html">
                         Applications
                     </a>
                     <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="sr-only">Toggle Dropright</span>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Unscored</a>
+                        <a class="dropdown-item" href="apps_unscored.html">Unscored</a>
                     </div>
                 </div>
             </li>
@@ -69,6 +69,9 @@
                 <a class="nav-link" href="users.html">
                     Users
                 </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="tags.html">Tags</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="about.html">
@@ -82,7 +85,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="btnGroupUser">
                 <a class="dropdown-item active" href="">My Profile <span class="sr-only">(current)</span></a>
-                <a class="dropdown-item" href="#">Applications</a>
+                <a class="dropdown-item" href="apps_unscored.html">Applications</a>
                 <div role="separator" class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Log out</a>
             </div>
@@ -96,7 +99,17 @@
         <div class="col-sm-9">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="display-4">Firstname Lastname</h1>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h1 class="display-4">Firstname Lastname</h1>
+                            </div>
+                            <div class="col-sm-4 text-right">
+                                <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm">Permissions</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="container-fluid">
@@ -139,8 +152,8 @@
                                         </div>
 
                                         <div class="col-sm-12 text-center space-before-20">
-                                            <button type="button" class="btn btn-outline-dark">Edit datas</button>
-                                            <button type="button" class="btn btn-outline-dark">Change picture</button>
+                                            <button type="button" class="btn btn-secondary">Edit datas</button>
+                                            <button type="button" class="btn btn-secondary">Change picture</button>
                                         </div>
                                         </div>
                                     </div>
