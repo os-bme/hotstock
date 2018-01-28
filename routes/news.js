@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 var renderMW = require('../middlewares/general/render');
-var authMW = require('../middlewares/general/auth');
 var updateUser = require('../middlewares/user/updateUser');
 
 var UserModel = require('../models/users');
@@ -13,7 +12,7 @@ var objectRepository = {
     newsModel: NewsModel
 };
 
-router.get('/',
+router.use('/all',
     function (req,res,next) {
 
         res.newses = [];
@@ -27,7 +26,6 @@ router.get('/',
         };
         res.newses.push(news);
 
-        /*
         var news = new NewsModel();
         news = {
             _id: 1,
@@ -54,16 +52,10 @@ router.get('/',
             publish_datetime: '2018-01-01'
         };
         res.newses.push(news);
-        */
 
         return next();
     },
-    renderMW(objectRepository, 'index')
-);
-
-router.get('/about',
-    authMW(objectRepository),
-    renderMW(objectRepository, 'about')
+    renderMW(objectRepository, 'newsAll')
 );
 
 module.exports = router;

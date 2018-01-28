@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+
+var renderMW = require('../middlewares/general/render');
+
 var UserModel = require('../models/users');
 
 var objectRepository = {
@@ -16,8 +19,10 @@ router.use('/logout', function (req, res) {
     }
 );
 
-router.use('/err', function (req, res) {
-        res.status(404).send(error);
+router.use('/err', function (req, res, next) {
+        var err = new Error('Not Found');
+        err.status = 404;
+        next(err);
     }
 );
 
@@ -34,6 +39,8 @@ router.use('/oauth/callback',
     }),
     function (req, res) {
         // Sikeres azonositas
+        req.session.bme_id = req.user.internal_id;
+
         objectRepository.userModel.findOne({bme_id: req.user.internal_id}, function (err, obj) {
             if (obj === null) {
                 res.tpl.user = new objectRepository.userModel();

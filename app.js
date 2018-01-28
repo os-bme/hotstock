@@ -17,7 +17,7 @@ var app = express();
  *  View engine setup
  */
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 
 /**
  *  Cookie and body parser
@@ -32,9 +32,12 @@ app.use(cookieParser());
  */
 app.use(session({
     secret: configuration.sessionSecret,
+    cookie: {
+        maxage: 60000,
+        secure: true
+    },
     resave: true,
-    saveUninitialized: true,
-    cookie: {secure: true}
+    saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -54,7 +57,7 @@ passport.use(new OAuth2Strategy({
         console.log(accessToken + '\n' + refreshToken + '\n' + JSON.stringify(profile));
         var request = require('request');
         request('https://auth.sch.bme.hu/api/profile?access_token=' + accessToken, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
+            if (!error && response.statusCode === 200) {
                 return cb(null, JSON.parse(body), null);
             } else {
                 return cb(new Error('oauth2 authentication failure'));
@@ -84,6 +87,9 @@ passport.deserializeUser(function (user, done) {
 app.use(function (req, res, next) {
     res.tpl = {};
     res.tpl.error = [];
+    res.tpl.func= {
+        moment: moment
+    };
     return next();
 });
 
@@ -96,16 +102,22 @@ app.use(favicon(path.join(__dirname, 'public', 'hotstockicon.ico')));
 /**
  * Include routes
  */
-require('./routes/users')(app);
-require('./routes/db')(app);
-var indexRoute = require('./routes/index');
-var authorizationRoutes = require('./routes/auth');
+var user = require('./routes/users');
+var db = require('./routes/db');
+var index = require('./routes/index');
+var auth = require('./routes/auth');
+var news = require('./routes/news');
+var tender = require('./routes/tender');
 
 /**
  *  Use routes
  */
-app.use('/auth', authorizationRoutes);
-app.use('/', indexRoute);
+app.use('/', index);
+app.use('/user', user);
+app.use('/db', db);
+app.use('/auth', auth);
+app.use('/news', news);
+app.use('/tender', tender);
 
 /**
  * Error handler
@@ -126,7 +138,8 @@ app.use(function(err, req, res, next) {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.error = err;
+    res.render('error', {req: req, res: res});
 });
 
 /**

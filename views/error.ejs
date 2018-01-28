@@ -1,0 +1,33 @@
+<% include pageHeader %>
+
+<% include pageNavbar %>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+
+        <div class="container-fluid">
+            <div class="row justify-content-center space-before-4">
+
+                <div class="col-sm-10">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1 class="display-4">
+                                <%= res.error.status%>
+                                <%= res.error.message %>
+                            </h1>
+                        </div>
+                        <div class="card-body">
+                            <p>
+                                <%= res.error.stack%>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<% include pageFooter %>
