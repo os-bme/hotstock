@@ -2,15 +2,19 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        res.tpl.users = objectrepository.userModel.find();
+        objectrepository.userModel.find({}, function (err, obj) {
 
-        if ( res.tpl.users === null ) {
-            console.log("users find error/none");
-        } else {
-            console.log("users find success");
-        }
+            if ( res.tpl.users === null ) {
+                res.tpl.users = null;
+                console.log("users find error/none");
+            } else {
+                res.tpl.users = obj;
+                console.log("users find success");
+            }
 
-        return next();
+            return next();
+
+        });
 
     }
 };

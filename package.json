@@ -1,11 +1,11 @@
 {
   "name": "hotstock",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "description": "Pályázatis portál, ami a következő [vik.hk által kiírt pályázatok](https://vik.hk/palyazatok) leadására és feldolgozására szolgál.",
   "private": true,
   "scripts": {
-    "start": "node index.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -17,13 +17,19 @@
     "url": "https://github.com/os-bme/hotstock/issues"
   },
   "dependencies": {
-    "body-parser": "~1.18.2",
+    "body-parser": "^1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
+    "dotenv": "^4.0.0",
     "express": "~4.15.5",
+    "express-session": "^1.15.6",
+    "moment": "^2.20.1",
+    "mongoose": "^4.13.4",
     "morgan": "~1.9.0",
+    "passport": "^0.4.0",
+    "passport-oauth2": "^1.4.0",
     "pug": "2.0.0-beta11",
-    "serve-favicon": "~2.4.5",
-    "mongoose": "^4.13.4"
+    "request": "^2.83.0",
+    "serve-favicon": "~2.4.5"
   }
 }

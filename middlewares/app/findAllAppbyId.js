@@ -2,15 +2,19 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        res.tpl.app = objectrepository.appModel.findOne( { _id: res.tpl.app._id } );
+        objectrepository.appModel.findOne( { _id: res.tpl.app._id }, function (err, obj) {
 
-        if ( res.tpl.app === null ) {
-            console.log("app find error/none");
-        } else {
-            console.log("app find success");
-        }
+            if ( res.tpl.app === null ) {
+                res.tpl.app = null;
+                console.log("app find error/none");
+            } else {
+                res.tpl.app = obj;
+                console.log("app find success");
+            }
 
-        return next();
+            return next();
+
+        } );
 
     }
 };
