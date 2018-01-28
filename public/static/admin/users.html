@@ -65,18 +65,19 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="users.html">
                     Users
+                    <span class="sr-only">(current)</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="tags.html">Tags</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="about.html">
+                <a class="nav-link" href="about.html">
                     About
-                    <span class="sr-only">(current)</span></a>
+                </a>
             </li>
         </ul>
         <div class="dropdown">
@@ -94,17 +95,79 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="row justify-content-center space-before-100">
+    <div class="row justify-content-center space-before-40">
 
         <div class="col-sm-10">
-            <div class="card">
-                <div class="card-header">
-                    <h1 class="display-4">About this webpage</h1>
+            <form>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Name">
+                                <select class="form-control">
+                                    <option>All</option>
+                                    <option>User</option>
+                                    <option>Editor</option>
+                                    <option>Admin</option>
+                                </select>
+                                <input type="text" class="form-control" placeholder="NEPTUN">
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Mobile">
+                                <input type="text" class="form-control" placeholder="E-mail">
+                            </div>
+                        </div>
+                        <div class ="col-lg-1">
+                            <div class="input-group-prepend">
+                                <button type="submit" class="btn btn-secondary">Search</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="lead text-justify">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur non augue et nisi porttitor pretium. Mauris vel neque vitae orci luctus aliquet. Nulla facilisi. Donec in mi. Curabitur semper massa quis diam. Ut dignissim elit at nisi. Mauris nec ipsum. Nunc ac quam. Donec in diam. Phasellus tempus scelerisque justo.</p>
-                </div>
-            </div>
+            </form>
+        </div>
+        <div class="col-sm-10">
+            <table class="table table-hover space-before-20">
+                <thead>
+                    <tr>
+                        <th scope="col">Full name</th>
+                        <th scope="col" class="text-center">Mobile</th>
+                        <th scope="col" class="text-center">Permission</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Firstname Lastname</th>
+                        <td class="text-center">+36 00 123 4567</td>
+                        <td class="text-center">Admin</td>
+                        <td class="text-right">
+                            <a class="btn btn-secondary btn-sm" href="profile.html">Profile</a>
+                            <a class="btn btn-secondary btn-sm" href="apps_unscored.html">Apps</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Firstname Lastname</th>
+                        <td class="text-center">+36 00 123 4567</td>
+                        <td class="text-center">User</td>
+                        <td class="text-right">
+                            <a class="btn btn-secondary btn-sm" href="profile.html">Profile</a>
+                            <a class="btn btn-secondary btn-sm" href="apps_unscored.html">Apps</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Firstname Lastname</th>
+                        <td class="text-center">+36 00 123 4567</td>
+                        <td class="text-center">Editor</td>
+                        <td class="text-right">
+                            <a class="btn btn-secondary btn-sm" href="profile.html">Profile</a>
+                            <a class="btn btn-secondary btn-sm" href="apps_unscored.html">Apps</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
     </div>

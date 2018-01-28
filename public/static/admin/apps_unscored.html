@@ -54,8 +54,9 @@
             </li>
             <li class="nav-item">
                 <div class="btn-group dropdown">
-                    <a class="nav-link text-right" href="apps_unscored.html">
+                    <a class="nav-link text-right active" href="apps_unscored.html">
                         Applications
+                        <span class="sr-only">(current)</span>
                     </a>
                     <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="sr-only">Toggle Dropright</span>
@@ -74,9 +75,9 @@
                 <a class="nav-link" href="tags.html">Tags</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="about.html">
+                <a class="nav-link" href="about.html">
                     About
-                    <span class="sr-only">(current)</span></a>
+                </a>
             </li>
         </ul>
         <div class="dropdown">
@@ -94,17 +95,77 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="row justify-content-center space-before-100">
+    <div class="row justify-content-center space-before-40">
 
         <div class="col-sm-10">
-            <div class="card">
-                <div class="card-header">
-                    <h1 class="display-4">About this webpage</h1>
+            <form>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Tender">
+                                <input type="text" class="form-control" placeholder="Name">
+                                <input type="text" class="form-control" placeholder="NEPTUN">
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="input-group">
+                                <input type="date" class="form-control" data-toggle="tooltip" data-placement="top" title="Start date">
+                                <input type="date" class="form-control" data-toggle="tooltip" data-placement="top" title="End date">
+                            </div>
+                        </div>
+                        <div class ="col-lg-1">
+                            <div class="input-group-prepend">
+                                <button type="submit" class="btn btn-secondary">Search</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="lead text-justify">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur non augue et nisi porttitor pretium. Mauris vel neque vitae orci luctus aliquet. Nulla facilisi. Donec in mi. Curabitur semper massa quis diam. Ut dignissim elit at nisi. Mauris nec ipsum. Nunc ac quam. Donec in diam. Phasellus tempus scelerisque justo.</p>
-                </div>
-            </div>
+            </form>
+        </div>
+
+        <div class="col-sm-10">
+            <table class="table table-hover space-before-20">
+                <thead>
+                    <tr>
+                        <th scope="col">Tender</th>
+                        <th scope="col" class="text-center">Full name</th>
+                        <th scope="col" class="text-center">Recieved</th>
+                        <th scope="col" class="text-center">Final score</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tender title</td>
+                        <td class="text-center">Firstname Lastname</td>
+                        <td class="text-center">2018.01.01.</td>
+                        <td class="text-center"> - </td>
+                        <td class="text-right">
+                            <a class="btn btn-secondary btn-sm" href="app.html">Application</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tender title</td>
+                        <td class="text-center">Firstname Lastname</td>
+                        <td class="text-center">2018.01.01.</td>
+                        <td class="text-center"> - </td>
+                        <td class="text-right">
+                            <a class="btn btn-secondary btn-sm" href="app.html">Application</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tender title</td>
+                        <td class="text-center">Firstname Lastname</td>
+                        <td class="text-center">2018.01.01.</td>
+                        <td class="text-center"> - </td>
+                        <td class="text-right">
+                            <a class="btn btn-secondary btn-sm" href="app.html">Application</a>
+                        </td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
     </div>

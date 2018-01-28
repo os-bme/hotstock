@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="icon" href="/public/assets/hotstock-solid.png">
+
+    <title>Hotstock</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">
+        <img src="/public/assets/hotstock-solid.png" width="30" height="30" class="d-inline-block align-top rounded" alt="">
+        Hotstock
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="main.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <div class="btn-group dropdown">
+                    <a class="nav-link text-right" href="news.html">
+                        News
+                    </a>
+                    <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropright</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">New</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="btn-group dropdown">
+                    <a class="nav-link text-right" href="tenders.html">
+                        Tenders
+                    </a>
+                    <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropright</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">All</a>
+                        <a class="dropdown-item" href="#">New</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="btn-group dropdown">
+                    <a class="nav-link text-right" href="apps_unscored.html">
+                        Applications
+                    </a>
+                    <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropright</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="apps_unscored.html">Unscored</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="users.html">
+                    Users
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="about.html">About</a>
+            </li>
+        </ul>
+        <div class="dropdown">
+            <button id="btnGroupUser" type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Firstname Lastname
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupUser">
+                <a class="dropdown-item" href="profile.html">My Profile</a>
+                <a class="dropdown-item" href="apps_unscored.html">Applications</a>
+                <div role="separator" class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Log out</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+
+        <div class="col-sm-10 space-before-40">
+            <div class="card">
+                <div class="card-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <a class="h3 display-4" href="tender_description.html">Tender title</a>
+                            </div>
+                            <div class="col-sm-4 text-right">
+                                <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm">Edit</button>
+                                <a class="btn btn-outline-secondary btn-sm" href="profile.html">Firstname Lastname</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="container">
+                            <div class="row space-before-10">
+                                <div class="col-sm-5">
+                                    <div class="d-flex justify-content-start">
+                                        <div class="p-2 align-self-center">
+                                            <h5><strong>Tender part</strong></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="d-flex justify-content-start">
+                                        <div class="p-2 align-self-center">
+                                            <h5>Short answer</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+
+                                    <div class="d-flex justify-content-around">
+                                        <div class="p-2 align-self-center">
+                                            <h5>-</h5>
+                                        </div>
+                                        <div class="p-2 align-self-start">
+                                            <button type="button" class="btn btn-secondary btn-sm">Score</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="container">
+                            <div class="row space-before-10">
+                                <div class="col-sm-5">
+                                    <div class="d-flex justify-content-start">
+                                        <div class="p-2 align-self-center">
+                                            <h5>
+                                                <strong>Tender part</strong>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="d-flex justify-content-start">
+                                        <div class="p-2 align-self-center">
+                                            <h5>
+                                                <a href="">
+                                                    Document
+                                                </a>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+
+                                    <div class="d-flex justify-content-around">
+                                        <div class="p-2 align-self-center">
+                                            <h5>-</h5>
+                                        </div>
+                                        <div class="p-2 align-self-start">
+                                            <button type="button" class="btn btn-secondary btn-sm">Score</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+
+                        <div class="container">
+                            <div class="row space-before-10">
+                                <div class="col-sm-10">
+                                    <div class="d-flex justify-content-start">
+                                        <div class="p-2 align-self-center">
+                                            <h5>
+                                                <strong>Tender part</strong>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+
+                                    <div class="d-flex justify-content-around">
+                                        <div class="p-2 align-self-center">
+                                            <h5>-</h5>
+                                        </div>
+                                        <div class="p-2 align-self-start">
+                                            <button type="button" class="btn btn-secondary btn-sm">Score</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-justify">
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur non augue et nisi porttitor pretium. Mauris vel neque vitae orci luctus aliquet. Nulla facilisi. Donec in mi. Curabitur semper massa quis diam. Ut dignissim elit at nisi. Mauris nec ipsum. Nunc ac quam. Donec in diam. Phasellus tempus scelerisque justo.
+                            </p>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-around">
+                            <div class="p-2 align-self-center">
+                                <h3>-</h3>
+                            </div>
+                            <div class="p-2 align-self-center">
+                                <button type="button" class="btn btn-secondary">Final score</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -74,9 +74,9 @@
                 <a class="nav-link" href="tags.html">Tags</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="about.html">
+                <a class="nav-link" href="about.html">
                     About
-                    <span class="sr-only">(current)</span></a>
+                </a>
             </li>
         </ul>
         <div class="dropdown">
@@ -84,7 +84,7 @@
                 Firstname Lastname
             </button>
             <div class="dropdown-menu" aria-labelledby="btnGroupUser">
-                <a class="dropdown-item" href="profile.html">My Profile</a>
+                <a class="dropdown-item active" href="">My Profile <span class="sr-only">(current)</span></a>
                 <a class="dropdown-item" href="apps_unscored.html">Applications</a>
                 <div role="separator" class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Log out</a>
@@ -94,15 +94,73 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="row justify-content-center space-before-100">
+    <div class="row justify-content-center space-before-40">
 
-        <div class="col-sm-10">
+        <div class="col-sm-9">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="display-4">About this webpage</h1>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h1 class="display-4">Firstname Lastname</h1>
+                            </div>
+                            <div class="col-sm-4 text-right">
+                                <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm">Permissions</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <p class="lead text-justify">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur non augue et nisi porttitor pretium. Mauris vel neque vitae orci luctus aliquet. Nulla facilisi. Donec in mi. Curabitur semper massa quis diam. Ut dignissim elit at nisi. Mauris nec ipsum. Nunc ac quam. Donec in diam. Phasellus tempus scelerisque justo.</p>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img class="card-img-top" src="http://via.placeholder.com/180x259" alt="Card image cap">
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="container-fluid space-before-20">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <p> <strong>Firstname:</strong> Firstname</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Lastname:</strong> Lastname</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Neptun-code:</strong> AAAAAA</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Status:</strong> active/passive</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Date of birth:</strong> YYYY.MM.DD.</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Place of birth:</strong> City</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>E-mail address:</strong> alias@domain.hu</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Mobile:</strong> +36 00 123 4567</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Post type:</strong> post_number</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Permission:</strong> permission_number</p>
+                                        </div>
+
+                                        <div class="col-sm-12 text-center space-before-20">
+                                            <button type="button" class="btn btn-secondary">Edit datas</button>
+                                            <button type="button" class="btn btn-secondary">Change picture</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -23,13 +23,55 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="main.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="main.html">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="news.html">News</a>
+                <div class="btn-group dropdown">
+                    <a class="nav-link text-right" href="news.html">
+                        News
+                    </a>
+                    <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropright</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">New</a>
+                    </div>
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="tenders.html">Tenders</a>
+                <div class="btn-group dropdown">
+                    <a class="nav-link text-right" href="tenders.html">
+                        Tenders
+                    </a>
+                    <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropright</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">All</a>
+                        <a class="dropdown-item" href="#">New</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="btn-group dropdown">
+                    <a class="nav-link text-right" href="apps_unscored.html">
+                        Applications
+                    </a>
+                    <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropright</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="apps_unscored.html">Unscored</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="users.html">
+                    Users
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="tags.html">Tags</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="about.html">About</a>
@@ -40,8 +82,9 @@
                 Firstname Lastname
             </button>
             <div class="dropdown-menu" aria-labelledby="btnGroupUser">
-                <a class="dropdown-item" href="#">My Profile</a>
-                <a class="dropdown-item" href="#">Applications</a>
+                <a class="dropdown-item" href="profile.html">My Profile</a>
+                <a class="dropdown-item" href="apps_unscored.html">Applications</a>
+                <div role="separator" class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Log out</a>
             </div>
         </div>
@@ -49,12 +92,30 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="row justify-content-center space-before-20">
+    <div class="row justify-content-center">
 
-        <div class="col-sm-10">
+        <div class="col-sm-10 space-before-40">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="display-4">Tender title</h1>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h1 class="display-4" >
+                                    Tender title
+                                </h1>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <span class="badge badge-info h6">BSc</span>
+                                <span class="badge badge-info h6">Koli</span>
+                                <span class="badge badge-info h6">Heti</span>
+                                <br>
+                                <a class="btn btn-outline-danger btn-sm" href="">Delete</a>
+                                <a class="btn btn-outline-secondary btn-sm" href="">Edit</a>
+                                <a class="btn btn-outline-secondary btn-sm" href="tender_parts.html">Parts</a>
+                                <a class="btn btn-outline-secondary btn-sm" href="">Submit</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="container-fluid">
@@ -63,7 +124,7 @@
                                 <img class="card-img-top" src="http://via.placeholder.com/259x180" alt="Card image cap">
                             </div>
                             <div class="col-sm-8">
-                                <p class="lead">
+                                <p class="lead text-justify">
                                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur non augue et nisi porttitor pretium. Mauris vel neque vitae orci luctus aliquet. Nulla facilisi. Donec in mi. Curabitur semper massa quis diam. Ut dignissim elit at nisi. Mauris nec ipsum. Nunc ac quam. Donec in diam. Phasellus tempus scelerisque justo. Aenean at elit id eros luctus malesuada. Donec magna. Nullam quis dui. Vivamus a est eu eros eleifend venenatis. Fusce arcu. Cras ipsum ante, placerat at, euismod eu, tempus eu, risus. Nulla tempus erat et ante. Sed facilisis scelerisque mauris. Morbi erat dui, congue sit amet, egestas eget, rutrum ac, lectus. Proin porttitor molestie lorem.
                                 </p>
                             </div>
