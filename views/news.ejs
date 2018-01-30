@@ -1,0 +1,71 @@
+<% include pageHeader %>
+
+<% include pageNavbar %>
+
+<div class="container-fluid">
+    <div class="row justify-content-center space-before-40">
+
+        <div class="col-sm-10">
+            <div class="card">
+                <div class="card-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h1 class="display-4" >
+                                    <%= res.news.title %>
+                                </h1>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <span class="badge badge-info h6">BSc</span>
+                                <span class="badge badge-info h6">Koli</span>
+                                <span class="badge badge-info h6">Heti</span>
+
+                                <% if ( req.isAuthenticated() ) { %>
+                                    <br>
+                                    <% if ( req.session.passport.user.permission > 2 ) { %>
+                                        <a class="btn btn-outline-danger btn-sm" href="/news/<%= res.news._id %>/del">Delete</a>
+                                    <% } %>
+                                    <% if ( req.session.passport.user.permission > 0 ) { %>
+                                        <a class="btn btn-outline-secondary btn-sm" href="/news/<%= res.news._id %>/mod">Edit</a>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <img class="card-img-top" src="http://via.placeholder.com/259x180" alt="Card image cap">
+                            </div>
+                            <div class="col-sm-8 text-justify">
+                                <p class="lead">
+                                    <%= res.news.description %>
+                                </p>
+                            </div>
+                            <div class="col-sm-7 space-before-20">
+                                Attachment:
+                                <a href="">datasheet_template</a>,
+                                <a href="">tender_description</a>
+                            </div>
+                            <div class="col-sm-3 text-center space-before-20">
+                                <h6>
+                                    <%= res.news.publisher.name %>
+                                </h6>
+                            </div>
+                            <div class="col-sm-2 text-center space-before-20">
+                                <h6>
+                                    <%= res.news.publish_datetime %>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<% include pageFooter %>

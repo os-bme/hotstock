@@ -46,8 +46,6 @@ router.use('/oauth/callback',
                 res.tpl.user.name = req.user.displayName;
                 res.tpl.user.email = req.user.email;
                 res.tpl.user.roomNumber = req.user.roomNumber;
-                //res.tpl.user.avatar = 'default.jpg';
-                res.tpl.user.post_type = 'user';
                 req.session.passport.user.permission = 0;
                 res.tpl.user.permission = 0;
 

@@ -1,0 +1,76 @@
+<% include pageHeader %>
+
+<% include pageNavbar %>
+
+<div class="container-fluid">
+    <div class="row justify-content-center space-before-40">
+
+        <div class="col-sm-9">
+            <div class="card">
+                <div class="card-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h1 class="display-4"><%= res.user.name %></h1>
+                            </div>
+                            <div class="col-sm-4 text-right">
+                                <a class="btn btn-outline-danger btn-sm" href="/user/<%= res.user._id %>/del" >Delete</a>
+                                <button type="button" class="btn btn-outline-secondary btn-sm">Permissions</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img class="card-img-top" src="http://via.placeholder.com/180x259" alt="Card image cap">
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="container-fluid space-before-20">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <p> <strong>Firstname:</strong> <%= res.user.firstname %></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Lastname:</strong> <%= res.user.lastname %></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Neptun-code:</strong> <%= res.user.neptun %></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Status:</strong> <%= res.user.status %></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Date of birth:</strong> <%= res.user.birth_date %></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Place of birth:</strong> <%= res.user.birth_place %></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>E-mail address:</strong> <%= res.user.email %></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Mobile:</strong> <%= res.user.mobile %></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Permission:</strong> <%= res.user.permission %></p>
+                                        </div>
+
+                                        <div class="col-sm-12 text-center space-before-20">
+                                            <button type="button" class="btn btn-secondary">Edit datas</button>
+                                            <button type="button" class="btn btn-secondary">Change picture</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<% include pageFooter %>

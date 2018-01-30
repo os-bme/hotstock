@@ -55,7 +55,23 @@ router.use('/all',
 
         return next();
     },
-    renderMW(objectRepository, 'newsAll')
+    renderMW(objectRepository, 'newsList')
+);
+
+router.use('/:id',
+    function (req, res, next) {
+        res.news = {
+            _id: 0,
+            title: 'Title',
+            description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur non augue et nisi porttitor pretium. Mauris vel neque vitae orci luctus aliquet. Nulla facilisi. Donec in mi. Curabitur semper massa quis diam. Ut dignissim elit at nisi. Mauris nec ipsum. Nunc ac quam. Donec in diam. Phasellus tempus scelerisque justo.',
+            publish_datetime: '2018-01-01',
+            publisher: {
+                name: 'Béla'
+            }
+        };
+        next();
+    },
+    renderMW(objectRepository, 'news')
 );
 
 module.exports = router;
