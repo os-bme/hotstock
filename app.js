@@ -34,7 +34,7 @@ app.use(session({
     secret: configuration.sessionSecret,
     cookie: {
         maxage: 60000,
-        secure: true
+        secure: false
     },
     resave: true,
     saveUninitialized: false

@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var renderMW = require('../middlewares/general/render');
-var authMW = require('../middlewares/general/auth');
+var authMW = require('../middlewares/general/authUser');
 var updateUser = require('../middlewares/user/updateUser');
 
 var UserModel = require('../models/users');
@@ -62,7 +62,6 @@ router.get('/',
 );
 
 router.get('/about',
-    authMW(objectRepository),
     renderMW(objectRepository, 'about')
 );
 

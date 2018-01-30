@@ -39,8 +39,6 @@ router.use('/oauth/callback',
     }),
     function (req, res) {
         // Sikeres azonositas
-        req.session.bme_id = req.user.internal_id;
-
         objectRepository.userModel.findOne({bme_id: req.user.internal_id}, function (err, obj) {
             if (obj === null) {
                 res.tpl.user = new objectRepository.userModel();
@@ -50,6 +48,7 @@ router.use('/oauth/callback',
                 res.tpl.user.roomNumber = req.user.roomNumber;
                 //res.tpl.user.avatar = 'default.jpg';
                 res.tpl.user.post_type = 'user';
+                req.session.passport.user.permission = 0;
                 res.tpl.user.permission = 0;
 
                 res.tpl.user.save(function (err) {
@@ -58,12 +57,15 @@ router.use('/oauth/callback',
                         res.redirect('/auth/err');
                     } else {
                         console.log('new user save success');
+                        req.session.passport.user._id = res.tpl.user._id;
                         res.redirect('/');
                     }
                 });
             } else {
                 console.log('user found in db');
                 res.tpl.user = obj;
+                req.session.passport.user.permission = obj.permission;
+                req.session.passport.user._id = obj._id;
                 res.redirect('/');
             }
         });

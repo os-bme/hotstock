@@ -18,16 +18,15 @@
                         News
                     </a>
 
-                    <% if ( req.session.authenticated ) { %>
-
-                    <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="sr-only">Toggle Dropright</span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/news/add">New</a>
-                    </div>
-
+                    <% if ( req.isAuthenticated() && req.session.passport.user.permission > 0 ) { %>
+                        <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropright</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/news/add">New</a>
+                        </div>
                     <% } %>
+
                 </div>
             </li>
             <li class="nav-item">
@@ -36,61 +35,64 @@
                         Tenders
                     </a>
 
-                    <% if ( req.session.authenticated ) { %>
-
-                    <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="sr-only">Toggle Dropright</span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/tender/all">All</a>
-                        <a class="dropdown-item" href="/tender/add">New</a>
-                    </div>
-
+                    <% if ( req.isAuthenticated() && req.session.passport.user.permission > 0 ) { %>
+                        <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropright</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/tender/all">All</a>
+                            <a class="dropdown-item" href="/tender/add">New</a>
+                        </div>
                     <% } %>
                 </div>
             </li>
 
-            <% if ( req.session.authenticated ) { %>
-
-            <li class="nav-item">
-                <div class="btn-group dropdown">
-                    <a class="nav-link text-right" href="/app/all">
-                        Applications
-                    </a>
-                    <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="sr-only">Toggle Dropright</span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="">Unscored</a>
+            <% if ( req.isAuthenticated() && req.session.passport.user.permission > 0 ) { %>
+                <li class="nav-item">
+                    <div class="btn-group dropdown">
+                        <a class="nav-link text-right" href="/app/all">
+                            Applications
+                        </a>
+                        <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropright</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="">Unscored</a>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/user/all">
-                    Users
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tag">Tags</a>
-            </li>
-
+                </li>
             <% } %>
+
+            <% if ( req.isAuthenticated() && req.session.passport.user.permission > 1 ) { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/all">
+                        Users
+                    </a>
+                </li>
+            <% } %>
+
+            <% if ( req.isAuthenticated() && req.session.passport.user.permission > 2 ) { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/tag">Tags</a>
+                </li>
+            <% } %>
+
 
             <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
         </ul>
 
-        <% if (!req.session || !req.session.authenticated) { %>
+        <% if ( !req.isAuthenticated() ) { %>
             <a class="btn btn-outline-info" href="/auth/login" >Log in</a>
         <% } else { %>
             <div class="dropdown">
                 <button id="btnGroupUser" type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Firstname Lastname
+                    <%= req.session.passport.user.displayName %>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupUser">
-                    <a class="dropdown-item" href="/user/id">My Profile</a>
-                    <a class="dropdown-item" href="/user/id/apps">Applications</a>
+                    <a class="dropdown-item" href="/user/<%= req.session.passport.user._id %>">My Profile</a>
+                    <a class="dropdown-item" href="/user/<%= req.session.passport.user._id %>/apps">Applications</a>
                     <div role="separator" class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/auth/logout">Log out</a>
                 </div>
