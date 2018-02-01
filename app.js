@@ -104,7 +104,7 @@ app.use(favicon(path.join(__dirname, 'public', 'hotstockicon.ico')));
  */
 var userRoute = require('./routes/users');
 var dbRoute = require('./routes/db');
-var indexRoute = require('./routes/index');
+var generalRoute = require('./routes/general');
 var authRoute = require('./routes/auth');
 var newsRoute = require('./routes/news');
 var tenderRoute = require('./routes/tender');
@@ -113,7 +113,7 @@ var appRoute = require('./routes/app');
 /**
  *  Use routes
  */
-app.use('/', indexRoute);
+app.use('/', generalRoute);
 app.use('/user', userRoute);
 app.use('/db', dbRoute);
 app.use('/auth', authRoute);

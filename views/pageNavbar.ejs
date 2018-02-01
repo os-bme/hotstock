@@ -9,12 +9,13 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
+            <li class="nav-item <% if ( req.originalUrl == "/" && req.originalUrl.length == 1 ) { %> active <% } %> ">
+
+                <a class="nav-link" href="/" >Home</a>
             </li>
             <li class="nav-item">
                 <div class="btn-group dropdown">
-                    <a class="nav-link text-right" href="/news/all">
+                    <a class="nav-link text-right <% if ( req.originalUrl.indexOf( '/news/all' ) > -1 ) { %> active <% } %> " href="/news/all">
                         News
                     </a>
 
@@ -31,7 +32,7 @@
             </li>
             <li class="nav-item">
                 <div class="btn-group dropdown">
-                    <a class="nav-link text-right" href="/tender/active">
+                    <a class="nav-link text-right  <% if ( req.originalUrl.indexOf( '/tender/active' ) > -1 ) { %> active <% } %>" href="/tender/active">
                         Tenders
                     </a>
 
@@ -49,7 +50,7 @@
 
             <% if ( req.isAuthenticated() && req.session.passport.user.permission > 0 ) { %>
                 <li class="nav-item">
-                    <div class="btn-group dropdown">
+                    <div class="btn-group dropdown <% if ( req.originalUrl.indexOf( '/app/all' ) > -1 ) { %> active <% } %>">
                         <a class="nav-link text-right" href="/app/all">
                             Applications
                         </a>
@@ -64,7 +65,7 @@
             <% } %>
 
             <% if ( req.isAuthenticated() && req.session.passport.user.permission > 1 ) { %>
-                <li class="nav-item">
+                <li class="nav-item <% if ( req.originalUrl.indexOf( '/user/all' ) > -1 ) { %> active <% } %>">
                     <a class="nav-link" href="/user/all">
                         Users
                     </a>
@@ -72,13 +73,13 @@
             <% } %>
 
             <% if ( req.isAuthenticated() && req.session.passport.user.permission > 2 ) { %>
-                <li class="nav-item">
+                <li class="nav-item <% if ( req.originalUrl.indexOf( '/tag' ) > -1 ) { %> active <% } %> ">
                     <a class="nav-link" href="/tag">Tags</a>
                 </li>
             <% } %>
 
 
-            <li class="nav-item">
+            <li class="nav-item <% if ( req.originalUrl.indexOf( '/about' ) > -1 ) { %> active <% } %>">
                 <a class="nav-link" href="/about">About</a>
             </li>
         </ul>

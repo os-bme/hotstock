@@ -12,7 +12,8 @@ var UserModel = db.model( 'User', {
     email: String,
     mobile: String,
     bme_id: String,
-    permission: Number
+    permission: Number,
+    notification: Boolean
 });
 
 module.exports = UserModel;

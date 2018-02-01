@@ -1,0 +1,67 @@
+<% include pageHeader %>
+
+<% include pageNavbar %>
+
+
+<div class="container-fluid">
+    <div class="row justify-content-center space-before-40">
+
+        <div class="col-lg-5 col-sm-8">
+            <table class="table table-hover space-before-20">
+                <thead>
+                <tr>
+                    <th scope="col">Full name</th>
+                    <th scope="col" class="text-center">Tag</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <% res.tpl.tags.forEach(function (tag) { %>
+                        <tr>
+                            <td><%= tag.fullname%></td>
+                            <th class="text-center"><%= tag.shortname%></th>
+                            <td class="text-right">
+                                <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteModal<%= tag._id%>" >Delete</button>
+                                <a class="btn btn-secondary btn-sm" href="/tag/<%= tag._id%>/mod">Edit</a>
+                            </td>
+                        </tr>
+                    <% }); %>
+
+                    <tr>
+                        <td class="text-center" colspan="3">
+                            <a class="btn btn-secondary btn-sm" href="">Add</a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<% res.tpl.tags.forEach(function (tag) { %>
+<div class="modal fade" id="deleteModal<%= tag._id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">WARNING!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                You are trying to remove (from linked tenders and news) and delete a tag. Once it's deleted, it can't be restored.
+                <br>
+                Please pay attention to it!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a class="btn btn-danger" href="/tag/<%= tag._id %>/del">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+<% }); %>
+
+<% include pageFooter %>

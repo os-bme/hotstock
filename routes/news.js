@@ -1,8 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
+var authUserMW = require('../middlewares/general/authUser');
+var authEditorMW = require('../middlewares/general/authEditor');
+var authAdminMW = require('../middlewares/general/authAdmin');
+var authSuperAdminMW = require('../middlewares/general/authSuperAdmin');
+
 var renderMW = require('../middlewares/general/render');
-var updateUser = require('../middlewares/user/updateUser');
 
 var UserModel = require('../models/users');
 var NewsModel = require('../models/news');
@@ -14,8 +18,7 @@ var objectRepository = {
 
 router.use('/all',
     function (req,res,next) {
-
-        res.newses = [];
+        res.tpl.newses = [];
 
         var news = {
             _id: 0,
@@ -52,6 +55,21 @@ router.use('/all',
         return next();
     },
     renderMW(objectRepository, 'newsList')
+);
+
+router.use('/add',
+    authEditorMW(objectRepository),
+    renderMW(objectRepository, 'newsList')
+);
+
+router.use('/:id/mod',
+    authEditorMW(objectRepository),
+    renderMW(objectRepository, 'news')
+);
+
+router.use('/:id/del',
+    authSuperAdminMW(objectRepository),
+    renderMW(objectRepository, 'news')
 );
 
 router.use('/:id',

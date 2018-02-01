@@ -1,8 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var passport = require('passport');
+
+var authUserMW = require('../middlewares/general/authUser');
+var authEditorMW = require('../middlewares/general/authEditor');
+var authAdminMW = require('../middlewares/general/authAdmin');
+var authSuperAdminMW = require('../middlewares/general/authSuperAdmin');
 
 var renderMW = require('../middlewares/general/render');
+var passport = require('passport');
 
 var UserModel = require('../models/users');
 

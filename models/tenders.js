@@ -2,7 +2,7 @@ var Schema = require('mongoose').Schema;
 var db = require( '../db' );
 
 var TenderModel = db.model( 'Tender', {
-    name: String,
+    title: String,
     start_datetime: Date,
     end_datetime: Date,
     publish_datetime: Date,
