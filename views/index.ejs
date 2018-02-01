@@ -13,7 +13,7 @@
         <div class="col-sm-11">
 
 
-            <% for( var i = 0; i < res.newses.length; i++ ){ %>
+            <% for( var i = 0; i < res.tpl.newses.length; i++ ){ %>
 
                 <% if( i === 3 ) break; %>
 
@@ -22,17 +22,17 @@
                 <% } %>
 
                 <div class="card card-link">
-                    <a href="/news/<%= res.newses[i]._id %>">
+                    <a href="/news/<%= res.tpl.newses[i]._id %>">
                         <img class="card-img-top" src="http://via.placeholder.com/259x180" alt="Card image cap">
                         <div class="card-body">
                             <p class="card-title">
-                                <span class="h5"><%= res.newses[i].title %></span>
+                                <span class="h5"><%= res.tpl.newses[i].title %></span>
                                 <span class="badge badge-info h6">BSc</span>
                                 <span class="badge badge-info h6">Koli</span>
                                 <span class="badge badge-info h6">Heti</span>
                             </p>
-                            <p class="card-text short-description"><%= res.newses[i].short_description %></p>
-                            <p class="card-text"><small class="text-muted"><%= res.newses[i].publish_datetime %></small></p>
+                            <p class="card-text short-description"><%= res.tpl.newses[i].short_description %></p>
+                            <p class="card-text"><small class="text-muted"><%= res.tpl.newses[i].publish_datetime %></small></p>
                         </div>
                     </a>
                 </div>
@@ -42,8 +42,8 @@
                 <% } %>
             <% } %>
 
-            <% if ( res.newses.length < 3 ) { %>
-                <% for ( var j = 0; j < 3 - (res.newses.length % 3); j++ ) { %>
+            <% if ( res.tpl.newses.length < 3 ) { %>
+                <% for ( var j = 0; j < 3 - (res.tpl.newses.length % 3); j++ ) { %>
                     <div class="card card-link">
                     </div>
                 <% } %>

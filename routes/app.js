@@ -13,26 +13,20 @@ var objectRepository = {
     newsModel: NewsModel
 };
 
-router.get('/',
+router.get('/all',
     function (req,res,next) {
-
-        res.tpl.newses = [];
-
-        var news = {
-            _id: 0,
-            title: 'Title',
-            short_description: 'This is a news card with its short version of the full article, the full content.',
-            publish_datetime: '2018-01-01'
-        };
-        res.tpl.newses.push(news);
+        res.tpl.apps = [];
 
         return next();
     },
-    renderMW(objectRepository, 'index')
+    renderMW(objectRepository, 'appList')
 );
 
-router.get('/about',
-    renderMW(objectRepository, 'about')
+router.get('/unscored',
+    function (req,res,next) {
+        return next();
+    },
+    renderMW(objectRepository, 'appList')
 );
 
 module.exports = router;

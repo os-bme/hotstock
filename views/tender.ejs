@@ -12,7 +12,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <h1 class="display-4" >
-                                    <%= res.tender.title %>
+                                    <%= res.tpl.tender.title %>
                                 </h1>
                             </div>
                             <div class="col-sm-6 text-right">
@@ -22,15 +22,15 @@
                                 <% if ( req.isAuthenticated() ) { %>
                                     <br>
                                     <% if ( req.session.passport.user.permission > 2 ) { %>
-                                        <a class="btn btn-outline-danger btn-sm" href="/tender/<%= res.tender._id %>/del">Delete</a>
+                                        <a class="btn btn-outline-danger btn-sm" href="/tender/<%= res.tpl.tender._id %>/del">Delete</a>
                                     <% } %>
                                     <% if ( req.session.passport.user.permission > 0 ) { %>
-                                        <a class="btn btn-outline-secondary btn-sm" href="/tender/<%= res.tender._id %>/mod">Edit</a>
+                                        <a class="btn btn-outline-secondary btn-sm" href="/tender/<%= res.tpl.tender._id %>/mod">Edit</a>
                                     <% } %>
                                     <% if ( req.session.passport.user.permission > 0 ) { %>
-                                        <a class="btn btn-outline-secondary btn-sm" href="/tender/<%= res.tender._id %>/part">Parts</a>
+                                        <a class="btn btn-outline-secondary btn-sm" href="/tender/<%= res.tpl.tender._id %>/part">Parts</a>
                                     <% } %>
-                                    <a class="btn btn-outline-secondary btn-sm" href="/app/add/<%= res.tender._id %>">Submit</a>
+                                    <a class="btn btn-outline-secondary btn-sm" href="/app/add/<%= res.tpl.tender._id %>">Submit</a>
                                 <% } %>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-sm-8">
                                 <p class="lead text-justify">
-                                    <%= res.tender.description %>
+                                    <%= res.tpl.tender.description %>
                                 </p>
                             </div>
                             <div class="col-sm-6 space-before-20">
@@ -54,12 +54,12 @@
                             </div>
                             <div class="col-sm-3 text-center space-before-20">
                                 <h6>
-                                    <%= res.tender.publisher.name %>
+                                    <%= res.tpl.tender.publisher.name %>
                                 </h6>
                             </div>
                             <div class="col-sm-3 text-center space-before-20">
                                 <h6>
-                                    <%= res.tender.start_datetime %> - <%= res.tender.end_datetime %>
+                                    <%= res.tpl.tender.start_datetime %> - <%= res.tpl.tender.end_datetime %>
                                 </h6>
                             </div>
                         </div>

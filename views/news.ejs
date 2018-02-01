@@ -12,7 +12,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <h1 class="display-4" >
-                                    <%= res.news.title %>
+                                    <%= res.tpl.news.title %>
                                 </h1>
                             </div>
                             <div class="col-sm-6 text-right">
@@ -23,10 +23,10 @@
                                 <% if ( req.isAuthenticated() ) { %>
                                     <br>
                                     <% if ( req.session.passport.user.permission > 2 ) { %>
-                                        <a class="btn btn-outline-danger btn-sm" href="/news/<%= res.news._id %>/del">Delete</a>
+                                        <a class="btn btn-outline-danger btn-sm" href="/news/<%= res.tpl.news._id %>/del">Delete</a>
                                     <% } %>
                                     <% if ( req.session.passport.user.permission > 0 ) { %>
-                                        <a class="btn btn-outline-secondary btn-sm" href="/news/<%= res.news._id %>/mod">Edit</a>
+                                        <a class="btn btn-outline-secondary btn-sm" href="/news/<%= res.tpl.news._id %>/mod">Edit</a>
                                     <% } %>
                                 <% } %>
                             </div>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-sm-8 text-justify">
                                 <p class="lead">
-                                    <%= res.news.description %>
+                                    <%= res.tpl.news.description %>
                                 </p>
                             </div>
                             <div class="col-sm-7 space-before-20">
@@ -51,12 +51,12 @@
                             </div>
                             <div class="col-sm-3 text-center space-before-20">
                                 <h6>
-                                    <%= res.news.publisher.name %>
+                                    <%= res.tpl.news.publisher.name %>
                                 </h6>
                             </div>
                             <div class="col-sm-2 text-center space-before-20">
                                 <h6>
-                                    <%= res.news.publish_datetime %>
+                                    <%= res.tpl.news.publish_datetime %>
                                 </h6>
                             </div>
                         </div>

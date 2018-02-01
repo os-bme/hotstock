@@ -21,7 +21,7 @@ router.use('/all',
 router.use('/:id',
     authUserMW(objectRepository),
     function (req, res, next) {
-        res.user = {
+        res.tpl.user = {
             _id: 0,
             name: 'Kiss Béla',
             firstname: 'Kiss',

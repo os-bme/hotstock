@@ -102,22 +102,24 @@ app.use(favicon(path.join(__dirname, 'public', 'hotstockicon.ico')));
 /**
  * Include routes
  */
-var user = require('./routes/users');
-var db = require('./routes/db');
-var index = require('./routes/index');
-var auth = require('./routes/auth');
-var news = require('./routes/news');
-var tender = require('./routes/tender');
+var userRoute = require('./routes/users');
+var dbRoute = require('./routes/db');
+var indexRoute = require('./routes/index');
+var authRoute = require('./routes/auth');
+var newsRoute = require('./routes/news');
+var tenderRoute = require('./routes/tender');
+var appRoute = require('./routes/app');
 
 /**
  *  Use routes
  */
-app.use('/', index);
-app.use('/user', user);
-app.use('/db', db);
-app.use('/auth', auth);
-app.use('/news', news);
-app.use('/tender', tender);
+app.use('/', indexRoute);
+app.use('/user', userRoute);
+app.use('/db', dbRoute);
+app.use('/auth', authRoute);
+app.use('/news', newsRoute);
+app.use('/tender', tenderRoute);
+app.use('/app', appRoute);
 
 /**
  * Error handler

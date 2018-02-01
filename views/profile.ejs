@@ -11,10 +11,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-8">
-                                <h1 class="display-4"><%= res.user.name %></h1>
+                                <h1 class="display-4"><%= res.tpl.user.name %></h1>
                             </div>
                             <div class="col-sm-4 text-right">
-                                <a class="btn btn-outline-danger btn-sm" href="/user/<%= res.user._id %>/del" >Delete</a>
+                                <a class="btn btn-outline-danger btn-sm" href="/user/<%= res.tpl.user._id %>/del" >Delete</a>
                                 <button type="button" class="btn btn-outline-secondary btn-sm">Permissions</button>
                             </div>
                         </div>
@@ -30,31 +30,31 @@
                                 <div class="container-fluid space-before-20">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <p> <strong>Firstname:</strong> <%= res.user.firstname %></p>
+                                            <p> <strong>Firstname:</strong> <%= res.tpl.user.firstname %></p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p> <strong>Lastname:</strong> <%= res.user.lastname %></p>
+                                            <p> <strong>Lastname:</strong> <%= res.tpl.user.lastname %></p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p> <strong>Neptun-code:</strong> <%= res.user.neptun %></p>
+                                            <p> <strong>Neptun-code:</strong> <%= res.tpl.user.neptun %></p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p> <strong>Status:</strong> <%= res.user.status %></p>
+                                            <p> <strong>Status:</strong> <%= res.tpl.user.status %></p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p> <strong>Date of birth:</strong> <%= res.user.birth_date %></p>
+                                            <p> <strong>Date of birth:</strong> <%= res.tpl.user.birth_date %></p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p> <strong>Place of birth:</strong> <%= res.user.birth_place %></p>
+                                            <p> <strong>Place of birth:</strong> <%= res.tpl.user.birth_place %></p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p> <strong>E-mail address:</strong> <%= res.user.email %></p>
+                                            <p> <strong>E-mail address:</strong> <%= res.tpl.user.email %></p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p> <strong>Mobile:</strong> <%= res.user.mobile %></p>
+                                            <p> <strong>Mobile:</strong> <%= res.tpl.user.mobile %></p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p> <strong>Permission:</strong> <%= res.user.permission %></p>
+                                            <p> <strong>Permission:</strong> <%= res.tpl.user.permission %></p>
                                         </div>
 
                                         <div class="col-sm-12 text-center space-before-20">

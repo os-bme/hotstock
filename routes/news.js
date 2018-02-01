@@ -17,41 +17,37 @@ router.use('/all',
 
         res.newses = [];
 
-        var news = new NewsModel();
-        news = {
+        var news = {
             _id: 0,
             title: 'Title',
             short_description: 'This is a news card with its short version of the full article, the full content.',
             publish_datetime: '2018-01-01'
         };
-        res.newses.push(news);
+        res.tpl.newses.push(news);
 
-        var news = new NewsModel();
-        news = {
+        var news = {
             _id: 1,
             title: 'Title',
             short_description: 'This is a news card with its short version of the full article, the full content.',
             publish_datetime: '2018-01-01'
         };
-        res.newses.push(news);
+        res.tpl.newses.push(news);
 
-        var news = new NewsModel();
-        news = {
+        var news = {
             _id: 2,
             title: 'Title',
             short_description: 'This is a news card with its short version of the full article, the full content.',
             publish_datetime: '2018-01-01'
         };
-        res.newses.push(news);
+        res.tpl.newses.push(news);
 
-        var news = new NewsModel();
-        news = {
+        var news = {
             _id: 3,
             title: 'Title',
             short_description: 'This is a news card with its short version of the full article, the full content.',
             publish_datetime: '2018-01-01'
         };
-        res.newses.push(news);
+        res.tpl.newses.push(news);
 
         return next();
     },
@@ -60,7 +56,7 @@ router.use('/all',
 
 router.use('/:id',
     function (req, res, next) {
-        res.news = {
+        res.tpl.news = {
             _id: 0,
             title: 'Title',
             description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur non augue et nisi porttitor pretium. Mauris vel neque vitae orci luctus aliquet. Nulla facilisi. Donec in mi. Curabitur semper massa quis diam. Ut dignissim elit at nisi. Mauris nec ipsum. Nunc ac quam. Donec in diam. Phasellus tempus scelerisque justo.',
