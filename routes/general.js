@@ -6,6 +6,8 @@ var authEditorMW = require('../middlewares/general/authEditor');
 var authAdminMW = require('../middlewares/general/authAdmin');
 var authSuperAdminMW = require('../middlewares/general/authSuperAdmin');
 
+var findAllNewsMW = require('../middlewares/news/findAllNews');
+
 var renderMW = require('../middlewares/general/render');
 
 var UserModel = require('../models/users');
@@ -17,20 +19,7 @@ var objectRepository = {
 };
 
 router.get('/',
-    function (req,res,next) {
-
-        res.tpl.newses = [];
-
-        var news = {
-            _id: 0,
-            title: 'Title',
-            short_description: 'This is a news card with its short version of the full article, the full content.',
-            publish_datetime: '2018-01-01'
-        };
-        res.tpl.newses.push(news);
-
-        return next();
-    },
+    findAllNewsMW(objectRepository, 'list'),
     renderMW(objectRepository, 'index')
 );
 

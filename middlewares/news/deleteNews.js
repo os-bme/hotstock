@@ -6,9 +6,9 @@ module.exports = function (objectrepository) {
 
             if (err !== null) {
                 res.tpl.error.add(err);
-                console.log("news delete error");
+                console.log("Delete news: error");
             } else {
-                console.log("news delete success");
+                console.log("Delete news: success");
             }
 
             return next();

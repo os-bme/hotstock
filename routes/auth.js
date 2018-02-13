@@ -54,7 +54,6 @@ router.use('/oauth/callback',
                 res.tpl.user.email = req.user.mail;
                 res.tpl.user.mobile = req.user.mobile;
                 res.tpl.user.permission = 0;
-                req.session.passport.user.permission = 0;
 
                 res.tpl.user.save(function (err) {
                     if (err !== null) {
@@ -62,7 +61,7 @@ router.use('/oauth/callback',
                         res.redirect('/auth/err');
                     } else {
                         console.log('Oauth callback: new user save success');
-                        req.session.passport.user._id = res.tpl.user._id;
+                        req.session.passport.user = res.tpl.user;
                         res.redirect('/');
                     }
                 });

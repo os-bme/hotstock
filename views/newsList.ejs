@@ -37,7 +37,7 @@
                                     <span class="badge badge-info h6">Heti</span>
                                 </p>
                                 <p class="card-text short-description"><%= res.tpl.newses[i].short_description %></p>
-                                <p class="card-text"><small class="text-muted"><%= res.tpl.newses[i].publish_datetime %></small></p>
+                                <p class="card-text text-right"><small class="text-muted"><%= res.tpl.func.moment(res.tpl.newses[i].publish_datetime).format("YYYY-MM-DD") %></small></p>
                             </div>
                         </a>
                     </div>

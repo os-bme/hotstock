@@ -3,34 +3,40 @@ var router = express.Router();
 
 var updateUserMW = require('../middlewares/user/updateUserDatas');
 var deleteUserMW = require('../middlewares/user/deleteUser');
-var findUserbyBMEIdMW = require('../middlewares/user/findUserbyId');
+var findUserByBMEIdMW = require('../middlewares/user/findUserbyId');
+
+var updateNewsMW = require('../middlewares/news/updateNews');
+var deleteNewsMW = require('../middlewares/news/deleteNews');
+var findNewsByIdMW = require('../middlewares/news/findNewsbyId');
 
 var updateTenderMW = require('../middlewares/tender/updateTender');
 var deleteTenderMW = require('../middlewares/tender/deleteTender');
-var findTenderbyIdMW = require('../middlewares/tender/findTenderbyId');
+var findTenderByIdMW = require('../middlewares/tender/findTenderbyId');
 
 var updateAppMW = require('../middlewares/app/updateApp');
 var deleteAppMW = require('../middlewares/app/deleteApp');
-var findAppbyIdMW = require('../middlewares/app/findAllAppbyId');
+var findAppByIdMW = require('../middlewares/app/findAllAppbyId');
 
 var updateEvaMW = require('../middlewares/eva/updateEva');
 var deleteEvaMW = require('../middlewares/eva/deleteEva');
 var findEvaMW = require('../middlewares/eva/findEva');
 
 var UserModel = require('../models/users');
+var NewsModel = require('../models/news');
 var TenderModel = require('../models/tenders');
 var AppModel = require('../models/apps');
 var EvaModel = require('../models/evaluators');
 
 var objectRepository = {
     userModel: UserModel,
+    newsModel: NewsModel,
     tenderModel: TenderModel,
     appModel: AppModel,
     evaModel: EvaModel
 };
 
 /* GET Test User Schema */
-router.use('/db/user/test',
+router.use('/user/test',
     function (req, res, next) {
         res.tpl.user = new objectRepository.userModel();
         res.tpl.user.name = "Test Elek";
@@ -40,15 +46,32 @@ router.use('/db/user/test',
         return next();
     },
     updateUserMW(objectRepository),
-    findUserbyBMEIdMW(objectRepository),
+    findUserByBMEIdMW(objectRepository),
     deleteUserMW(objectRepository),
     function (req, res, next) {
         return res.send('User schema tested');
     }
 );
 
+/* GET Test News Schema */
+router.use('/news/test',
+    function (req, res, next) {
+        res.tpl.news = new objectRepository.newsModel();
+        req.body.title = "Test title";
+        req.body.short_description = "Test short description";
+        req.body.long_description = "Test long description";
+        return next();
+    },
+    updateNewsMW(objectRepository),
+    findNewsByIdMW(objectRepository),
+    deleteNewsMW(objectRepository),
+    function (req, res, next) {
+        return res.send('News schema tested');
+    }
+);
+
 /* GET Test Tender Schema */
-router.use('/db/tender/test',
+router.use('/tender/test',
     function (req, res, next) {
         res.tpl.tender = new objectRepository.tenderModel();
         res.tpl.tender.name = "Próba pályázat";
@@ -58,7 +81,7 @@ router.use('/db/tender/test',
         return next();
     },
     updateTenderMW(objectRepository),
-    findTenderbyIdMW(objectRepository),
+    findTenderByIdMW(objectRepository),
     deleteTenderMW(objectRepository),
     function (req, res, next) {
         return res.send('Tender schema tested');
@@ -66,7 +89,7 @@ router.use('/db/tender/test',
 );
 
 /* GET Test App Schema */
-router.use('/db/app/test',
+router.use('/app/test',
     function (req, res, next) {
         res.tpl.tender = new objectRepository.tenderModel();
         res.tpl.tender.name = "Próba pályázat";
@@ -96,7 +119,7 @@ router.use('/db/app/test',
     },
 
     updateAppMW(objectRepository),
-    findAppbyIdMW(objectRepository),
+    findAppByIdMW(objectRepository),
 
     deleteAppMW(objectRepository),
     deleteUserMW(objectRepository),
@@ -108,7 +131,7 @@ router.use('/db/app/test',
 );
 
 /* GET Test Evaulator Schema */
-router.use('/db/eva/test',
+router.use('/eva/test',
     function (req, res, next) {
         res.tpl.tender = new objectRepository.tenderModel();
         res.tpl.tender.name = "Próba pályázat";
@@ -150,7 +173,7 @@ router.use('/db/eva/test',
 );
 
 /* GET Database admin home page. */
-router.use('/db',
+router.use('/',
     function (req, res, next) {
         return res.send('Database admin home page');
     }
