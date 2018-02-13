@@ -59,7 +59,7 @@ router.use('/all',
 
 router.use('/add',
     authEditorMW(objectRepository),
-    renderMW(objectRepository, 'newsList')
+    renderMW(objectRepository, 'newsAdd')
 );
 
 router.use('/:id/mod',

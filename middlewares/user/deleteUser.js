@@ -6,9 +6,9 @@ module.exports = function (objectrepository) {
 
             if (err !== null) {
                 res.tpl.error.add(err);
-                console.log("user delete error");
+                console.log("User delete: error");
             } else {
-                console.log("user delete success");
+                console.log("User delete: success");
             }
 
             return next();

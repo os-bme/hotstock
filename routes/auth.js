@@ -49,23 +49,25 @@ router.use('/oauth/callback',
                 res.tpl.user = new objectRepository.userModel();
                 res.tpl.user.bme_id = req.user.internal_id;
                 res.tpl.user.name = req.user.displayName;
-                res.tpl.user.email = req.user.email;
-                res.tpl.user.roomNumber = req.user.roomNumber;
-                req.session.passport.user.permission = 0;
+                res.tpl.user.firstname = req.user.givenName;
+                res.tpl.user.lastname = req.user.sn;
+                res.tpl.user.email = req.user.mail;
+                res.tpl.user.mobile = req.user.mobile;
                 res.tpl.user.permission = 0;
+                req.session.passport.user.permission = 0;
 
                 res.tpl.user.save(function (err) {
                     if (err !== null) {
-                        console.log('new user save failure');
+                        console.log('Oauth callback: new user save failure');
                         res.redirect('/auth/err');
                     } else {
-                        console.log('new user save success');
+                        console.log('Oauth callback: new user save success');
                         req.session.passport.user._id = res.tpl.user._id;
                         res.redirect('/');
                     }
                 });
             } else {
-                console.log('user found in db');
+                console.log('Oauth callback: user found in db');
                 res.tpl.user = obj;
                 req.session.passport.user.permission = obj.permission;
                 req.session.passport.user._id = obj._id;

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var updateUserMW = require('../middlewares/user/updateUser');
+var updateUserMW = require('../middlewares/user/updateUserDatas');
 var deleteUserMW = require('../middlewares/user/deleteUser');
 var findUserbyBMEIdMW = require('../middlewares/user/findUserbyId');
 

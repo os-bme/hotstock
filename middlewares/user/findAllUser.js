@@ -6,10 +6,10 @@ module.exports = function (objectrepository) {
 
             if ( res.tpl.users === null ) {
                 res.tpl.users = null;
-                console.log("users find error/none");
+                console.log("Find all user: error/none");
             } else {
                 res.tpl.users = obj;
-                console.log("users find success");
+                console.log("Find all user: success");
             }
 
             return next();

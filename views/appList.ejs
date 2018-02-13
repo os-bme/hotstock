@@ -12,7 +12,7 @@
                         <div class="col-lg-6">
                             <div class="input-group">
                                 <input type="text" name="tender" class="form-control" placeholder="Tender"  value="<%= req.query.tender %>" >
-                                <% if ( req.originalUrl.indexOf( "/user//all" ) > -1 ){%>
+                                <% if ( req.originalUrl.indexOf( "/user/all" ) > -1 ){%>
                                     <input type="text" name="name" class="form-control" placeholder="Name" value="<%= req.query.name %>" >
                                     <input type="text" name="neptun" class="form-control" placeholder="NEPTUN" value="<%= req.query.neptun %>" >
                                 <% } else { %>

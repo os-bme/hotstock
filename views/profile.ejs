@@ -11,7 +11,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-8">
-                                <h1 class="display-4"><%= res.tpl.user.fullname %></h1>
+                                <h1 class="display-4"><%= res.tpl.user.name %></h1>
                             </div>
                             <div class="col-sm-4 text-right">
                                 <% if ( req.session.passport.user.permission > 2) { %>
@@ -41,16 +41,27 @@
                                             <p> <strong>Neptun-code:</strong> <%= res.tpl.user.neptun %></p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p> <strong>Status:</strong> <%= res.tpl.user.status %></p>
+                                            <p> <strong>Status:</strong>
+                                                <% if (res.tpl.user.status == 1) {%>
+                                                    Active
+                                                <% } %>
+                                                <% if (res.tpl.user.status == 0) {%>
+                                                    Passive
+                                                <% } %>
+                                            </p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p> <strong>Date of birth:</strong> <%= res.tpl.user.birth_date %></p>
+                                            <p> <strong>Date of birth:</strong>
+                                                <% if (res.tpl.user.birth_date !== undefined) { %>
+                                                    <%= res.tpl.func.moment(res.tpl.user.birth_date).format('YYYY-MM-DD') %>
+                                                <% } %>
+                                            </p>
                                         </div>
                                         <div class="col-sm-6">
                                             <p> <strong>Place of birth:</strong> <%= res.tpl.user.birth_place %></p>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p> <strong>E-mail address:</strong> <%= res.tpl.user.email %></p>
+                                            <p> <strong>E-mail:</strong> <%= res.tpl.user.email %></p>
                                         </div>
                                         <div class="col-sm-6">
                                             <p>
@@ -194,7 +205,11 @@
                             <label class="col-md-4 col-form-label" for="birthdate">
                                 Date of birth
                             </label>
-                            <input type="date" name="birthdate" class="col-md-8 form-control" id="birthdate" value="<%= res.tpl.user.birth_date %>" >
+                            <input type="date" name="birthdate" class="col-md-8 form-control" id="birthdate"
+                                   <% if (res.tpl.user.birth_date !== undefined) { %>
+                                        value="<%= res.tpl.func.moment(res.tpl.user.birth_date).format('YYYY-MM-DD') %>"
+                                    <% } %>
+                            >
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label" for="birthplace">
@@ -217,7 +232,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-6 form-check text-center">
-                                <input type="checkbox" class="form-check-input" id="notify" value="true" <% if ( res.tpl.user.notification ) { %> checked <% } %> >
+                                <input type="checkbox" name="notification" class="form-check-input" id="notify" value="true" <% if ( res.tpl.user.notification ) { %> checked <% } %> >
                                 <label class="col-form-check-label" for="notify">
                                     E-mail notifications
                                 </label>
@@ -248,9 +263,9 @@
                     <div class="container">
                         <div class="form-group row">
                             <div class="input-group mb-2 space-before-20">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile02">
-                                    <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Example file input</label>
+                                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
                                 </div>
                             </div>
                             <div class="col-md-12 text-right space-before-20">

@@ -6,6 +6,15 @@ var authEditorMW = require('../middlewares/general/authEditor');
 var authAdminMW = require('../middlewares/general/authAdmin');
 var authSuperAdminMW = require('../middlewares/general/authSuperAdmin');
 
+var permissionSelfOrSuperadminMW = require('../middlewares/general/permissionSelfOrSuperadmin');
+
+var deleteUserMW = require('../middlewares/user/deleteUser');
+var findUserByIdMW = require('../middlewares/user/findUserbyId');
+var findAllUserMW = require('../middlewares/user/findAllUser');
+var updateUserDatasMW = require('../middlewares/user/updateUserDatas');
+var updateUserPermissionMW = require('../middlewares/user/updateUserPersmission');
+
+var redirectPrevMW = require('../middlewares/general/redirectPrev');
 var redirectMW = require('../middlewares/general/redirect');
 var renderMW = require('../middlewares/general/render');
 
@@ -18,41 +27,7 @@ var objectRepository = {
 /* GET users listing. */
 router.get('/all',
     authAdminMW(objectRepository),
-    function (req, res, next) {
-        res.tpl.users = [];
-
-        var user = {
-            _id: 0,
-            name: 'Kiss Béla',
-            fullname: 'Kiss Béla',
-            email: 'kiss.bela@bme.hu',
-            bme_id: 'asdlol',
-            permission: 0
-        };
-        res.tpl.users.push(user);
-
-        var user = {
-            _id: 1,
-            name: 'Kiss Béla',
-            fullname: 'Közép Béla',
-            email: 'kiss.bela@bme.hu',
-            bme_id: 'asdlol',
-            permission: 1
-        };
-        res.tpl.users.push(user);
-
-        var user = {
-            _id: 2,
-            name: 'Kiss Béla',
-            fullname: 'Nagy Béla',
-            email: 'kiss.bela@bme.hu',
-            bme_id: 'asdlol',
-            permission: 2
-        };
-        res.tpl.users.push(user);
-
-        return next();
-    },
+    findAllUserMW(objectRepository),
     renderMW(objectRepository, 'userList')
 );
 
@@ -110,42 +85,41 @@ router.get('/:id/apps',
     renderMW(objectRepository, 'appList')
 );
 
+/* POST delete user */
 router.post('/:id/del',
     authSuperAdminMW(objectRepository),
-    redirectMW(objectRepository)
+    findUserByIdMW(objectRepository),
+    deleteUserMW(objectRepository),
+    redirectMW(objectRepository, "user")
 );
 
+/* POST user data update */
 router.post('/:id/mod',
-    authAdminMW(objectRepository),
-    redirectMW(objectRepository)
+    authUserMW(objectRepository),
+    permissionSelfOrSuperadminMW(objectRepository),
+    findUserByIdMW(objectRepository),
+    updateUserDatasMW(objectRepository),
+    redirectPrevMW(objectRepository)
 );
 
 router.post('/:id/img',
     authSuperAdminMW(objectRepository),
-    redirectMW(objectRepository)
+    redirectPrevMW(objectRepository)
 );
 
+/* POST user permission update */
 router.post('/:id/permission',
     authSuperAdminMW(objectRepository),
-    redirectMW(objectRepository)
+    findUserByIdMW(objectRepository),
+    updateUserPermissionMW(objectRepository),
+    redirectPrevMW(objectRepository)
 );
 
 /* GET user's profile */
 router.get('/:id',
     authUserMW(objectRepository),
-    function (req, res, next) {
-        res.tpl.user = {
-            _id: 0,
-            fullname: 'Kiss Béla',
-            firstname: 'Kiss',
-            lastname: 'Béla',
-            email: 'kiss.bela@bme.hu',
-            bme_id: 'asdlol',
-            permission: 0,
-            notification: true
-        };
-        return next();
-    },
+    permissionSelfOrSuperadminMW(objectRepository),
+    findUserByIdMW(objectRepository),
     renderMW(objectRepository, 'profile')
 );
 
