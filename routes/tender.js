@@ -9,6 +9,7 @@ var authSuperAdminMW = require('../middlewares/general/authSuperAdmin');
 var findAllTenderMW = require('../middlewares/tender/findAllTender');
 var findTenderByIdMW = require('../middlewares/tender/findTenderbyId');
 var updateTenderMW = require('../middlewares/tender/updateTender');
+var deleteTenderMW = require('../middlewares/tender/deleteTender');
 
 var redirectPrevMW = require('../middlewares/general/redirectPrev');
 var renderMW = require('../middlewares/general/render');
@@ -40,7 +41,8 @@ router.get('/add',
 
 router.post('/:id/del',
     authSuperAdminMW(objectRepository),
-    // TODO delete tender
+    findTenderByIdMW(objectRepository, 'mod'),
+    deleteTenderMW(objectRepository),
     redirectMW(objectRepository, "tender/all")
 );
 
@@ -49,7 +51,6 @@ router.post('/:id/mod',
     findTenderByIdMW(objectRepository, 'mod'),
     updateTenderMW(objectRepository),
     redirectPrevMW(objectRepository)
-    // TODO: redirect
 );
 
 router.get('/:id/app',

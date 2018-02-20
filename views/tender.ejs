@@ -25,7 +25,7 @@
                                         <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteModal" >Delete</button>
                                     <% } %>
                                     <% if ( req.session.passport.user.permission > 0 ) { %>
-                                        <a class="btn btn-outline-secondary btn-sm" href="/tender/<%= res.tpl.tender._id %>/mod">Edit</a>
+                                        <button class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modModal" >Edit</button>
                                     <% } %>
                                     <% if ( req.session.passport.user.permission > 0 ) { %>
                                         <a class="btn btn-outline-secondary btn-sm" href="/tender/<%= res.tpl.tender._id %>/part">Parts</a>
@@ -98,5 +98,56 @@
 </div>
 
 <% } %>
+
+
+<% if ( req.isAuthenticated() && req.session.passport.user.permission > 0) { %>
+
+<div class="modal fade" id="modModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit datas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/tender/<%= res.tpl.tender._id %>/mod" method="post">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="title">Title</label>
+                            <input type="text" name="title" class="col-md-8 form-control" id="title" value="<%= res.tpl.tender.title %>">
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="short_description">Short description</label>
+                            <input type="text" name="short_description" class="col-md-8 form-control" id="short_description" value="<%= res.tpl.tender.short_description %>">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label" for="long_description">Long description</label>
+                            <textarea name="long_description" class="form-control" id="long_description"><%= res.tpl.tender.description %></textarea>
+                        </div>
+                        <div class="form-group row">
+                            <label for="startdate" class="col-form-label col-sm-6" >Application period start date</label>
+                            <div class="input-group col-sm-6">
+                                <input type="text" name="startdate" id="startdate" class="form-control text-center" value="<%= res.tpl.func.moment(res.tpl.tender.start_datetime).format('YYYY-MM-DD') %>">
+                            </div>
+                            <label for="enddate" class="col-form-label col-sm-6" >Application period end date</label>
+                            <div class="input-group col-sm-6">
+                                <input type="text" name="enddate" id="enddate" class="form-control text-center" value="<%= res.tpl.func.moment(res.tpl.tender.end_datetime).format('YYYY-MM-DD') %>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                        <input class="btn btn-info" type="submit" value="Save">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% } %>
+
 
 <% include pageFooter %>
