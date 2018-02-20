@@ -14,11 +14,10 @@ module.exports = function (objectRepository, method) {
             objectRepository.newsModel.findOne( { _id: req.params.id }, function (err, obj) {
                 if (res.tpl.news === null) {
                     res.tpl.news = null;
-                    console.log("Find news by id: error/none");
+                    console.log("Find news by ID: error/none");
                 } else {
                     res.tpl.news = obj;
-                    console.log(obj);
-                    console.log("Find news by id: success");
+                    console.log("Find news by ID: success");
                 }
                 return next();
             })

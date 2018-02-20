@@ -59,7 +59,7 @@
                             </div>
                             <div class="col-sm-3 text-center space-before-20">
                                 <h6>
-                                    <%= res.tpl.tender.start_datetime %> - <%= res.tpl.tender.end_datetime %>
+                                    <%= res.tpl.func.moment(res.tpl.tender.start_datetime).format('YYYY-MM-DD') %> - <%= res.tpl.func.moment(res.tpl.tender.end_datetime).format('YYYY-MM-DD') %>
                                 </h6>
                             </div>
                         </div>
@@ -71,26 +71,32 @@
     </div>
 </div>
 
+<% if ( req.isAuthenticated() && req.session.passport.user.permission === 3 ) { %>
+
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">WARNING!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        <form method="post" action="/tender/<%= res.tpl.tender._id %>/del">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">WARNING!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    You are trying to delete a tender and all the applications that received for it. After delete, can't be restored.
+                    <br>
+                    Please pay attention to it!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger" >Delete</button>
+                </div>
             </div>
-            <div class="modal-body">
-                You are trying to delete a tender and all the applications that received for it. After delete, can't be restored.
-                <br>
-                Please pay attention to it!
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a class="btn btn-danger" href="/tender/<%= res.tpl.tender._id %>/del">Delete</a>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
+
+<% } %>
 
 <% include pageFooter %>

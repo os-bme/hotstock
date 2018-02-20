@@ -11,8 +11,8 @@ var findAllNewsMW = require('../middlewares/news/findAllNews');
 var updateNewsMW = require('../middlewares/news/updateNews');
 
 var redirectPrevMW = require('../middlewares/general/redirectPrev');
-
 var renderMW = require('../middlewares/general/render');
+var redirectMW = require('../middlewares/general/redirect');
 
 var UserModel = require('../models/users');
 var NewsModel = require('../models/news');
@@ -42,9 +42,10 @@ router.post('/:id/mod',
     redirectPrevMW(objectRepository)
 );
 
-router.use('/:id/del',
+router.post('/:id/del',
     authSuperAdminMW(objectRepository),
-    renderMW(objectRepository, 'news')
+    // TODO delete news
+    redirectMW(objectRepository, "news/all")
 );
 
 /* GET news */

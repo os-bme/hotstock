@@ -12,7 +12,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h1 class="display-4">
-                                Create news
+                                Create Tender
                             </h1>
                         </div>
                         <div class="card-body">
@@ -23,7 +23,7 @@
                                 </button>
                             </div>
 
-                            <form method="post" action="/news/new/mod">
+                            <form method="post" action="/tender/new/mod">
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="title">Title</label>
                                     <input type="text" class="form-control col-sm-4" id="title" name="title" placeholder="Enter the title">
@@ -52,13 +52,25 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="form-group row">
+                                    <label for="startdate" class="col-form-label col-sm-3" >Application period start date</label>
+                                    <div class="input-group col-sm-3">
+                                        <input type="text" name="startdate" id="startdate" class="form-control datepicker1" width="100%">
+                                    </div>
+                                    <label for="enddate" class="col-form-label col-sm-3" >Application period end date</label>
+                                    <div class="input-group col-sm-3">
+                                        <input type="text" name="enddate" id="enddate" class="form-control datepicker2" width="100%">
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="short-description">Short description</label>
-                                    <input type="text" class="form-control" id="short-description" name="short_description" placeholder="Enter the short version of the news">
+                                    <input type="text" class="form-control" id="short-description" name="short_description" placeholder="Enter the short version of the tender">
                                 </div>
                                 <div class="form-group">
                                     <label for="short-description">Full description</label>
-                                    <textarea class="form-control" id="long-description" name="long_description" cols="20" placeholder="Enter the complete version of the news"></textarea>
+                                    <textarea class="form-control" id="long-description" name="long_description" cols="20" placeholder="Enter the complete version of the tender"></textarea>
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-info">Publish</button>
