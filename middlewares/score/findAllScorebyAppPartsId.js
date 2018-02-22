@@ -14,7 +14,7 @@ module.exports = function (objectrepository) {
 
         objectrepository.scoreModel.findOne( query, function (err,obj) {
 
-            if ( res.tpl.scores === null ) {
+            if ( obj === null ) {
                 res.tpl.scores = null;
                 console.log("scores find error/none");
             } else {

@@ -29,7 +29,7 @@ module.exports = function (objectrepository, method) {
                 },
                 function (err, obj) {
 
-                    if (res.tpl.tenders === null) {
+                    if (obj === null) {
                         res.tpl.tenders = null;
                         console.log("Find all tender: error/none");
                     } else {

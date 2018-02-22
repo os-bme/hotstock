@@ -13,7 +13,7 @@ module.exports = function (objectRepository, method) {
 
         if (method === 'mod') {
             objectRepository.tenderModel.findOne( { _id: req.params.id }, function (err, obj) {
-                if (res.tpl.tender === null) {
+                if (obj === null) {
                     res.tpl.tender = null;
                     console.log("Find tender by ID: error/none");
                 } else {

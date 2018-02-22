@@ -4,12 +4,12 @@ module.exports = function (objectrepository) {
 
         objectrepository.newsModel.find({}, function (err, obj) {
 
-            if ( res.tpl.newses === null ) {
+            if ( obj === null ) {
                 res.tpl.newses = null;
-                console.log("newses find error/none");
+                console.log("Find news: error/none");
             } else {
                 res.tpl.newses = obj;
-                console.log("newses find success");
+                console.log("Find news: success");
             }
 
             return next();

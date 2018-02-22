@@ -6,14 +6,23 @@ var authEditorMW = require('../middlewares/general/authEditor');
 var authAdminMW = require('../middlewares/general/authAdmin');
 var authSuperAdminMW = require('../middlewares/general/authSuperAdmin');
 
+var findTenderbyIDMW = require('../middlewares/tender/findTenderbyId');
+var findTenderPartsbyTenderIdMW = require('../middlewares/tender/findAllTenderPartsbyTenderId');
+
+var findMyUserMW = require('../middlewares/user/findMyUserDatas');
+
 var renderMW = require('../middlewares/general/render');
 
 var UserModel = require('../models/users');
 var NewsModel = require('../models/news');
+var TenderModel = require('../models/tenders');
+var TenderPartModel = require('../models/tender_parts');
 
 var objectRepository = {
     userModel: UserModel,
-    newsModel: NewsModel
+    newsModel: NewsModel,
+    tenderModel: TenderModel,
+    tenderPartModel: TenderPartModel
 };
 
 router.get('/all',
@@ -64,9 +73,12 @@ router.get('/unscored',
     renderMW(objectRepository, 'appList')
 );
 
-router.use('/add/:id',
+router.get('/add/:id',
     authUserMW(objectRepository),
-    renderMW(objectRepository, 'app')
+    findTenderbyIDMW(objectRepository, 'mod'),
+    findTenderPartsbyTenderIdMW(objectRepository),
+    findMyUserMW(objectRepository),
+    renderMW(objectRepository, 'appAdd')
 );
 
 router.use('/:id/del',

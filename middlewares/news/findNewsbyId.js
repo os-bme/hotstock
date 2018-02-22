@@ -12,7 +12,7 @@ module.exports = function (objectRepository, method) {
 
         if (method === 'mod') {
             objectRepository.newsModel.findOne( { _id: req.params.id }, function (err, obj) {
-                if (res.tpl.news === null) {
+                if (obj === null) {
                     res.tpl.news = null;
                     console.log("Find news by ID: error/none");
                 } else {
