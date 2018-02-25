@@ -1,14 +1,17 @@
 <% include pageHeader %>
-
 <% include pageNavbar %>
 
 <div class="container-fluid">
     <div class="row justify-content-center space-before-40">
 
         <div class="col-sm-10 text-center">
-            <h1 class="display-4" >
-                <%= res.tpl.tender.title %> parts
-                <button class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#addModal" >Add</button>
+            <h1 class="display-4">
+                <a class="h3 display-4" href="/tender/<%= res.tpl.tender._id %>"><%= res.tpl.tender.title %></a>
+                parts
+                <% if ( res.tpl.tender.start_datetme > Date.now() || req.session.passport.user.permission === 3 ) { %>
+                <button class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#addModal">Add
+                    <% } %>
+                </button>
             </h1>
         </div>
         <div class="col-sm-10">
@@ -31,26 +34,44 @@
                     <td class="text-center"><%= tenderPart.description %></td>
                     <td class="text-center">
                         <% switch (tenderPart.type) {
-                            case 0: %>
-                                Attachment
-                                <% break;
-                            case 1: %>
-                                Short text
-                                <% break;
-                            case 2: %>
-                                Long text
-                                <% break;
-                            case 3: %>
-                                Document
-                                <% break;
+                        case 0: %>
+                        Attachment
+                        <% break;
+                        case 1: %>
+                        Short text
+                        <% break;
+                        case 2: %>
+                        Long text
+                        <% break;
+                        case 3: %>
+                        Document
+                        <% break;
+                        case 4: %>
+                        Separator
+                        <% break;
                         } %>
                     </td>
-                    <td class="text-center"><% if (tenderPart.required) { %>X<% } %></td>
-                    <td class="text-center"><% if (tenderPart.scorable) { %>X<% } %></td>
+                    <td class="text-center">
+                        <% if (tenderPart.required) { %>
+                        X
+                        <% } %>
+                    </td>
+                    <td class="text-center">
+                        <% if (tenderPart.scorable) { %>
+                        X
+                        <% } %>
+                    </td>
                     <td>
-                        <button class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modModal<%= tenderPart._id %>" >Edit</button>
+                        <% if (res.tpl.tender.start_datetme > Date.now() || req.session.passport.user.permission === 3 ) { %>
+                        %>
+                        <button class="btn btn-outline-secondary btn-sm" data-toggle="modal"
+                                data-target="#modModal<%= tenderPart._id %>">Edit
+                        </button>
+                        <% } %>
                         <% if (req.session.passport.user.permission === 3 ) { %>
-                        <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#delModal" >Delete</button>
+                        <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#delModal">
+                            Delete
+                        </button>
                         <% } %>
                     </td>
                 </tr>
@@ -63,7 +84,10 @@
     </div>
 </div>
 
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<% if (res.tpl.tender.start_datetme > Date.now() || req.session.passport.user.permission === 3 ) { %>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form method="post" action="/tender/<%= res.tpl.tender._id %>/part/add">
             <div class="modal-content">
@@ -82,7 +106,7 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label" for="description">Description</label>
-                            <input type="text" name="description" class="col-md-8 form-control" id="description" required>
+                            <input type="text" name="description" class="col-md-8 form-control" id="description">
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label" for="type">Type</label>
@@ -91,26 +115,30 @@
                                 <option value="1">Short text</option>
                                 <option value="2">Long text</option>
                                 <option value="3">Document</option>
+                                <option value="4">Separator</option>
                             </select>
                         </div>
                         <div class="form-group row">
                             <div class="col-6 text-center space-before-20">
-                                <label class="checkbox-inline"><input type="checkbox" value="true" name="scorable" id="scorable">Scorable</label>
+                                <label class="checkbox-inline"><input type="checkbox" value="true" name="scorable"
+                                                                      id="scorable">Scorable</label>
                             </div>
                             <div class="col-6 text-center space-before-20">
-                                <label class="checkbox-inline"><input type="checkbox" value="true" name="required" id="required">Required</label>
+                                <label class="checkbox-inline"><input type="checkbox" value="true" name="required"
+                                                                      id="required">Required</label>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label" for="exampleFormControlFile1">File input</label>
-                            <input type="file" class="col-sm-8  form-control-file" id="exampleFormControlFile1" disabled>
+                            <input type="file" class="col-sm-8  form-control-file" id="exampleFormControlFile1"
+                                   disabled>
                         </div>
                     </div>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-info" >Save</button>
+                    <button type="submit" class="btn btn-info">Save</button>
                 </div>
             </div>
         </form>
@@ -118,7 +146,8 @@
 </div>
 
 <% res.tpl.tenderParts.forEach( function (part) { %>
-<div class="modal fade" id="modModal<%= part._id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modModal<%= part._id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form method="post" action="/tender/<%= res.tpl.tender._id %>/part/<%= part._id %>/mod">
             <div class="modal-content">
@@ -133,44 +162,83 @@
                     <div class="container space-before-20">
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label" for="title">Title</label>
-                            <input type="text" name="title" class="col-md-8 form-control" id="title" value="<%= part.title %>" required>
+                            <input type="text" name="title" class="col-md-8 form-control" id="title"
+                                   value="<%= part.title %>" required>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label" for="description">Description</label>
-                            <input type="text" name="description" class="col-md-8 form-control" id="description" value="<%= part.description%>" required>
+                            <input type="text" name="description" class="col-md-8 form-control" id="description"
+                                   value="<%= part.description %>">
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label" for="type">Type</label>
                             <select class="col-md-4 form-control" id="type" name="type" required>
-                                <option value="0" <% if (part.type == 0) { %> selected <% } %> >Attachment</option>
-                                <option value="1" <% if (part.type == 1) { %> selected <% } %> >Short text</option>
-                                <option value="2" <% if (part.type == 2) { %> selected <% } %> >Long text</option>
-                                <option value="3" <% if (part.type == 3) { %> selected <% } %> >Document</option>
+                                <option value="0"
+                                        <% if (part.type == 0) { %>
+                                        selected
+                                        <% } %>
+                                >Attachment
+                                </option>
+                                <option value="1"
+                                        <% if (part.type == 1) { %>
+                                        selected
+                                        <% } %>
+                                >Short text
+                                </option>
+                                <option value="2"
+                                        <% if (part.type == 2) { %>
+                                        selected
+                                        <% } %>
+                                >Long text
+                                </option>
+                                <option value="3"
+                                        <% if (part.type == 3) { %>
+                                        selected
+                                        <% } %>
+                                >Document
+                                </option>
+                                <option value="4"
+                                        <% if (part.type == 4) { %>
+                                        selected
+                                        <% } %>
+                                >Separator
+                                </option>
                             </select>
                         </div>
                         <div class="form-group row">
                             <div class="col-6 text-center space-before-20">
-                                <label class="checkbox-inline"><input type="checkbox" value="true" name="scorable" id="scorable" <% if ( part.scorable ) { %> checked <% } %> >Scorable</label>
+                                <label class="checkbox-inline"><input type="checkbox" value="true" name="scorable"
+                                                                      id="scorable"
+                                            <% if ( part.scorable ) { %>
+                                                                      checked
+                                            <% } %>
+                                    >Scorable</label>
                             </div>
                             <div class="col-6 text-center space-before-20">
-                                <label class="checkbox-inline"><input type="checkbox" value="true" name="required" id="required" <% if ( part.required ) { %> checked <% } %> >Required</label>
+                                <label class="checkbox-inline"><input type="checkbox" value="true" name="required"
+                                                                      id="required"
+                                            <% if ( part.required ) { %>
+                                                                      checked
+                                            <% } %>
+                                    >Required</label>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label" for="exampleFormControlFile1">File input</label>
-                            <input type="file" class="col-sm-8  form-control-file" id="exampleFormControlFile1" disabled>
+                            <input type="file" class="col-sm-8  form-control-file" id="exampleFormControlFile1"
+                                   disabled>
                         </div>
                     </div>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-info" >Save</button>
+                    <button type="submit" class="btn btn-info">Save</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
 <% }) %>
-
+<% } %>
 <% include pageFooter %>
