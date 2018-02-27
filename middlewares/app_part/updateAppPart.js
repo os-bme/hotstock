@@ -6,6 +6,9 @@ module.exports = function (objectrepository) {
             res.tpl.appPart._score = res.tpl.score._id;
         }
 
+        console.log( req.body );
+        res.tpl.appPart.status = req.body.status;
+
         res.tpl.appPart.save(function (err) {
 
             if (err != null){

@@ -3,6 +3,7 @@ var db = require( '../db' );
 
 var AppPartModel = db.model( 'AppPart', {
     content: String,
+    status: Number,
     _score: {
         type: Schema.Types.ObjectId,
         ref: 'Score'

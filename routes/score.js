@@ -12,6 +12,9 @@ var updateAppMW = require('../middlewares/app/updateApp');
 var findAppPartByIdMW = require('../middlewares/app_part/findAppPartbyId');
 var updateAppPartMW = require('../middlewares/app_part/updateAppPart');
 
+var updateScoreMW = require('../middlewares/score/updateScore');
+var findScoreByAppPartIdMW = require('../middlewares/score/findScorebyAppPartId');
+
 var redirectPrevMW = require('../middlewares/general/redirectPrev');
 var redirectMW = require('../middlewares/general/redirect');
 var renderMW = require('../middlewares/general/render');
@@ -33,6 +36,8 @@ router.post('/:id/:part',
     authAdminMW(objectRepository),
     findAppByIdMW(objectRepository),
     findAppPartByIdMW(objectRepository),
+    findScoreByAppPartIdMW(objectRepository),
+    updateScoreMW(objectRepository),
     updateAppPartMW(objectRepository),
     updateAppMW(objectRepository),
     redirectToAppMw(objectRepository)

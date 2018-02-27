@@ -2,7 +2,6 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        res.tpl.appPart.status = req.body.status;
         res.tpl.score.value = req.body.value;
         res.tpl.score.comment = req.body.comment;
         res.tpl.score._evaulator = req.session.passport.user._id;

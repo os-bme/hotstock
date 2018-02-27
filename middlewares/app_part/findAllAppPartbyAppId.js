@@ -4,25 +4,10 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        objectrepository.appPartModel.aggregate(
-            {
-                $match:
-                    {
-                        _app: ObjectId(res.tpl.app._id)
-                    }
-            },
-            {
-                $lookup:
-                    {
-                        from: 'tenderparts',
-                        localField: '_tender_part',
-                        foreignField: '_id',
-                        as: 'tenderPart'
-                    }
-            },
-            { $unwind: '$tenderPart' },
-            function (err, obj) {
-
+        objectrepository.appPartModel.find({_app: ObjectId(res.tpl.app._id)})
+            .populate('_tender_part')
+            .populate('_score')
+            .exec(function (err, obj) {
                 if (err != null) {
                     res.tpl.error.add(err);
                     console.log("AppParts find: error");
@@ -30,9 +15,7 @@ module.exports = function (objectrepository) {
                     res.tpl.appParts = obj;
                     console.log("AppParts find: success");
                 }
-
                 return next();
-
             });
 
     }
