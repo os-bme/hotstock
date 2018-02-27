@@ -9,12 +9,12 @@ module.exports = function (objectrepository) {
                 _id: ObjectId(req.session.passport.user._id)
             },
             function (err, obj) {
-                if ( obj === null ) {
-                    res.tpl.user = null;
-                    console.log("Find user by id: error/none");
+
+                if (err != null) {
+                    res.tpl.error.add(err);
+                    console.log("Find user by id: error");
                 } else {
                     res.tpl.user = obj;
-                    console.log(res.tpl.user);
                     console.log("Find user by id:  success");
                 }
                 return next();

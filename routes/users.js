@@ -11,16 +11,21 @@ var permissionSelfOrSuperadminMW = require('../middlewares/general/permissionSel
 var deleteUserMW = require('../middlewares/user/deleteUser');
 var findUserByIdMW = require('../middlewares/user/findUserbyId');
 var findAllUserMW = require('../middlewares/user/findAllUser');
+var findMyUserMW = require('../middlewares/user/findMyUserDatas');
 var updateUserDatasMW = require('../middlewares/user/updateUserDatas');
 var updateUserPermissionMW = require('../middlewares/user/updateUserPersmission');
+
+var findAppbyUserIdMW = require('../middlewares/app/findAppbyUserid');
 
 var redirectPrevMW = require('../middlewares/general/redirectPrev');
 var redirectMW = require('../middlewares/general/redirect');
 var renderMW = require('../middlewares/general/render');
 
 var UserModel = require('../models/users');
+var AppModel = require('../models/apps');
 
 var objectRepository = {
+    appModel: AppModel,
     userModel: UserModel
 };
 
@@ -34,54 +39,8 @@ router.get('/all',
 /* GET user's apps */
 router.get('/:id/apps',
     authUserMW(objectRepository),
-    function (req, res, next) {
-        res.tpl.user = {
-            _id: 0,
-            fullname: 'Kiss Béla',
-            neptun: 'ABCDEF',
-            email: 'kiss.bela@bme.hu',
-            bme_id: 'asdlol',
-            permission: 0,
-            ownSearch: true
-        };
-
-        res.tpl.apps = [];
-
-        var app = {
-            _id: 0,
-            title: 'one',
-            user: {
-                name: 'Béla'
-            },
-            register_date: '2018.01.01.',
-            final_score: ''
-        };
-        res.tpl.apps.push(app);
-
-        var app = {
-            _id: 1,
-            title: 'two',
-            user: {
-                name: 'Béla'
-            },
-            register_date: '2018.01.01.',
-            final_score: ''
-        };
-        res.tpl.apps.push(app);
-
-        var app = {
-            _id: 2,
-            title: 'three',
-            user: {
-                name: 'Béla'
-            },
-            register_date: '2018.01.01.',
-            final_score: ''
-        };
-        res.tpl.apps.push(app);
-
-        return next();
-    },
+    findMyUserMW(objectRepository),
+    findAppbyUserIdMW(objectRepository),
     renderMW(objectRepository, 'appList')
 );
 

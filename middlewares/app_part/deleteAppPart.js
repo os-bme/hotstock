@@ -3,11 +3,12 @@ module.exports = function (objectrepository) {
     return function (req, res, next) {
 
         res.tpl.app_part.remove(function (err) {
-            if (err !== null) {
+
+            if (err != null){
                 res.tpl.error.add(err);
-                console.log("app_part delete error");
+                console.log("AppPart delete: error");
             } else {
-                console.log("app_part delete success");
+                console.log("AppPart delete: success");
             }
             return next();
         });

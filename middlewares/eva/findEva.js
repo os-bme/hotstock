@@ -12,12 +12,12 @@ module.exports = function (objectrepository) {
             },
             function (err, obj) {
 
-                if ( res.tpl.eva === null ) {
-                    res.tpl.eva = null;
-                    console.log("evaluator find error/none");
+                if (err != null) {
+                    res.tpl.error.add(err);
+                    console.log("Evaluator find: error");
                 } else {
                     res.tpl.eva = obj;
-                    console.log("evaluator find success");
+                    console.log("Evaluator find: success");
                 }
 
                 return next();

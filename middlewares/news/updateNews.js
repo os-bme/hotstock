@@ -10,7 +10,7 @@ module.exports = function (objectrepository) {
 
         res.tpl.news.save(function (err) {
 
-            if (err !== null){
+            if (err != null) {
                 res.tpl.error.add(err);
                 console.log("Update news: error");
             } else {

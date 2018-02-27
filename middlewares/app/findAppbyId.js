@@ -1,3 +1,5 @@
+var ObjectId = require('../../db').Types.ObjectId;
+
 module.exports = function (objectrepository) {
 
     return function (req, res, next) {
@@ -5,7 +7,7 @@ module.exports = function (objectrepository) {
         objectrepository.appModel.aggregate(
             {
                 $match:
-                    {}
+                    { _id : ObjectId(req.params.id) }
             },
             {
                 $lookup:
@@ -27,19 +29,19 @@ module.exports = function (objectrepository) {
                     }
             },
             { $unwind: '$tender' },
-        function (err, obj) {
+            function (err, obj) {
 
             if (err != null){
                 res.tpl.error.add(err);
-                console.log("Apps find: error/none");
+                console.log("App find: error");
             } else {
-                res.tpl.apps = obj;
-                console.log("Apps find: success");
+                res.tpl.app = obj[0];
+                console.log("App find: success");
             }
 
             return next();
 
-        });
+        } );
 
     }
 };

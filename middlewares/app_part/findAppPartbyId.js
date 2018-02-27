@@ -2,14 +2,15 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        objectrepository.AppPartModel.findOne( { _id: res.tpl.app_part._id }, function (err, obj) {
+        objectrepository.appPartModel.find( { _id: req.params.part },
+            function (err, obj) {
 
-            if ( res.tpl.app_part === null ) {
-                res.tpl.app_part = null;
-                console.log("app_part find error/none");
+            if (err != null){
+                res.tpl.error.add(err);
+                console.log("AppPart find: error");
             } else {
-                res.tpl.app_part = obj;
-                console.log("app_part find success");
+                res.tpl.appPart = obj[0];
+                console.log("AppPart find: success");
             }
 
             return next();

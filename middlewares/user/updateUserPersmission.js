@@ -6,7 +6,7 @@ module.exports = function (objectrepository) {
 
         res.tpl.user.save(function (err) {
 
-            if (err !== null){
+            if (err != null) {
                 res.tpl.error.add(err);
                 console.log("Update user permission: error");
             } else {

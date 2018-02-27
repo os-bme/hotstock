@@ -11,9 +11,10 @@ module.exports = function (objectRepository) {
                 _id: ObjectId(req.params.partId)
             },
             function (err, obj) {
-                if (obj === null) {
-                    res.tpl.tenderPart = null;
-                    console.log("Find Tender Part by ID: error/none");
+
+                if (err != null) {
+                    res.tpl.error.add(err);
+                    console.log("Find Tender Part by ID: error");
                 } else {
                     res.tpl.tenderPart = obj;
                     console.log( res.tpl.tenderPart );

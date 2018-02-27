@@ -15,6 +15,7 @@ var addTenderPartMW = require('../middlewares/tender/addTenderPart');
 var updateTenderPartMW = require('../middlewares/tender/updateTendetPart');
 var findTenderPartsMW = require('../middlewares/tender/findAllTenderPartsbyTenderId');
 var findTenderPartbyIDMW = require('../middlewares/tender/findTenderPartbyId');
+var deleteTenderPartMW = require('../middlewares/tender/deleteTenderPart');
 
 var redirectPrevMW = require('../middlewares/general/redirectPrev');
 var renderMW = require('../middlewares/general/render');
@@ -93,6 +94,14 @@ router.post('/:id/part/:partId/mod',
     findTenderByIdMW(objectRepository, 'mod'),
     findTenderPartbyIDMW(objectRepository),
     updateTenderPartMW(objectRepository)            // also refresh page
+);
+
+/* POST del tender's part */
+router.post('/:id/part/:partId/del',
+    authSuperAdminMW(objectRepository),
+    findTenderByIdMW(objectRepository, 'mod'),
+    findTenderPartbyIDMW(objectRepository),
+    deleteTenderPartMW(objectRepository)            // also refresh page
 );
 
 /* GET tender's page */

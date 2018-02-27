@@ -3,8 +3,10 @@ var db = require( '../db' );
 
 var AppPartModel = db.model( 'AppPart', {
     content: String,
-    score: Number,
-    status: Number,
+    _score: {
+        type: Schema.Types.ObjectId,
+        ref: 'Score'
+    },
     _app: {
         type: Schema.Types.ObjectId,
         ref: 'App'

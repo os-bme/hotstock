@@ -12,9 +12,10 @@ module.exports = function (objectRepository) {
                     }
             },
             function (err, obj) {
-                if (obj === null) {
-                    res.tpl.tenderParts = null;
-                    console.log("Find Tender Part by Tender ID: error/none");
+
+                if (err != null) {
+                    res.tpl.error.add(err);
+                    console.log("Find Tender Part by Tender ID: error");
                 } else {
                     res.tpl.tenderParts = obj;
                     console.log("Find Tender Part by Tender ID: success");

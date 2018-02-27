@@ -12,9 +12,10 @@ module.exports = function (objectRepository, method) {
 
         if (method === 'mod') {
             objectRepository.newsModel.findOne( { _id: req.params.id }, function (err, obj) {
-                if (obj === null) {
-                    res.tpl.news = null;
-                    console.log("Find news by ID: error/none");
+
+                if (err != null) {
+                    res.tpl.error.add(err);
+                    console.log("Find news by ID: error");
                 } else {
                     res.tpl.news = obj;
                     console.log("Find news by ID: success");
@@ -36,9 +37,10 @@ module.exports = function (objectRepository, method) {
                 }},
                 { $unwind: '$publisher'},
                 function (err, obj) {
-                    if (res.tpl.news === null) {
-                        res.tpl.news = null;
-                        console.log("Find news by id: error/none");
+
+                    if (err != null) {
+                        res.tpl.error.add(err);
+                        console.log("Find news by id: error");
                     } else {
                         res.tpl.news = obj[0];
                         console.log(obj[0]);

@@ -5,38 +5,41 @@
 <div class="container-fluid">
     <div class="row justify-content-center">
 
-        <div class="col-sm-10 space-before-40">
-            <div class="card">
+        <ul class="col-sm-10 space-before-40">
+            <li class="card">
                 <div class="card-header">
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-8">
-                                <a class="h3 display-4" href="tender_description.html"><%= res.tpl.tender.title %></a>
+                                <a class="h3 display-4" href="/tender/<%= res.tpl.app.tender._id %>"><%= res.tpl.app.tender.title %></a>
                             </div>
                             <div class="col-sm-4 text-right">
-                                <% if ( req.session.passport.user.permission > 2 || req.session.passport.user.internal_id == res.tpl.user.bme_id ) { %>
+                                <% if ( req.session.passport.user.permission > 2 || req.session.passport.user.internal_id == res.tpl.app.user.bme_id ) { %>
                                 <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteModal" >Delete</button>
                                     <a class="btn btn-outline-secondary btn-sm" href="/app/<%= res.tpl.app._id %>/mod">Edit</a>
                                 <% } %>
-                                <a class="btn btn-outline-secondary btn-sm" href="/user/<%= res.tpl.user._id %>"><%= res.tpl.user.fullname %></a>
+                                <a class="btn btn-outline-secondary btn-sm" href="/user/<%= res.tpl.app.user._id %>"><%= res.tpl.app.user.name %></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <% res.tpl.tender_parts.forEach( function (tender_part) { %>
+                        <% res.tpl.appParts.forEach( function (appPart) { %>
                             <div class="container">
                                 <div class="row space-before-10">
-
-                                    <% res.tpl.app_parts.forEach( function (part) { if ( tender_part._id == part._tender_part ) { res.tpl.app_part = part; console.log('found'); }}); %>
 
                                     <div class="col-sm-5">
                                         <div class="d-flex justify-content-start">
                                             <div class="p-2 align-self-center">
                                                 <h5>
-                                                    <strong data-toggle="tooltip" data-placement="top" title="<%= tender_part.description %>">
-                                                            <%= tender_part.title %>
+                                                    <strong data-toggle="tooltip" data-placement="top" title="<%= appPart.tenderPart.description %>">
+                                                        <% if ( appPart.tenderPart.type != 4 && appPart.tenderPart.type != 0 ) { %>
+                                                            <%= appPart.tenderPart.title %>
+                                                            <% if ( appPart.tenderPart.required ) { %>
+                                                                *
+                                                            <% } %>
+                                                        <% } %>
                                                     </strong>
                                                 </h5>
                                             </div>
@@ -46,30 +49,33 @@
                                     <div class="col-sm-5">
                                         <div class="d-flex justify-content-start">
                                             <div class="p-2 align-self-center">
-                                                <h5>
-                                                    <% if ( tender_part.type == 0 ) { %>
-                                                        <%= res.tpl.app_part.content %>
+                                                <p>
+                                                    <% if ( appPart.tenderPart.type == 1 ) { %>
+                                                        <%= appPart.content %>
                                                     <% } %>
 
-                                                    <% if ( tender_part.type == 1 ) { %>
+                                                    <% if ( appPart.tenderPart.type == 3 ) {%>
                                                         <a href="">
-                                                            <%= res.tpl.app_part.content %>
+                                                            <%= appPart.content %>
                                                         </a>
                                                     <% } %>
 
-                                                </h5>
+                                                    <% if ( appPart.tenderPart.type == 4 ) { %>
+                                                    <div class="space-before-20"></div>
+                                                    <% } %>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-sm-2">
                                         <div class="d-flex justify-content-around">
-                                            <% if ( tender_part.scorable ) { %>
+                                            <% if ( appPart.tenderPart.scorable ) { %>
                                                 <div class="p-2 align-self-center">
-                                                    <h5><%= res.tpl.app_part.score %></h5>
+                                                    <h5><%= appPart.score %></h5>
                                                 </div>
                                                 <div class="p-2 align-self-start">
-                                                    <button type="button" class="btn btn-secondary btn-sm">Score</button>
+                                                    <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#scoreModal<%= appPart._id %>">Evaluate</button>
                                                 </div>
                                             <% } %>
                                         </div>
@@ -77,11 +83,13 @@
 
                                 </div>
                             </div>
-                            <% if ( tender_part.type == 2 ) { %>
-                                <div>
-                                    <p class="text-justify">
-                                        <%= res.tpl.app_part.content %>
-                                    </p>
+                            <% if ( appPart.tenderPart.type == 2 ) { %>
+                                <div class="row justify-content-md-center" >
+                                    <div class="col-11">
+                                        <p class="text-justify">
+                                            <%= appPart.content %>
+                                        </p>
+                                    </div>
                                 </div>
                             <% } %>
 
@@ -92,10 +100,10 @@
                     <li class="list-group-item">
                         <div class="d-flex justify-content-around">
                             <div class="p-2 align-self-center">
-                                <h3><%= res.tpl.tender.final_score %></h3>
+                                <h3><%= res.tpl.app.final_score %></h3>
                             </div>
                             <div class="p-2 align-self-center">
-                                <button type="button" class="btn btn-secondary">Final score</button>
+                                <button type="button" class="btn btn-secondary">Final evaluation</button>
                             </div>
                         </div>
                     </li>
@@ -107,6 +115,52 @@
     </div>
 </div>
 
+
+<% res.tpl.appParts.forEach( function (appPart) { if( appPart.tenderPart.scorable ) { %>
+<div class="modal fade" id="scoreModal<%= appPart._id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form method="post" action="/score/<%= res.tpl.app._id %>/<%= appPart._id %>">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Evaluation (<%= appPart.tenderPart.title %>)</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="type">Type</label>
+                        <select class="col-md-8 form-control" id="type" name="status" required>
+                            <option value="0">Checked</option>
+                            <option value="1">Processing</option>
+                            <option value="2">Accepted</option>
+                            <option value="3">Rejected</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="score">Score</label>
+                        <input type="number" name="value" class="col-md-8 form-control" id="score">
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="comment">Comment</label>
+                        <input type="text" name="comment" class="col-md-8 form-control" id="comment">
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-info" >Save</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+<% }}) %>
 
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

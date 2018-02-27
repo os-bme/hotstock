@@ -4,12 +4,12 @@ module.exports = function (objectrepository) {
 
        objectrepository.appModel.find( { _tender: res.tpl.tender._id }, function (err, obj) {
 
-            if ( res.tpl.apps === null ) {
-                res.tpl.apps = null;
-                console.log("apps find error/none");
+           if (err != null){
+               res.tpl.error.add(err);
+                console.log("Apps find: error");
             } else {
                 res.tpl.apps = obj;
-                console.log("apps find success");
+                console.log("Apps find: success");
             }
 
             return next();

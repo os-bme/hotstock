@@ -4,7 +4,7 @@ module.exports = function (objectrepository) {
 
         res.tpl.news.remove(function (err) {
 
-            if (err !== null) {
+            if (err != null) {
                 res.tpl.error.add(err);
                 console.log("Delete news: error");
             } else {

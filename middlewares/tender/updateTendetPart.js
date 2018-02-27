@@ -11,7 +11,7 @@ module.exports = function (objectrepository) {
 
         res.tpl.tenderPart.save(function (err) {
 
-            if (err !== null){
+            if (err != null) {
                 res.tpl.error.add(err);
                 console.log("Tender Part update: error");
             } else {

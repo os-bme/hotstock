@@ -14,12 +14,12 @@ module.exports = function (objectrepository) {
 
         objectrepository.scoreModel.findOne( query, function (err,obj) {
 
-            if ( obj === null ) {
-                res.tpl.scores = null;
-                console.log("scores find error/none");
+            if (err != null) {
+                res.tpl.error.add(err);
+                console.log("Scores find: error");
             } else {
                 res.tpl.scores = obj;
-                console.log("scores find success");
+                console.log("Scores find: success");
             }
 
             return next();

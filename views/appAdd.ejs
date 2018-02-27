@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
 
-    <form>
+    <form method="post" action="/app/add/<%= res.tpl.tender._id %>">
 
     <div class="row justify-content-center">
 
@@ -57,11 +57,11 @@
                                         <h5 class="row" >
 
                                             <% if ( tender_part.type == 1 ) { %>
-                                                <input class="col-11 text-center"  <% if ( tender_part.required ) { %> required <% } %>  >
+                                                <input class="col-11 text-center" name="<%= tender_part._id %>"  <% if ( tender_part.required ) { %> required <% } %>  >
                                             <% } %>
 
                                             <% if ( tender_part.type == 3 ) { %>
-                                                <input type="file" class="col-11 h6 form-control-file" id="exampleFormControlFile1" disabled>
+                                                <input type="file" class="col-11 h6 form-control-file" name="<%= tender_part._id %>" id="exampleFormControlFile1" disabled>
                                             <% } %>
 
                                             <% if ( tender_part.type == 4 ) { %>
@@ -75,8 +75,8 @@
                             </div>
                             <% if ( tender_part.type == 2 ) { %>
                             <div class="container">
-                                <div class="row">
-                                    <textarea class="col-12" rows="8" <% if ( tender_part.required ) { %> required <% } %> ></textarea>
+                                <div class="row justify-content-md-center" >
+                                    <textarea class="col-11" rows="8" name="<%= tender_part._id %>" <% if ( tender_part.required ) { %> required <% } %> ></textarea>
                                 </div>
                                 <div class="space-before-20"></div>
                             </div>

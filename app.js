@@ -109,6 +109,7 @@ var authRoute = require('./routes/auth');
 var newsRoute = require('./routes/news');
 var tenderRoute = require('./routes/tender');
 var appRoute = require('./routes/app');
+var scoreRoute = require('./routes/score');
 
 /**
  *  Use routes
@@ -120,6 +121,7 @@ app.use('/auth', authRoute);
 app.use('/news', newsRoute);
 app.use('/tender', tenderRoute);
 app.use('/app', appRoute);
+app.use('/score', scoreRoute);
 
 /**
  * Error handler

@@ -3,11 +3,12 @@ module.exports = function (objectrepository) {
     return function (req, res, next) {
 
         res.tpl.eva.save(function (err) {
-            if (err !== null){
+
+            if (err != null) {
                 res.tpl.error.add(err);
-                console.log("evaluator update error");
+                console.log("Evaluator update: error");
             } else {
-                console.log("evaluator update success");
+                console.log("Evaluator update: success");
             }
             return next();
         });
