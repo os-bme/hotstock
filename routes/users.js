@@ -39,7 +39,7 @@ router.get('/all',
 /* GET user's apps */
 router.get('/:id/apps',
     authUserMW(objectRepository),
-    findMyUserMW(objectRepository),
+    findUserByIdMW(objectRepository),
     findAppbyUserIdMW(objectRepository),
     renderMW(objectRepository, 'appList')
 );

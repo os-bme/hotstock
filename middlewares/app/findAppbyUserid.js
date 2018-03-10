@@ -2,7 +2,32 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        objectrepository.appModel.find( { _User: res.tpl.user._id }, function (err, obj) {
+        objectrepository.appModel.aggregate(
+            {
+                $match:
+                    { _user: res.tpl.user._id }
+            },
+            {
+                $lookup:
+                    {
+                        from: 'users',
+                        localField: '_user',
+                        foreignField: '_id',
+                        as: 'user'
+                    }
+            },
+            { $unwind: '$user' },
+            {
+                $lookup:
+                    {
+                        from: 'tenders',
+                        localField: '_tender',
+                        foreignField: '_id',
+                        as: 'tender'
+                    }
+            },
+            { $unwind: '$tender' },
+            function (err, obj) {
 
             if (err != null){
                 res.tpl.error.add(err);

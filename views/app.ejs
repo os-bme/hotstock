@@ -76,7 +76,7 @@
                                     <div class="d-flex justify-content-between">
                                         <% if ( appPart._tender_part.scorable ) { %>
                                             <div class="p-2 align-self-center">
-                                                <% if ( appPart._score != undefined ) { %>
+                                                <% if ( appPart._score != undefined && appPart._score.value != null ) { %>
                                                     <h5 data-toggle="tooltip" data-placement="top" title="<%= appPart._score.comment %>"><%= appPart._score.value %> point</h5>
                                                 <% } %>
                                             </div>
