@@ -1,0 +1,58 @@
+<% include pageHeader %>
+
+<% include pageNavbar %>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+
+        <div class="welcome-card col-sm-12">
+            <h1 class="display-4">Welcome to Hotstock!</h1>
+            <p class="lead">This page is an open source application portal.</p>
+        </div>
+
+        <div class="col-sm-11">
+
+
+            <% for( var i = 0; i < res.tpl.newses.length; i++ ){ %>
+
+                <% if( i === 3 ) break; %>
+
+                <% if( i % 3 === 0 ) {%>
+                    <div class="card-deck space-before-20">
+                <% } %>
+
+                <div class="card card-link">
+                    <a href="/news/<%= res.tpl.newses[i]._id %>">
+                        <img class="card-img-top" src="http://via.placeholder.com/259x180" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-title">
+                                <span class="h5"><%= res.tpl.newses[i].title %></span>
+                                <span class="badge badge-info h6">BSc</span>
+                                <span class="badge badge-info h6">Koli</span>
+                                <span class="badge badge-info h6">Heti</span>
+                            </p>
+                            <p class="card-text short-description"><%= res.tpl.newses[i].short_description %></p>
+                            <p class="card-text"><small class="text-muted"><%= res.tpl.newses[i].publish_datetime %></small></p>
+                        </div>
+                    </a>
+                </div>
+
+                <% if( i % 3 === 2 ) { %>
+                    </div>
+                <% } %>
+            <% } %>
+
+            <% if ( res.tpl.newses.length < 3 ) { %>
+                <% for ( var j = 0; j < 3 - (res.tpl.newses.length % 3); j++ ) { %>
+                    <div class="card card-link">
+                    </div>
+                <% } %>
+                </div>
+            <% } %>
+
+        </div>
+
+    </div>
+</div>
+
+<% include pageFooter %>

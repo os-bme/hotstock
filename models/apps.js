@@ -2,8 +2,8 @@ var Schema = require('mongoose').Schema;
 var db = require( '../db' );
 
 var AppModel = db.model( 'App', {
-    register_datetime: Date,
-    is_accepted: Boolean,
+    register_date: Date,
+    status: Number,
     final_score: Number,
     _tender: {
         type: Schema.Types.ObjectId,

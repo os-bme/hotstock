@@ -1,0 +1,86 @@
+<% include pageHeader %>
+
+<% include pageNavbar %>
+
+<div class="container-fluid">
+    <div class="row justify-content-center space-before-40">
+
+        <div class="col-sm-10">
+            <form>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <select name="permission" class="custom-select">
+                                    <option value="" selected>All</option>
+                                    <option value="0">User</option>
+                                    <option value="1">Editor</option>
+                                    <option value="2">Admin</option>
+                                    <option value="3">Superadmin</option>
+                                </select>
+                                <input type="text" name="name" class="form-control" placeholder="Name" value="<%= req.query.name %>" >
+                                <input type="text" name="neptun" class="form-control" placeholder="NEPTUN" value="<%= req.query.neptun %>" >
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="input-group">
+                                <input type="text" name="mobile" class="form-control" placeholder="Mobile" value="<%= req.query.mobile %>" >
+                                <input type="text" name="email" class="form-control" placeholder="E-mail" value="<%= req.query.email %>" >
+                            </div>
+                        </div>
+                        <div class ="col-lg-1">
+                            <div class="input-group-prepend">
+                                <button type="submit" class="btn btn-secondary">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-10">
+            <table class="table table-hover space-before-20">
+                <thead>
+                <tr>
+                    <th scope="col">Full name</th>
+                    <th scope="col" class="text-center">Mobile</th>
+                    <th scope="col" class="text-center">Permission</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <% res.tpl.users.forEach( function (user) { %>
+                    <tr>
+                        <th scope="row"><%= user.fullname %></th>
+                        <td class="text-center"><%= user.mobile %></td>
+                        <td class="text-center">
+                            <% switch ( user.permission ) {
+                                case 0: %>
+                                    User
+                                    <% break;
+                                case 1: %>
+                                    Editor
+                                    <% break;
+                                case 2: %>
+                                    Admin
+                                    <% break;
+                                case 3: %>
+                                    Superadmin
+                                    <% break;
+                                default: %>
+                                    <%= user.permission %>
+                            <% } %>
+                        </td>
+                        <td class="text-right">
+                            <a class="btn btn-secondary btn-sm" href="/user/<%= user._id %>">Profile</a>
+                            <a class="btn btn-secondary btn-sm" href="/user/<%= user._id %>/apps">Apps</a>
+                        </td>
+                    </tr>
+                <% }); %>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<% include pageFooter %>

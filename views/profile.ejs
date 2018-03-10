@@ -1,0 +1,268 @@
+<% include pageHeader %>
+
+<% include pageNavbar %>
+
+<div class="container-fluid">
+    <div class="row justify-content-center space-before-40">
+
+        <div class="col-sm-9">
+            <div class="card">
+                <div class="card-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h1 class="display-4"><%= res.tpl.user.fullname %></h1>
+                            </div>
+                            <div class="col-sm-4 text-right">
+                                <% if ( req.session.passport.user.permission > 2) { %>
+                                    <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteModal" >Delete</button>
+                                    <button class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#permissionModal">Permissions</button>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img class="card-img-top" src="http://via.placeholder.com/180x259" alt="Card image cap">
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="container-fluid space-before-20">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <p> <strong>Firstname:</strong> <%= res.tpl.user.firstname %></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Lastname:</strong> <%= res.tpl.user.lastname %></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Neptun-code:</strong> <%= res.tpl.user.neptun %></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Status:</strong> <%= res.tpl.user.status %></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Date of birth:</strong> <%= res.tpl.user.birth_date %></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Place of birth:</strong> <%= res.tpl.user.birth_place %></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>E-mail address:</strong> <%= res.tpl.user.email %></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p>
+                                                <strong>E-mail notifications:</strong>
+                                                <% if (res.tpl.user.notification) { %>
+                                                On
+                                                <% } else {%>
+                                                Off
+                                                <% } %>
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Mobile:</strong> <%= res.tpl.user.mobile %></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p> <strong>Permission:</strong>
+                                                <% switch ( res.tpl.user.permission ) {
+                                                case 0: %>
+                                                User
+                                                <% break;
+                                                case 1: %>
+                                                Editor
+                                                <% break;
+                                                case 2: %>
+                                                Admin
+                                                <% break;
+                                                case 3: %>
+                                                Admin
+                                                <% break;
+                                                default: %>
+                                                <%= res.tpl.user.permission %>
+                                                <% } %>
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-12 text-center space-before-20">
+                                            <button class="btn btn-secondary" data-toggle="modal" data-target="#modModal" >Edit datas</button>
+                                            <button class="btn btn-secondary" data-toggle="modal" data-target="#pictureModal" >Change picture</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">WARNING!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                You are trying to delete a person's profile. Once it's deleted, it can't be restored.
+                <br>
+                Please pay attention to it!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                <form method="post" action="/user/<%= res.tpl.user._id %>/del">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="permissionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change permission</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/user/<%= res.tpl.user._id %>/permission" method="post">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="status">Status</label>
+                            <select class="col-md-8 form-control" name="permission" id="status">
+                                <option value="0" <% if (res.tpl.user.permission == 0) { %> selected <% } %> >User</option>
+                                <option value="1" <% if (res.tpl.user.permission == 1) { %> selected <% } %> >Editor</option>
+                                <option value="2" <% if (res.tpl.user.permission == 2) { %> selected <% } %> >Admin</option>
+                                <option value="3" <% if (res.tpl.user.permission == 3) { %> selected <% } %> >Superadmin</option>
+                            </select>
+                            <div class="col-md-12 space-before-20 text-right">
+                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                                <input class="btn btn-info" type="submit" value="Save">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit datas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/user/<%= res.tpl.user._id %>/mod" method="post">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="firstname">Firstname</label>
+                            <input type="text" name="firstname" class="col-md-8 form-control <% if ( req.session.passport.user.permission == 3 ) { %> is-invalid <% } %>" id="firstname" value="<%= res.tpl.user.firstname %>" <% if ( req.session.passport.user.permission < 3 ) { %> readonly <% } %> >
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="lastname">Lastname</label>
+                            <input type="text" name="lastname" class="col-md-8 form-control <% if ( req.session.passport.user.permission == 3 ) { %> is-invalid <% } %>" id="lastname" value="<%= res.tpl.user.lastname %>" <% if ( req.session.passport.user.permission < 3 ) { %> readonly <% } %> >
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="neptun">Neptun</label>
+                            <input type="text" name="neptun" class="col-md-8 form-control <% if ( req.session.passport.user.permission == 3 ) { %> is-invalid <% } %>" id="neptun" value="<%= res.tpl.user.neptun %>" <% if ( req.session.passport.user.permission < 3 ) { %> readonly <% } %> >
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="status">Status</label>
+                            <select class="col-md-8 form-control" name="status" id="status">
+                                <option value="-1" <% if (res.tpl.user.status == -1) { %> selected <% } %> ></option>
+                                <option value="1" <% if (res.tpl.user.status == 1) { %> selected <% } %> >Active</option>
+                                <option value="0" <% if (res.tpl.user.status == 0) { %> selected <% } %> >Passive</option>
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="birthdate">
+                                Date of birth
+                            </label>
+                            <input type="date" name="birthdate" class="col-md-8 form-control" id="birthdate" value="<%= res.tpl.user.birth_date %>" >
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="birthplace">
+                                Place of birth
+                            </label>
+                            <input type="text" name="birthplace" class="col-md-8 form-control" id="birthplace" value="<%= res.tpl.user.birth_place%>" >
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="email">
+                                Email address
+                            </label>
+                            <input type="email" name="email" class="col-md-8 form-control" id="email" value="<%= res.tpl.user.email %>" placeholder="name@example.com" >
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="mobile">
+                                Mobile number
+                            </label>
+                            <input type="tel" name="mobile" class="col-md-8 form-control" id="mobile" value="<%= res.tpl.user.mobile %>" placeholder="+36 30 123 4567">
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6 form-check text-center">
+                                <input type="checkbox" class="form-check-input" id="notify" value="true" <% if ( res.tpl.user.notification ) { %> checked <% } %> >
+                                <label class="col-form-check-label" for="notify">
+                                    E-mail notifications
+                                </label>
+                            </div>
+                            <div class="col-md-6 text-right" >
+                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                                <input class="btn btn-info" type="submit" value="Save">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="pictureModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change profile picture</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/user/<%= res.tpl.user._id %>/img" method="post">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="form-group row">
+                            <div class="input-group mb-2 space-before-20">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile02">
+                                    <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-right space-before-20">
+                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                                <input class="btn btn-info" type="submit" value="Save">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include pageFooter %>

@@ -1,0 +1,73 @@
+<% include pageHeader %>
+
+<% include pageNavbar %>
+
+<div class="container-fluid">
+    <div class="row justify-content-center space-before-40">
+
+        <div class="col-sm-10">
+            <form>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="text" name="tender" class="form-control" placeholder="Tender"  value="<%= req.query.tender %>" >
+                                <% if ( req.originalUrl.indexOf( "/user//all" ) > -1 ){%>
+                                    <input type="text" name="name" class="form-control" placeholder="Name" value="<%= req.query.name %>" >
+                                    <input type="text" name="neptun" class="form-control" placeholder="NEPTUN" value="<%= req.query.neptun %>" >
+                                <% } else { %>
+                                    <input type="text" name="name" class="form-control" value="<%= res.tpl.user.fullname %>" disabled>
+                                    <input type="text" name="neptun" class="form-control" value="<%= res.tpl.user.neptun %>" disabled>
+                                <% } %>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5">
+                            <div class="input-group">
+                                <input type="text" name="startdate" class="form-control datepicker1" width="50%" data-toggle="tooltip" data-placement="top" title="Start date"  value="<%= req.query.startdate %>" >
+                                <input type="text" name="enddate" class="form-control datepicker2" width="50%" data-toggle="tooltip" data-placement="top" title="End date" value="<%= req.query.enddate %>" >
+                            </div>
+                        </div>
+
+                        <div class ="col-lg-1">
+                            <div class="input-group-prepend">
+                                <button type="submit" class="btn btn-secondary">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-sm-10">
+            <table class="table table-hover space-before-20">
+                <thead>
+                <tr>
+                    <th scope="col">Tender</th>
+                    <th scope="col" class="text-center">Full name</th>
+                    <th scope="col" class="text-center">Received</th>
+                    <th scope="col" class="text-center">Final score</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <% res.tpl.apps.forEach( function (app) { %>
+                    <tr>
+                        <td><%= app.title %></td>
+                        <td class="text-center"><%= app.user.name %></td>
+                        <td class="text-center"><%= app.register_date %></td>
+                        <td class="text-center"><%= app.final_score %></td>
+                        <td class="text-right">
+                            <a class="btn btn-secondary btn-sm" href="/app/<%= app._id %>">Application</a>
+                        </td>
+                    </tr>
+                <% }); %>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<% include pageFooter %>

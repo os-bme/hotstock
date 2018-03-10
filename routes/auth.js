@@ -1,6 +1,14 @@
 var express = require('express');
 var router = express.Router();
+
+var authUserMW = require('../middlewares/general/authUser');
+var authEditorMW = require('../middlewares/general/authEditor');
+var authAdminMW = require('../middlewares/general/authAdmin');
+var authSuperAdminMW = require('../middlewares/general/authSuperAdmin');
+
+var renderMW = require('../middlewares/general/render');
 var passport = require('passport');
+
 var UserModel = require('../models/users');
 
 var objectRepository = {
@@ -16,8 +24,10 @@ router.use('/logout', function (req, res) {
     }
 );
 
-router.use('/err', function (req, res) {
-        res.status(404).send(error);
+router.use('/err', function (req, res, next) {
+        var err = new Error('Not Found');
+        err.status = 404;
+        next(err);
     }
 );
 
@@ -41,8 +51,7 @@ router.use('/oauth/callback',
                 res.tpl.user.name = req.user.displayName;
                 res.tpl.user.email = req.user.email;
                 res.tpl.user.roomNumber = req.user.roomNumber;
-                //res.tpl.user.avatar = 'default.jpg';
-                res.tpl.user.post_type = 'user';
+                req.session.passport.user.permission = 0;
                 res.tpl.user.permission = 0;
 
                 res.tpl.user.save(function (err) {
@@ -51,12 +60,15 @@ router.use('/oauth/callback',
                         res.redirect('/auth/err');
                     } else {
                         console.log('new user save success');
+                        req.session.passport.user._id = res.tpl.user._id;
                         res.redirect('/');
                     }
                 });
             } else {
                 console.log('user found in db');
                 res.tpl.user = obj;
+                req.session.passport.user.permission = obj.permission;
+                req.session.passport.user._id = obj._id;
                 res.redirect('/');
             }
         });

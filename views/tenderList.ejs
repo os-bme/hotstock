@@ -1,0 +1,50 @@
+<% include pageHeader %>
+
+<% include pageNavbar %>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+
+        <div id="accordion" class="col-sm-10">
+            <div class="container space-before-10">
+                <div class="row">
+                    <div class="col-sm-6 space-before-20">
+                        <h1 class="display-4">Actual tenders</h1>
+                    </div>
+                    <div class="col-sm-6 text-right space-before-10">
+                        <button type="button" class="btn btn-info space-before-10 btn-sm">BSc</button>
+                        <button type="button" class="btn btn-outline-info space-before-10 btn-sm">Koli</button>
+                        <button type="button" class="btn btn-outline-info space-before-10 btn-sm">Heti</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-before-10"></div>
+
+            <% res.tpl.tenders.forEach( function(tender){ %>
+                <div class="card">
+                    <div class="card-header" id="<%= tender._id %>" >
+                        <button class="btn btn-light container-fluid" data-toggle="collapse" data-target="#collapse<%= tender._id %>" aria-expanded="true" aria-controls="collapse<%= tender._id %>">
+                            <div class="d-flex justify-content-between">
+                                <div class="align-self-center"><%= tender.title %></div>
+                                <div class="align-self-center"><%= tender.publish_datetime %></div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div id="collapse<%= tender._id %>" class="collapse" aria-labelledby="<%= tender._id %>" data-parent="#accordion">
+                        <div class="card-body text-justify">
+                            <%= tender.short_description %>
+                            <br>
+                            <a href="/tender/<%= tender._id %>">See the tender</a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+
+        </div>
+
+    </div>
+</div>
+
+<% include pageFooter %>

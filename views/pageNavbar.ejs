@@ -1,0 +1,104 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="">
+        <img src="/public/assets/hotstock-solid.png" width="30" height="30" class="d-inline-block align-top rounded" alt="">
+        Hotstock
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item <% if ( req.originalUrl == "/" && req.originalUrl.length == 1 ) { %> active <% } %> ">
+
+                <a class="nav-link" href="/" >Home</a>
+            </li>
+            <li class="nav-item">
+                <div class="btn-group dropdown">
+                    <a class="nav-link text-right <% if ( req.originalUrl.indexOf( '/news/all' ) > -1 ) { %> active <% } %> " href="/news/all">
+                        News
+                    </a>
+
+                    <% if ( req.isAuthenticated() && req.session.passport.user.permission > 0 ) { %>
+                        <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropright</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/news/add">New</a>
+                        </div>
+                    <% } %>
+
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="btn-group dropdown">
+                    <a class="nav-link text-right  <% if ( req.originalUrl.indexOf( '/tender/active' ) > -1 ) { %> active <% } %>" href="/tender/active">
+                        Tenders
+                    </a>
+
+                    <% if ( req.isAuthenticated() && req.session.passport.user.permission > 0 ) { %>
+                        <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropright</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/tender/all">All</a>
+                            <a class="dropdown-item" href="/tender/add">New</a>
+                        </div>
+                    <% } %>
+                </div>
+            </li>
+
+            <% if ( req.isAuthenticated() && req.session.passport.user.permission > 0 ) { %>
+                <li class="nav-item">
+                    <div class="btn-group dropdown <% if ( req.originalUrl.indexOf( '/app/all' ) > -1 ) { %> active <% } %>">
+                        <a class="nav-link text-right" href="/app/all">
+                            Applications
+                        </a>
+                        <a class="text-left nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropright</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="">Unscored</a>
+                        </div>
+                    </div>
+                </li>
+            <% } %>
+
+            <% if ( req.isAuthenticated() && req.session.passport.user.permission > 1 ) { %>
+                <li class="nav-item <% if ( req.originalUrl.indexOf( '/user/all' ) > -1 ) { %> active <% } %>">
+                    <a class="nav-link" href="/user/all">
+                        Users
+                    </a>
+                </li>
+            <% } %>
+
+            <% if ( req.isAuthenticated() && req.session.passport.user.permission > 2 ) { %>
+                <li class="nav-item <% if ( req.originalUrl.indexOf( '/tag' ) > -1 ) { %> active <% } %> ">
+                    <a class="nav-link" href="/tag">Tags</a>
+                </li>
+            <% } %>
+
+
+            <li class="nav-item <% if ( req.originalUrl.indexOf( '/about' ) > -1 ) { %> active <% } %>">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+        </ul>
+
+        <% if ( !req.isAuthenticated() ) { %>
+            <a class="btn btn-outline-info" href="/auth/login" >Log in</a>
+        <% } else { %>
+            <div class="dropdown">
+                <button id="btnGroupUser" type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <%= req.session.passport.user.displayName %>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupUser">
+                    <a class="dropdown-item" href="/user/<%= req.session.passport.user._id %>">My Profile</a>
+                    <a class="dropdown-item" href="/user/<%= req.session.passport.user._id %>/apps">Applications</a>
+                    <div role="separator" class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/auth/logout">Log out</a>
+                </div>
+            </div>
+        <% } %>
+
+    </div>
+</nav>

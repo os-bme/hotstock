@@ -1,0 +1,133 @@
+<% include pageHeader %>
+
+<% include pageNavbar %>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+
+        <div class="col-sm-10 space-before-40">
+            <div class="card">
+                <div class="card-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <a class="h3 display-4" href="tender_description.html"><%= res.tpl.tender.title %></a>
+                            </div>
+                            <div class="col-sm-4 text-right">
+                                <% if ( req.session.passport.user.permission > 2 || req.session.passport.user.internal_id == res.tpl.user.bme_id ) { %>
+                                <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteModal" >Delete</button>
+                                    <a class="btn btn-outline-secondary btn-sm" href="/app/<%= res.tpl.app._id %>/mod">Edit</a>
+                                <% } %>
+                                <a class="btn btn-outline-secondary btn-sm" href="/user/<%= res.tpl.user._id %>"><%= res.tpl.user.fullname %></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <% res.tpl.tender_parts.forEach( function (tender_part) { %>
+                            <div class="container">
+                                <div class="row space-before-10">
+
+                                    <% res.tpl.app_parts.forEach( function (part) { if ( tender_part._id == part._tender_part ) { res.tpl.app_part = part; console.log('found'); }}); %>
+
+                                    <div class="col-sm-5">
+                                        <div class="d-flex justify-content-start">
+                                            <div class="p-2 align-self-center">
+                                                <h5>
+                                                    <strong data-toggle="tooltip" data-placement="top" title="<%= tender_part.description %>">
+                                                            <%= tender_part.title %>
+                                                    </strong>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-5">
+                                        <div class="d-flex justify-content-start">
+                                            <div class="p-2 align-self-center">
+                                                <h5>
+                                                    <% if ( tender_part.type == 0 ) { %>
+                                                        <%= res.tpl.app_part.content %>
+                                                    <% } %>
+
+                                                    <% if ( tender_part.type == 1 ) { %>
+                                                        <a href="">
+                                                            <%= res.tpl.app_part.content %>
+                                                        </a>
+                                                    <% } %>
+
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="d-flex justify-content-around">
+                                            <% if ( tender_part.scorable ) { %>
+                                                <div class="p-2 align-self-center">
+                                                    <h5><%= res.tpl.app_part.score %></h5>
+                                                </div>
+                                                <div class="p-2 align-self-start">
+                                                    <button type="button" class="btn btn-secondary btn-sm">Score</button>
+                                                </div>
+                                            <% } %>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <% if ( tender_part.type == 2 ) { %>
+                                <div>
+                                    <p class="text-justify">
+                                        <%= res.tpl.app_part.content %>
+                                    </p>
+                                </div>
+                            <% } %>
+
+                        <%  }); %>
+
+                    </li>
+
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-around">
+                            <div class="p-2 align-self-center">
+                                <h3><%= res.tpl.tender.final_score %></h3>
+                            </div>
+                            <div class="p-2 align-self-center">
+                                <button type="button" class="btn btn-secondary">Final score</button>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">WARNING!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                You are trying to delete an application. Once it's deleted, it can't be restored.
+                <br>
+                Please pay attention to it!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a class="btn btn-danger" href="/app/<%= res.tpl.app._id %>/del">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include pageFooter %>

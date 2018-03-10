@@ -2,15 +2,15 @@ var Schema = require('mongoose').Schema;
 var db = require( '../db' );
 
 var AppPartModel = db.model( 'AppPart', {
-    name:String,
-    max_score: Number,
+    content: String,
+    score: Number,
     _app: {
         type: Schema.Types.ObjectId,
         ref: 'App'
     },
-    _tender: {
+    _tender_part: {
         type: Schema.Types.ObjectId,
-        ref: 'Tender'
+        ref: 'TenderPart'
     }
 });
 
