@@ -2,13 +2,15 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
+        res.tpl.user.permission = req.body.permission;
+
         res.tpl.user.save(function (err) {
 
-            if (err !== null){
+            if (err != null) {
                 res.tpl.error.add(err);
-                console.log("user update error");
+                console.log("Update user permission: error");
             } else {
-                console.log("user update success");
+                console.log("Update user permission: success");
             }
 
             return next();

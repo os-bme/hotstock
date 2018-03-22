@@ -3,6 +3,7 @@ var db = require( '../db' );
 
 var NewsModel = db.model( 'News', {
     publish_datetime: Date,
+    title: String,
     short_description: String,
     description: String,
     _publisher: {

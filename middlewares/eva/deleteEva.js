@@ -4,11 +4,11 @@ module.exports = function (objectrepository) {
 
         res.tpl.eva.remove(function (err) {
 
-            if (err !== null) {
+            if (err != null) {
                 res.tpl.error.add(err);
-                console.log("evaluator delete error");
+                console.log("Evaluator delete: error");
             } else {
-                console.log("evaluator delete success");
+                console.log("Evaluator delete: success");
             }
 
             return next();

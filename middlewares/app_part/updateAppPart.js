@@ -2,14 +2,23 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        res.tpl.app_part.save(function (err) {
-            if (err !== null){
+        if ( res.tpl.score != undefined ){
+            res.tpl.appPart._score = res.tpl.score._id;
+        }
+
+        console.log( req.body );
+        res.tpl.appPart.status = req.body.status;
+
+        res.tpl.appPart.save(function (err) {
+
+            if (err != null){
                 res.tpl.error.add(err);
-                console.log("app_part update error");
+                console.log("AppPart update: error");
             } else {
-                console.log("app_part update success");
+                console.log("AppPart update: success");
             }
             return next();
+
         });
     }
 

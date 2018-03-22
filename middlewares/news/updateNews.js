@@ -2,13 +2,20 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
+        res.tpl.news.title = req.body.title;
+        res.tpl.news.short_description = req.body.short_description;
+        res.tpl.news.description = req.body.long_description;
+        res.tpl.news._publisher = req.session.passport.user._id;
+        res.tpl.news.publish_datetime = Date.now();
+
         res.tpl.news.save(function (err) {
 
-            if (err !== null){
+            if (err != null) {
                 res.tpl.error.add(err);
-                console.log("news update error");
+                console.log("Update news: error");
             } else {
-                console.log("news update success");
+                req.originalUrl = req.originalUrl.replace("/news/new","/news/" + res.tpl.news._id);
+                console.log("Update news: success");
             }
 
             return next();

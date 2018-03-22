@@ -9,7 +9,7 @@
             <div class="container space-before-10">
                 <div class="row">
                     <div class="col-sm-6 space-before-20">
-                        <h1 class="display-4">Actual tenders</h1>
+                        <h1 class="display-4"><% if ( req.originalUrl.indexOf( '/active' ) > -1 ) { %>Actual<% } else {%>All<% } %> tenders</h1>
                     </div>
                     <div class="col-sm-6 text-right space-before-10">
                         <button type="button" class="btn btn-info space-before-10 btn-sm">BSc</button>
@@ -27,7 +27,7 @@
                         <button class="btn btn-light container-fluid" data-toggle="collapse" data-target="#collapse<%= tender._id %>" aria-expanded="true" aria-controls="collapse<%= tender._id %>">
                             <div class="d-flex justify-content-between">
                                 <div class="align-self-center"><%= tender.title %></div>
-                                <div class="align-self-center"><%= tender.publish_datetime %></div>
+                                <div class="align-self-center"><%= res.tpl.func.moment(tender.publish_datetime).format('YYYY-MM-DD') %></div>
                             </div>
                         </button>
                     </div>

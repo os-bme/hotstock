@@ -1,0 +1,108 @@
+<% include pageHeader %>
+
+<% include pageNavbar %>
+
+<div class="container-fluid">
+
+    <form method="post" action="/app/add/<%= res.tpl.tender._id %>">
+
+    <div class="row justify-content-center">
+
+            <div class="col-sm-10 space-before-40">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <a class="h3 display-4" href="/tender/<%= res.tpl.tender._id %>"><%= res.tpl.tender.title %></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+
+                            <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+                                All part marked with "<strong>*</strong>" is <strong>required</strong>!
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="alert alert-info alert-dismissible fade show text-center" role="alert">
+                                In some cases you find a tooltip if you drag your mouse over the name!
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <% res.tpl.tenderParts.forEach( function (tender_part) { %>
+                            <div class="container">
+                                <div class="row space-before-10">
+
+                                    <div class="col-sm-6">
+                                        <h5>
+                                            <strong data-toggle="tooltip" data-placement="top" title="<%= tender_part.description %>">
+                                                <% if ( tender_part.type != 4 && tender_part.type != 0 ) { %>
+                                                    <%= tender_part.title %>
+                                                    <% if ( tender_part.required ) { %>
+                                                        *
+                                                    <% } %>
+                                                <% } %>
+                                            </strong>
+                                        </h5>
+                                    </div>
+
+                                    <div class="col-sm-6 text-center">
+                                        <h5 class="row" >
+
+                                            <% if ( tender_part.type == 1 ) { %>
+                                                <input class="col-11 text-center" name="<%= tender_part._id %>"  <% if ( tender_part.required ) { %> required <% } %>  >
+                                            <% } %>
+
+                                            <% if ( tender_part.type == 3 ) { %>
+                                                <input type="file" class="col-11 h6 form-control-file" name="<%= tender_part._id %>" id="exampleFormControlFile1" disabled>
+                                            <% } %>
+
+                                            <% if ( tender_part.type == 4 ) { %>
+                                                <div class="space-before-20"></div>
+                                            <% } %>
+
+                                        </h5>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <% if ( tender_part.type == 2 ) { %>
+                            <div class="container">
+                                <div class="row justify-content-md-center" >
+                                    <textarea class="col-11" rows="8" name="<%= tender_part._id %>" <% if ( tender_part.required ) { %> required <% } %> ></textarea>
+                                </div>
+                                <div class="space-before-20"></div>
+                            </div>
+                            <% } %>
+
+                            <%  }); %>
+
+                            <div class="space-before-10"></div>
+
+                        </li>
+
+                        <li class="list-group-item text-center">
+                            <button type="submit" class="btn btn-info">Send</button>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="space-before-20"></div>
+            </div>
+
+
+    </div>
+
+    </form>
+
+</div>
+
+
+<% include pageFooter %>

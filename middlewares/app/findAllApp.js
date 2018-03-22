@@ -2,14 +2,39 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        objectrepository.appModel.find( {}, function (err, obj) {
+        objectrepository.appModel.aggregate(
+            {
+                $match:
+                    {}
+            },
+            {
+                $lookup:
+                    {
+                        from: 'users',
+                        localField: '_user',
+                        foreignField: '_id',
+                        as: 'user'
+                    }
+            },
+            { $unwind: '$user' },
+            {
+                $lookup:
+                    {
+                        from: 'tenders',
+                        localField: '_tender',
+                        foreignField: '_id',
+                        as: 'tender'
+                    }
+            },
+            { $unwind: '$tender' },
+        function (err, obj) {
 
-            if ( res.tpl.apps === null ) {
-                res.tpl.apps = null;
-                console.log("apps find error/none");
+            if (err != null){
+                res.tpl.error.add(err);
+                console.log("Apps find: error/none");
             } else {
                 res.tpl.apps = obj;
-                console.log("apps find success");
+                console.log("Apps find: success");
             }
 
             return next();

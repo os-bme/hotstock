@@ -4,11 +4,11 @@ module.exports = function (objectrepository) {
 
         res.tpl.tender.remove(function (err) {
 
-            if (err !== null) {
+            if (err != null) {
                 res.tpl.error.add(err);
-                console.log("tender delete error");
+                console.log("Tender deletion: error");
             } else {
-                console.log("tender delete success");
+                console.log("Tender deletion: success");
             }
 
             return next();

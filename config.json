@@ -1,6 +1,6 @@
 {
   "CLIENT_ID": "85611133375620552810",
   "CLIENT_SECRET": "vTYx8jeT2780gsniUmuO6Az8O2xPK5c6O1tLZOfQKcQrK4PfgAucBkZQbMgmH9hVyRhOfDfqfvXqpnLL",
-  "SCOPE": ["basic","displayName","mail","mobile","roomNumber"],
+  "SCOPE": ["basic","displayName","sn", "givenName","mail","mobile"],
   "sessionSecret": "malacka"
 }

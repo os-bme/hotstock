@@ -10,12 +10,12 @@
                 <div class="card-header">
                     <div class="container">
                         <div class="row">
-                            <div class="col-sm-6">
-                                <h1 class="display-4" >
+                            <div class="col-sm-9">
+                                <h1 class="display-5" >
                                     <%= res.tpl.news.title %>
                                 </h1>
                             </div>
-                            <div class="col-sm-6 text-right">
+                            <div class="col-sm-3 text-right">
                                 <span class="badge badge-info h6">BSc</span>
                                 <span class="badge badge-info h6">Koli</span>
                                 <span class="badge badge-info h6">Heti</span>
@@ -26,7 +26,7 @@
                                         <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteModal" >Delete</button>
                                     <% } %>
                                     <% if ( req.session.passport.user.permission > 0 ) { %>
-                                        <a class="btn btn-outline-secondary btn-sm" href="/news/<%= res.tpl.news._id %>/mod">Edit</a>
+                                        <button class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modModal" >Edit</button>
                                     <% } %>
                                 <% } %>
                             </div>
@@ -56,7 +56,7 @@
                             </div>
                             <div class="col-sm-2 text-center space-before-20">
                                 <h6>
-                                    <%= res.tpl.news.publish_datetime %>
+                                    <%= res.tpl.func.moment(res.tpl.news.publish_datetime).format("YYYY-MM-DD") %>
                                 </h6>
                             </div>
                         </div>
@@ -68,9 +68,11 @@
     </div>
 </div>
 
+<% if ( req.isAuthenticated() && req.session.passport.user.permission === 3 ) { %>
 
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
+        <form method="post" action="/news/<%= res.tpl.news._id %>/del">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">WARNING!</h5>
@@ -85,10 +87,52 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a class="btn btn-danger" href="/news/<%= res.tpl.news._id %>/del">Delete</a>
+                <button type="submit" class="btn btn-danger">Delete</button>
             </div>
+        </div>
+        </form>
+    </div>
+</div>
+
+<% } %>
+
+<% if ( req.isAuthenticated() && req.session.passport.user.permission > 0) { %>
+
+<div class="modal fade" id="modModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit datas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/news/<%= res.tpl.news._id %>/mod" method="post">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="title">Title</label>
+                            <input type="text" name="title" class="col-md-8 form-control" id="title" value="<%= res.tpl.news.title %>">
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="short_description">Short description</label>
+                            <input type="text" name="short_description" class="col-md-8 form-control" id="short_description" value="<%= res.tpl.news.short_description %>">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label" for="long_description">Long description</label>
+                            <textarea name="long_description" class="form-control" id="long_description"><%= res.tpl.news.description %></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                        <input class="btn btn-info" type="submit" value="Save">
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+<% } %>
 
 <% include pageFooter %>

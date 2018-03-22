@@ -6,88 +6,107 @@ var authEditorMW = require('../middlewares/general/authEditor');
 var authAdminMW = require('../middlewares/general/authAdmin');
 var authSuperAdminMW = require('../middlewares/general/authSuperAdmin');
 
+var findAllTenderMW = require('../middlewares/tender/findAllTender');
+var findTenderByIdMW = require('../middlewares/tender/findTenderbyId');
+var updateTenderMW = require('../middlewares/tender/updateTender');
+var deleteTenderMW = require('../middlewares/tender/deleteTender');
+
+var addTenderPartMW = require('../middlewares/tender/addTenderPart');
+var updateTenderPartMW = require('../middlewares/tender/updateTendetPart');
+var findTenderPartsMW = require('../middlewares/tender/findAllTenderPartsbyTenderId');
+var findTenderPartbyIDMW = require('../middlewares/tender/findTenderPartbyId');
+var deleteTenderPartMW = require('../middlewares/tender/deleteTenderPart');
+
+var redirectPrevMW = require('../middlewares/general/redirectPrev');
 var renderMW = require('../middlewares/general/render');
+var redirectMW = require('../middlewares/general/redirect');
 
 var UserModel = require('../models/users');
 var TenderModel = require('../models/tenders');
+var TenderPartModel = require('../models/tender_parts');
 
 var objectRepository = {
     userModel: UserModel,
-    tenderModel: TenderModel
+    tenderModel: TenderModel,
+    tenderPartModel: TenderPartModel
 };
 
-router.use('/active',
-    function (req, res, next) {
-        res.tpl.tenders = [];
-
-        var tender = {
-            _id: 0,
-            title: 'tender one',
-            short_description:  'Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS. ',
-            publish_datetime: '2018-01-01'
-        };
-        res.tpl.tenders.push( tender );
-
-        var tender = {
-            _id: 1,
-            title: 'tender two',
-            short_description:  'Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS. ',
-            publish_datetime: '2018-01-01'
-        };
-        res.tpl.tenders.push( tender );
-
-        var tender = {
-            _id: 2,
-            title: 'tender three',
-            short_description:  'Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS. ',
-            publish_datetime: '2018-01-01'
-        };
-        res.tpl.tenders.push( tender );
-
-        return next();
-    },
+/* GET active tenders list */
+router.get('/active',
+    findAllTenderMW(objectRepository, 'active'),
     renderMW(objectRepository, 'tenderList')
 );
 
-router.use('/all',
+/* GET all tenders list */
+router.get('/all',
     authAdminMW(objectRepository),
+    findAllTenderMW(objectRepository, 'all'),
     renderMW(objectRepository, 'tenderList')
 );
 
-router.use('/add',
+/* GET new tender form */
+router.get('/add',
     authEditorMW(objectRepository),
-    renderMW(objectRepository, 'tenderList')
+    renderMW(objectRepository, 'tenderAdd')
 );
 
-router.use('/:id/del',
+/* POST delete tender */
+router.post('/:id/del',
     authSuperAdminMW(objectRepository),
-    renderMW(objectRepository, 'tender')
+    findTenderByIdMW(objectRepository, 'mod'),
+    deleteTenderMW(objectRepository),
+    redirectMW(objectRepository, "tender/all")
 );
 
-router.use('/:id/mod',
+/* POST modify tender */
+router.post('/:id/mod',
     authEditorMW(objectRepository),
-    renderMW(objectRepository, 'tender')
+    findTenderByIdMW(objectRepository, 'mod'),
+    updateTenderMW(objectRepository),
+    redirectPrevMW(objectRepository)
 );
 
-router.use('/:id/app',
+/* GET tender's application list */
+router.get('/:id/app',
     authAdminMW(objectRepository),
     renderMW(objectRepository, 'appList')
 );
 
-router.use('/:id',
-    function (req, res, next) {
-        res.tpl.tender = {
-            _id: 2,
-            title: 'tender three',
-            description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur non augue et nisi porttitor pretium. Mauris vel neque vitae orci luctus aliquet. Nulla facilisi. Donec in mi. Curabitur semper massa quis diam. Ut dignissim elit at nisi. Mauris nec ipsum. Nunc ac quam. Donec in diam. Phasellus tempus scelerisque justo.',
-            start_datetime: '2018-05-01',
-            end_datetime: '2018-06-01',
-            publisher: {
-                name: 'Béla'
-            }
-        };
-        return next();
-    },
+/* GET tender's parts list */
+router.get('/:id/part',
+    authAdminMW(objectRepository),
+    findTenderByIdMW(objectRepository, 'list'),
+    findTenderPartsMW(objectRepository),
+    renderMW(objectRepository, 'tenderParts')
+);
+
+/* POST add tender's new part */
+router.post('/:id/part/add',
+    authAdminMW(objectRepository),
+    findTenderByIdMW(objectRepository, 'mod'),
+    addTenderPartMW(objectRepository),
+    updateTenderPartMW(objectRepository)            // also refresh page
+);
+
+/* POST mod tender's part */
+router.post('/:id/part/:partId/mod',
+    authAdminMW(objectRepository),
+    findTenderByIdMW(objectRepository, 'mod'),
+    findTenderPartbyIDMW(objectRepository),
+    updateTenderPartMW(objectRepository)            // also refresh page
+);
+
+/* POST del tender's part */
+router.post('/:id/part/:partId/del',
+    authSuperAdminMW(objectRepository),
+    findTenderByIdMW(objectRepository, 'mod'),
+    findTenderPartbyIDMW(objectRepository),
+    deleteTenderPartMW(objectRepository)            // also refresh page
+);
+
+/* GET tender's page */
+router.get('/:id',
+    findTenderByIdMW(objectRepository, 'list'),
     renderMW(objectRepository, 'tender')
 );
 

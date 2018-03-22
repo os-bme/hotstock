@@ -1,0 +1,77 @@
+<% include pageHeader %>
+
+<% include pageNavbar %>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+
+        <div class="container-fluid">
+            <div class="row justify-content-center space-before-4">
+
+                <div class="col-sm-10">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1 class="display-4">
+                                Create news
+                            </h1>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                Use <strong>HTML</strong> code for rich text, but only in the <strong>full description</strong>!
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <form method="post" action="/news/new/mod">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="title">Title</label>
+                                    <input type="text" class="form-control col-sm-4" id="title" name="title" placeholder="Enter the title">
+                                    <div class="col-sm-1 space-before-10"></div>
+                                    <label class="col-form-label col-sm-2" for="exampleFormControlFile1">Image</label>
+                                    <input type="file" class="form-control-file col-sm-3" id="exampleFormControlFile1" disabled>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Tags</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-check form-check-inline space-before-10">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                            <label class="form-check-label" for="inlineCheckbox1">BSc</label>
+                                        </div>
+                                        <div class="form-check form-check-inline space-before-10">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                            <label class="form-check-label" for="inlineCheckbox1">MSc</label>
+                                        </div>
+                                        <div class="form-check form-check-inline space-before-10">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                            <label class="form-check-label" for="inlineCheckbox2">Koli</label>
+                                        </div>
+                                        <div class="form-check form-check-inline space-before-10">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                            <label class="form-check-label" for="inlineCheckbox2">Heti</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="short-description">Short description</label>
+                                    <input type="text" class="form-control" id="short-description" name="short_description" placeholder="Enter the short version of the news">
+                                </div>
+                                <div class="form-group">
+                                    <label for="short-description">Full description</label>
+                                    <textarea class="form-control" id="long-description" name="long_description" rows="10" placeholder="Enter the complete version of the news"></textarea>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-info">Publish</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<% include pageFooter %>

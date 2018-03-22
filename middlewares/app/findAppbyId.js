@@ -4,16 +4,16 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        objectrepository.appPartModel.find({_app: ObjectId(res.tpl.app._id)})
-            .populate('_tender_part')
-            .populate('_score')
+        objectrepository.appModel.findOne( {_id: ObjectId(req.params.id)} )
+            .populate('_user')
+            .populate('_tender')
             .exec(function (err, obj) {
                 if (err != null) {
                     res.tpl.error.add(err);
-                    console.log("AppParts find: error");
+                    console.log("App find: error");
                 } else {
-                    res.tpl.appParts = obj;
-                    console.log("AppParts find: success");
+                    res.tpl.app = obj;
+                    console.log("App find: success");
                 }
                 return next();
             });

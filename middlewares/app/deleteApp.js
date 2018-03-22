@@ -4,11 +4,11 @@ module.exports = function (objectrepository) {
 
         res.tpl.app.remove(function (err) {
 
-            if (err !== null) {
+            if (err != null) {
                 res.tpl.error.add(err);
-                console.log("app delete error");
+                console.log("App delete: error");
             } else {
-                console.log("app delete success");
+                console.log("App delete: success");
             }
 
             return next();

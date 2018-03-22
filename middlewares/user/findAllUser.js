@@ -4,12 +4,12 @@ module.exports = function (objectrepository) {
 
         objectrepository.userModel.find({}, function (err, obj) {
 
-            if ( res.tpl.users === null ) {
-                res.tpl.users = null;
-                console.log("users find error/none");
+            if (err != null) {
+                res.tpl.error.add(err);
+                console.log("Find all user: error");
             } else {
                 res.tpl.users = obj;
-                console.log("users find success");
+                console.log("Find all user: success");
             }
 
             return next();

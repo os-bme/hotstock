@@ -2,14 +2,19 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        objectrepository.scoreModel.findOne( { _app_part: res.tpl.app_part._id }, function (err, obj) {
+        objectrepository.scoreModel.findOne( { _app_part: res.tpl.appPart._id }, function (err, obj) {
 
-            if ( res.tpl.score === null ) {
-                res.tpl.score = null;
-                console.log("score find error/none");
+            if (err != null) {
+                res.tpl.error.add(err);
+                console.log("Score find: error");
             } else {
-                res.tpl.score = obj;
-                console.log("score find success");
+                if ( obj == null ){
+                    res.tpl.score = new objectrepository.scoreModel();
+                    console.log("Score find: new created");
+                } else {
+                    res.tpl.score = obj;
+                    console.log("Score find: success");
+                }
             }
 
             return next();
