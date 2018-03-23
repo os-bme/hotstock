@@ -1,3 +1,4 @@
+require('dotenv').config()
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -48,8 +49,8 @@ app.use(passport.session());
 passport.use(new OAuth2Strategy({
         authorizationURL: 'https://auth.sch.bme.hu/site/login',
         tokenURL: 'https://auth.sch.bme.hu/oauth2/token',
-        clientID: configuration.CLIENT_ID,
-        clientSecret: configuration.CLIENT_SECRET,
+        clientID: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
         callbackURL: "/auth/oauth/callback",
         scope: configuration.SCOPE
     },
