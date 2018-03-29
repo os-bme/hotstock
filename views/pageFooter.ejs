@@ -5,6 +5,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 
+<!-- include summernote css/js -->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+
 <script type="text/javascript">
 
     $(function () {
@@ -19,6 +23,21 @@
     $('.datepicker2').datepicker({
         format: 'yyyy.mm.dd.',
         uiLibrary: 'bootstrap4'
+    });
+
+    $('.summernote').summernote({
+        dialogsInBody: true,
+        height: 250,
+        toolbar: [
+            //[groupName, [list of button]]
+            ['para', ['style']],
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['insert', ['link', 'table', 'hr']]
+        ],
+        styleTags: ['p', 'h1', 'h3', 'h5']
     });
 
 </script>
