@@ -19,24 +19,30 @@
                                 <span class="badge badge-info h6">Koli</span>
                                 <span class="badge badge-info h6">Heti</span>
                                 <% if ( req.isAuthenticated() ) { %>
-                                <br>
-                                <% if ( req.session.passport.user.permission > 2 ) { %>
-                                <button class="btn btn-outline-danger btn-sm" data-toggle="modal"
-                                        data-target="#deleteModal">Delete
-                                </button>
-                                <% } %>
-                                <% if ( req.session.passport.user.permission > 0 && res.tpl.tender.start_datetme > Date.now() || req.session.passport.user.permission === 3 ) { %>
-                                <button class="btn btn-outline-secondary btn-sm" data-toggle="modal"
-                                        data-target="#modModal">Edit
-                                </button>
-                                <% } %>
-                                <% if ( req.session.passport.user.permission > 0 ) { %>
-                                <a class="btn btn-outline-secondary btn-sm"
-                                   href="/tender/<%= res.tpl.tender._id %>/part">Parts</a>
-                                <% } %>
-                                <% if ( res.tpl.tender.start_datetime < Date.now() && Date.now() < res.tpl.tender.end_datetime ) { %>
-                                <a class="btn btn-outline-secondary btn-sm" href="/app/add/<%= res.tpl.tender._id %>">Submit</a>
-                                <% }%>
+                                    <br>
+                                    <% if ( req.session.passport.user.permission > 2 ) { %>
+                                        <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteModal">
+                                            Delete
+                                        </button>
+                                    <% } %>
+                                    <% if ( req.session.passport.user.permission > 0 && res.tpl.tender.start_datetme > Date.now() || req.session.passport.user.permission === 3 ) { %>
+                                        <button class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modModal">
+                                            Edit
+                                        </button>
+                                    <% } %>
+                                    <% if ( req.session.passport.user.permission > 0 ) { %>
+                                        <a class="btn btn-outline-secondary btn-sm" href="/tender/<%= res.tpl.tender._id %>/part">
+                                            Parts
+                                        </a>
+                                        <a class="btn btn-outline-secondary btn-sm" href="/tender/<%= res.tpl.tender._id %>/app">
+                                            Apps
+                                        </a>
+                                    <% } %>
+                                    <% if ( res.tpl.tender.start_datetime < Date.now() && Date.now() < res.tpl.tender.end_datetime ) { %>
+                                        <a class="btn btn-outline-secondary btn-sm" href="/app/add/<%= res.tpl.tender._id %>">
+                                            Submit
+                                        </a>
+                                    <% }%>
                                 <% } %>
                             </div>
                         </div>
@@ -124,25 +130,20 @@
                     <div class="container">
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label" for="title">Title</label>
-                            <input type="text" name="title" class="col-md-8 form-control" id="title"
-                                   value="<%= res.tpl.tender.title %>" required>
+                            <input type="text" name="title" class="col-md-8 form-control" id="title" value="<%= res.tpl.tender.title %>" required>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label" for="short_description">Short description</label>
-                            <input type="text" name="short_description" class="col-md-8 form-control"
-                                   id="short_description" value="<%= res.tpl.tender.short_description %>" required>
+                            <input type="text" name="short_description" class="col-md-8 form-control" id="short_description" value="<%= res.tpl.tender.short_description %>" required>
                         </div>
                         <div class="form-group">
                             <label class="col-form-label" for="long_description">Long description</label>
-                            <textarea name="long_description" class="form-control" id="long_description"
-                                      required><%= res.tpl.tender.description %></textarea>
+                            <textarea name="long_description" class="form-control" id="long_description" required><%= res.tpl.tender.description %></textarea>
                         </div>
                         <div class="form-group row">
                             <label for="startdate" class="col-form-label col-sm-6">Application period start date</label>
                             <div class="input-group col-sm-6">
-                                <input type="text" name="startdate" id="startdate" class="form-control text-center"
-                                       value="<%= res.tpl.func.moment(res.tpl.tender.start_datetime).format('YYYY-MM-DD') %>"
-                                       required>
+                                <input type="text" name="startdate" id="startdate" class="form-control text-center" value="<%= res.tpl.func.moment(res.tpl.tender.start_datetime).format('YYYY-MM-DD') %>" required>
                             </div>
                             <label for="enddate" class="col-form-label col-sm-6">Application period end date</label>
                             <div class="input-group col-sm-6">

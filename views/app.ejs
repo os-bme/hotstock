@@ -14,15 +14,20 @@
                                    href="/tender/<%= res.tpl.app._tender._id %>"><%= res.tpl.app._tender.title %></a>
                             </div>
                             <div class="col-sm-4 text-right">
-                                <% if ( req.session.passport.user.permission > 2 || req.session.passport.user.internal_id == res.tpl.app._user.bme_id ) { %>
-                                <button class="btn btn-outline-danger btn-sm" data-toggle="modal"
-                                        data-target="#deleteModal">Delete
-                                </button>
-                                <a class="btn btn-outline-secondary btn-sm"
-                                   href="/app/<%= res.tpl.app._id %>/mod">Edit</a>
+                                <% if ( req.session.passport.user.permission > 2 || (res.tpl.app._tender.end_datetime >= Date.now() && req.session.passport.user.internal_id == res.tpl.app._user.bme_id) ) { %>
+                                    <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteModal">
+                                        Delete
+                                    </button>
+                                    <a class="btn btn-outline-secondary btn-sm" href="/app/<%= res.tpl.app._id %>/mod">
+                                        Edit
+                                    </a>
                                 <% } %>
-                                <a class="btn btn-outline-secondary btn-sm"
-                                   href="/user/<%= res.tpl.app._user._id %>"><%= res.tpl.app._user.name %></a>
+                                <% if ( req.session.passport.user.permission > 2 || req.session.passport.user.internal_id == res.tpl.app._user.bme_id ) { %>
+                                <a class="btn btn-outline-secondary btn-sm" href="/user/<%= res.tpl.app._user._id %>"><%= res.tpl.app._user.name %></a>
+                                <% } %>
+                                <h6 class="space-before-10">
+                                    ID: <%= res.tpl.app._id %>
+                                </h6>
                             </div>
                         </div>
                     </div>

@@ -4,7 +4,10 @@ var db = require( '../db' );
 var AppModel = db.model( 'App', {
     register_date: Date,
     status: Number,
-    final_score: Number,
+    _final_score: {
+        type: Schema.Types.ObjectId,
+        ref: 'Score'
+    },
     _tender: {
         type: Schema.Types.ObjectId,
         ref: 'Tender'
