@@ -43,7 +43,6 @@ module.exports = function (objectRepository, method) {
                         console.log("Find news by id: error");
                     } else {
                         res.tpl.news = obj[0];
-                        console.log(obj[0]);
                         console.log("Find news by id: success");
                     }
                     return next();
