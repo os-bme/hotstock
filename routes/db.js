@@ -36,13 +36,38 @@ var objectRepository = {
 };
 
 /* GET Test User Schema */
-router.use('/user/test',
+router.use('/user/create',
     function (req, res, next) {
-        res.tpl.user = new objectRepository.userModel();
-        res.tpl.user.name = "Test Elek";
-        res.tpl.user.bme_id = 1234;
-        res.tpl.user.email = "valami@proba.hu";
-        res.tpl.user.post_type = "user";
+
+        var names = ["Test Elek"];
+        var firstnames = ["Elek"];
+        var lastnames = ["Test"];
+        var neptuns = ["ASDLOL"];
+        var statuses = [1];
+        var bme_ids = ["1234"];
+        var emails = ["test.elek@proba.hu"];
+        var mobiles = ["+36 20/963 8527"];
+        var permissions = [0];
+        var notifications = [true];
+
+        var users = [];
+        var user;
+
+        for ( var i = 0; i < names.length; i++){
+            user = new objectRepository.userModel();
+            user.name = names[i];
+            user.firstname = firstnames[i];
+            user.lastname = lastnames[i];
+            user.neptun = neptuns[i];
+            user.status = statuses[i];
+            user.bme_id = bme_ids[i];
+            user.email = emails[i];
+            user.mobile = mobiles[i];
+            user.permission = permissions[i];
+            user.notification = notifications[i];
+            users.add( user );
+        }
+
         return next();
     },
     updateUserMW(objectRepository),

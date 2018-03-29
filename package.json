@@ -30,6 +30,7 @@
     "passport": "^0.4.0",
     "passport-oauth2": "^1.4.0",
     "request": "^2.83.0",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "wysiwyg": "^2.0.0"
   }
 }

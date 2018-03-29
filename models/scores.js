@@ -4,7 +4,7 @@ var db = require( '../db' );
 var ScoreModel = db.model( 'Score', {
     value: Number,
     comment: String,
-    _evaulator: {
+    _evaluator: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },

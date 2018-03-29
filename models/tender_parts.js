@@ -10,6 +10,10 @@ var TenderPartModel = db.model( 'TenderPart', {
     _tender: {
         type: Schema.Types.ObjectId,
         ref: 'Tender'
+    },
+    _publisher: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
 });
 

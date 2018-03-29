@@ -8,7 +8,8 @@ var TenderModel = db.model( 'Tender', {
     publish_datetime: Date,
     short_description: String,
     description: String,
-    datasheet_template: String,
+    max_apps: Number,
+    multi_eva: Boolean,
     _publisher: {
         type: Schema.Types.ObjectId,
         ref: 'User'
