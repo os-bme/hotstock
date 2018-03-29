@@ -1,8 +1,8 @@
-module.exports = function (objectrepository) {
+module.exports = function (objectRepository) {
 
     return function (req, res, next) {
 
-        res.tpl.news.remove(function (err) {
+        objectRepository.newsModel.findOne({_id: req.params.id}).remove(function (err) {
 
             if (err != null) {
                 res.tpl.error.add(err);

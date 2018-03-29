@@ -9,6 +9,7 @@ var authSuperAdminMW = require('../middlewares/general/authSuperAdmin');
 var findNewsByIdMW = require('../middlewares/news/findNewsbyId');
 var findAllNewsMW = require('../middlewares/news/findAllNews');
 var updateNewsMW = require('../middlewares/news/updateNews');
+var deleteNewsMW = require('../middlewares/news/deleteNews');
 
 var redirectPrevMW = require('../middlewares/general/redirectPrev');
 var renderMW = require('../middlewares/general/render');
@@ -44,7 +45,7 @@ router.post('/:id/mod',
 
 router.post('/:id/del',
     authSuperAdminMW(objectRepository),
-    // TODO delete news
+    deleteNewsMW(objectRepository),
     redirectMW(objectRepository, "news/all")
 );
 
