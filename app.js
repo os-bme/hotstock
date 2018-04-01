@@ -150,6 +150,6 @@ app.use(function(err, req, res, next) {
 /**
  *  Start server
  */
-var server = app.listen(3000, function () {
-  console.log('Running on :3000');
+var server = app.listen(process.env.APP_PORT, function () {
+  console.log('Running on :'+process.env.APP_PORT);
 });
