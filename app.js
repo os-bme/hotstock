@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var moment = require('moment');
 var configuration = require('./config.json');
+var i18n = require('i18n-express');
 
 var passport = require('passport'),
     OAuth2Strategy = require('passport-oauth2');
@@ -99,6 +100,15 @@ app.use(function (req, res, next) {
  */
 app.use('/public', express.static('public'));
 app.use(favicon(path.join(__dirname, 'public', 'hotstockicon.ico')));
+
+/**
+ * I18n
+ */
+app.use(i18n({
+  translationsPath: path.join(__dirname, 'i18n'),
+  siteLangs: ["hu","en"],
+  textsVarName: 'translation'
+}));
 
 /**
  * Include routes
