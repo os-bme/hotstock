@@ -11,7 +11,7 @@ module.exports = function (objectrepository) {
         res.tpl.news.save(function (err) {
 
             if (err != null) {
-                res.tpl.error.add(err);
+                res.tpl.error.push(err);
                 console.log("Update news: error");
             } else {
                 req.originalUrl = req.originalUrl.replace("/news/new","/news/" + res.tpl.news._id);

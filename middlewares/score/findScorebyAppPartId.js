@@ -5,7 +5,7 @@ module.exports = function (objectrepository) {
         objectrepository.scoreModel.findOne( { _app_part: res.tpl.appPart._id }, function (err, obj) {
 
             if (err != null) {
-                res.tpl.error.add(err);
+                res.tpl.error.push(err);
                 console.log("Score find: error");
             } else {
                 if ( obj == null ){

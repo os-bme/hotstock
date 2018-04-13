@@ -14,7 +14,7 @@ module.exports = function (objectRepository) {
             function (err, obj) {
 
                 if (err != null) {
-                    res.tpl.error.add(err);
+                    res.tpl.error.push(err);
                     console.log("Find Tender Part by Tender ID: error");
                 } else {
                     res.tpl.tenderParts = obj;

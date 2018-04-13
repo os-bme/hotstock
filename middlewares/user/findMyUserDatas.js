@@ -11,7 +11,7 @@ module.exports = function (objectrepository) {
             function (err, obj) {
 
                 if (err != null) {
-                    res.tpl.error.add(err);
+                    res.tpl.error.push(err);
                     console.log("Find user by id: error");
                 } else {
                     res.tpl.user = obj;

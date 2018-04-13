@@ -5,7 +5,7 @@ module.exports = function (objectrepository) {
         res.tpl.tender.remove(function (err) {
 
             if (err != null) {
-                res.tpl.error.add(err);
+                res.tpl.error.push(err);
                 console.log("Tender deletion: error");
             } else {
                 console.log("Tender deletion: success");

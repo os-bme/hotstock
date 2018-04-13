@@ -30,7 +30,7 @@ module.exports = function (objectrepository) {
         function (err, obj) {
 
             if (err != null){
-                res.tpl.error.add(err);
+                res.tpl.error.push(err);
                 console.log("Apps find: error/none");
             } else {
                 res.tpl.apps = obj;
