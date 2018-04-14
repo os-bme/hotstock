@@ -1,4 +1,48 @@
 {
-"WELCOME_MSG": "Welcome to Hootstock!",
-"CONTACT_TEXT": "More bla"
+	"WELCOME_MSG" : "Welcome to Hootstock!",
+	"WELCOME_DESCRIPTION" : "This page is an open source application portal. Please read about for more info",
+	"NEWS": {
+		"MENU": {
+			"ITEM" : "News",
+			"NEW" : "New",
+			"ALL" : "Összes hír"
+		},
+		"ATTACHMENT" : "Csatolmányok"
+	},
+	"TENDERS": {
+		"MENU": {
+			"ITEM" : "Tenders",
+			"NEW" : "New",
+			"ALL" : "All",
+		}
+	},
+	"APPLICATIONS": {
+		"MENU": {
+			"ITEM" : "Applications",
+			"UNSCORED" : "Unscored"
+		}
+	},
+	"USERS": {
+		"MENU": {
+			"ITEM" : "Users"
+		}
+	},
+	"TAGS": {
+		"MENU": {
+			"ITEM" : "Tags"
+		}
+	},
+	"ABOUT": {
+		"MENU": {
+			"ITEM" : "About"
+		}
+	},
+	"CONFIG": {
+		"MENU" :{
+			"PROFILE" : "My Profile",
+			"APPLICATIONS" : "Applications",
+			"LOG_OUT" : "Log out",
+			"LOG_IN" : "Log in"
+		}
+	}
 }

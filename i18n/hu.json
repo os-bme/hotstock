@@ -1,4 +1,48 @@
 {
-"WELCOME_MSG": "Üdv a HOTSTOCK pályázatis portálon!",
-"CONTACT_TEXT": "More bla"
+	"WELCOME_MSG" : "Üdv a Hotstock pályázatis portálon!",
+	"WELCOME_DESCRIPTION" : "Ez egy opensource portál, további információkat a Rólunk menüpontban találsz",
+	"NEWS": {
+		"MENU": {
+			"ITEM" : "Hírek",
+			"NEW" : "Új",
+			"ALL" : "Összes hír"
+		},
+		"ATTACHMENT" : "Csatolmányok"
+	},
+	"TENDERS": {
+		"MENU": {
+			"ITEM" : "Pályázatok",
+			"NEW" : "Új",
+			"ALL" : "Összes"
+		}
+	},
+	"APPLICATIONS": {
+		"MENU": {
+			"ITEM" : "Jelentkezések",
+			"UNSCORED" : "Elbírálatlan"
+		}
+	},
+	"USERS": {
+		"MENU": {
+			"ITEM" : "Felhasználók"
+		}
+	},
+	"TAGS": {
+		"MENU": {
+			"ITEM" : "Cimkék"
+		}
+	},
+	"ABOUT": {
+		"MENU": {
+			"ITEM" : "Rólunk"
+		}
+	},
+	"CONFIG": {
+		"MENU" :{
+			"PROFILE" : "Profilom",
+			"APPLICATIONS" : "Jelentkezéseim",
+			"LOG_OUT" : "Kijelentkezés",
+			"LOG_IN" : "Bejelentkezés"
+		}
+	}
 }

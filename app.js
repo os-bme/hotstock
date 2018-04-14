@@ -106,8 +106,10 @@ app.use(favicon(path.join(__dirname, 'public', 'hotstockicon.ico')));
  */
 app.use(i18n({
   translationsPath: path.join(__dirname, 'i18n'),
-  siteLangs: ["hu","en"],
-  textsVarName: 'translation'
+  siteLangs: ['hu','en'],
+  defaultLang : 'hu',
+  browserEnable: false,
+  textsVarName: 'i18n'
 }));
 
 /**
