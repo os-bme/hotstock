@@ -10,11 +10,11 @@ module.exports = function (objectrepository) {
         res.tpl.app.register_date = Date.now();
 
         res.tpl.app.save(function (err) {
-            if (err != null){
-                res.tpl.error.push(err);
-                console.log("App creation: error");
+            if (err != null) {
+                res.tpl.error.add(err);
+                res.tpl.func.logger.error("Application creation failure " + err);
             } else {
-                console.log("App creation: success");
+                res.tpl.func.logger.info("Application creation success ( appID: " + res.tpl.app._id + " )");
             }
             return next();
         });
