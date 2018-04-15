@@ -69,9 +69,8 @@ router.post('/add/:id',
     redirectToAppMW(objectRepository)
 );
 
-/**
- * TODO: Delete AppParts too
- */
+
+//TODO: Delete AppParts too
 router.post('/:id/del',
     authSuperAdminMW(objectRepository),
     findAppbyIdMW(objectRepository),

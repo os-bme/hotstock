@@ -10,7 +10,7 @@ module.exports = function (objectrepository) {
                 res.tpl.error.add(err);
                 res.tpl.func.logger.error("News delete failure " + err);
             } else {
-                res.tpl.func.logger.info("News delete success ( appID: " + newsID + " )");
+                res.tpl.func.logger.info("News delete success ( newsID: " + newsID + " )");
             }
 
             return next();

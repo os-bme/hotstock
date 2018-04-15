@@ -4,6 +4,7 @@ module.exports = function (objectrepository) {
 
         res.tpl.app = new objectrepository.appModel();
 
+        // TODO: Correct app creation
         res.tpl.app._tender = res.tpl.tender._id;
         res.tpl.app._user = req.session.passport.user._id;
         res.tpl.app.status = 0;

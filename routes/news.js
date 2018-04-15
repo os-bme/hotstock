@@ -6,9 +6,10 @@ var authEditorMW = require('../middlewares/general/authEditor');
 var authAdminMW = require('../middlewares/general/authAdmin');
 var authSuperAdminMW = require('../middlewares/general/authSuperAdmin');
 
-var findNewsByIdMW = require('../middlewares/news/findNewsbyId');
+var findNewsbyIdMW = require('../middlewares/news/findNewsbyId');
 var findAllNewsMW = require('../middlewares/news/findAllNews');
 var updateNewsMW = require('../middlewares/news/updateNews');
+var deleteNewsMW = require('../middlewares/news/deleteNews');
 
 var redirectPrevMW = require('../middlewares/general/redirectPrev');
 var renderMW = require('../middlewares/general/render');
@@ -37,20 +38,21 @@ router.get('/add',
 /* POST update news */
 router.post('/:id/mod',
     authEditorMW(objectRepository),
-    findNewsByIdMW(objectRepository, 'mod'),
+    findNewsbyIdMW(objectRepository, 'mod'),
     updateNewsMW(objectRepository),
     redirectPrevMW(objectRepository)
 );
 
 router.post('/:id/del',
     authSuperAdminMW(objectRepository),
-    // TODO delete news
+    findNewsbyIdMW(objectRepository, 'mod'),
+    deleteNewsMW(objectRepository),
     redirectMW(objectRepository, "news/all")
 );
 
 /* GET news */
 router.get('/:id',
-    findNewsByIdMW(objectRepository, 'list'),
+    findNewsbyIdMW(objectRepository, 'list'),
     renderMW(objectRepository, 'news')
 );
 
