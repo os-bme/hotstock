@@ -4,6 +4,7 @@ module.exports = function (objectRepository, method) {
 
     return function (req, res, next) {
 
+        // TODO: Correct news creation
         if (req.params.id === 'new') {
             res.tpl.news = new objectRepository.newsModel();
             console.log("Find news by id: new created");
