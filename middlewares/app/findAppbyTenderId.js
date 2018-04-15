@@ -2,19 +2,19 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-       objectrepository.appModel.find( { _tender: res.tpl.tender._id }, function (err, obj) {
+        objectrepository.appModel.find({_tender: res.tpl.tender._id}, function (err, obj) {
 
-           if (err != null){
-               res.tpl.error.add(err);
-                console.log("Apps find: error");
+            if (err != null) {
+                res.tpl.error.add(err);
+                res.tpl.func.logger.error("Application search failure " + err);
             } else {
                 res.tpl.apps = obj;
-                console.log("Apps find: success");
+                res.tpl.func.logger.info("Application search success ( tenderID: " + res.tpl.tender._id + " )");
             }
 
             return next();
 
-        } );
+        });
 
     }
 };

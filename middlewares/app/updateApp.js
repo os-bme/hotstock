@@ -5,9 +5,9 @@ module.exports = function (objectrepository) {
         res.tpl.app.save( function (err) {
                 if (err !== null){
                     res.tpl.error.add(err);
-                    console.log("App update: error");
+                    res.tpl.func.logger.error("Application update failure " + err);
                 } else {
-                    console.log("App update: success");
+                    res.tpl.func.logger.info("Application update success ( appID: " + res.tpl.app._id + " )");
                 }
                 return next();
         });
