@@ -10,45 +10,20 @@ module.exports = function (objectRepository, method) {
             return next();
         }
 
-        if (method === 'mod') {
-            objectRepository.newsModel.findOne( { _id: req.params.id }, function (err, obj) {
-
-                if (err != null) {
-                    res.tpl.error.add(err);
-                    console.log("Find news by ID: error");
-                } else {
-                    res.tpl.news = obj;
-                    console.log("Find news by ID: success");
-                }
-                return next();
-            })
-        }
-
-        if (method === 'list') {
-            objectRepository.newsModel.aggregate(
-                { $match: {
-                    _id: ObjectId(req.params.id)
-                }},
-                { $lookup: {
-                    from: 'users',
-                    localField: '_publisher',
-                    foreignField: '_id',
-                    as: 'publisher'
-                }},
-                { $unwind: '$publisher'},
-                function (err, obj) {
-
+        if (method === 'mod' || method === 'list') {
+            objectRepository.newsModel
+                .findOne({_id: req.params.id})
+                .populate('_publisher')
+                .exec(function (err, obj) {
                     if (err != null) {
                         res.tpl.error.add(err);
-                        console.log("Find news by id: error");
+                        res.tpl.func.logger.error("News search failure " + err);
                     } else {
-                        res.tpl.news = obj[0];
-                        console.log(obj[0]);
-                        console.log("Find news by id: success");
+                        res.tpl.news = obj;
+                        res.tpl.func.logger.info("News search success ( newsID: " + res.tpl.news._id + " )");
                     }
                     return next();
-                }
-            );
+                });
         }
 
     }

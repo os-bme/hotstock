@@ -2,13 +2,15 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
+        var newsID = res.tpl.news._id;
+
         res.tpl.news.remove(function (err) {
 
             if (err != null) {
                 res.tpl.error.add(err);
-                console.log("Delete news: error");
+                res.tpl.func.logger.error("News delete failure " + err);
             } else {
-                console.log("Delete news: success");
+                res.tpl.func.logger.info("News delete success ( appID: " + newsID + " )");
             }
 
             return next();
