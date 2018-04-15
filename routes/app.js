@@ -14,6 +14,7 @@ var findMyUserMW = require('../middlewares/user/findMyUserDatas');
 var findAppbyIdMW = require('../middlewares/app/findAppbyId');
 var findAllAppMW = require('../middlewares/app/findAllApp');
 var createAppMW = require('../middlewares/app/createApp');
+var deleteAppMW = require('../middlewares/app/deleteApp');
 
 var findAllAppPartsByAppIdMW = require('../middlewares/app_part/findAllAppPartbyAppId');
 
@@ -21,6 +22,7 @@ var createAllAppPartMW = require('../middlewares/app_part/createAllAppParts');
 
 var redirectMW = require('../middlewares/general/redirect');
 var redirectToAppMW = require('../middlewares/general/redirectToApp');
+var redirectPrevMW = require('../middlewares/general/redirectPrev');
 var renderMW = require('../middlewares/general/render');
 
 var UserModel = require('../models/users');
@@ -67,9 +69,14 @@ router.post('/add/:id',
     redirectToAppMW(objectRepository)
 );
 
+/**
+ * TODO: Delete AppParts too
+ */
 router.post('/:id/del',
     authSuperAdminMW(objectRepository),
-    renderMW(objectRepository, 'app')
+    findAppbyIdMW(objectRepository),
+    deleteAppMW(objectRepository),
+    redirectMW(objectRepository, "tender/active")
 );
 
 router.post('/:id/mod',
