@@ -7,13 +7,33 @@
 			"NEW" : "New",
 			"ALL" : "Összes hír"
 		},
+		"PAGE": {
+			"TITLE" : "Összes hír"
+		},
+		"EDIT": {
+			"TITLE" : "Adatok szerkesztése",
+			"DATA": {
+				"TITLE" : "Cím",
+				"DESCRIPTION" : {
+					"SHORT" : "Rövid leírás",
+					"LONG" : "Hosszú leírás"
+				}
+			}
+		},
 		"ATTACHMENT" : "Csatolmányok"
 	},
 	"TENDERS": {
 		"MENU": {
 			"ITEM" : "Tenders",
 			"NEW" : "New",
-			"ALL" : "All",
+			"ALL" : "All"
+		},
+		"PAGE": {
+			"TITLE": {
+				"ACTIVE": "Elérhető pályázatok",
+				"ALL" : "Összes pályázat"
+			},
+			"SHOW_TENDER": "See the tender"
 		}
 	},
 	"APPLICATIONS": {
@@ -25,6 +45,10 @@
 	"USERS": {
 		"MENU": {
 			"ITEM" : "Users"
+		},
+		"SHOW": {
+			"FIRSTNAME" : "Keresztnév",
+			"LASTNAME" : "Vezetéknév"
 		}
 	},
 	"TAGS": {
@@ -44,5 +68,12 @@
 			"LOG_OUT" : "Log out",
 			"LOG_IN" : "Log in"
 		}
+	},
+	"BUTTONS": {
+		"EDIT" : "Szerkesztés",
+		"DELETE" : "Törlés",
+		"PERMISSIONS" : "Jogosultságok",
+		"CLOSE" : "Bezárás",
+		"SAVE" : "Mentés"
 	}
 }

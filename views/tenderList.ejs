@@ -9,7 +9,13 @@
             <div class="container space-before-10">
                 <div class="row">
                     <div class="col-sm-6 space-before-20">
-                        <h1 class="display-4"><% if ( req.originalUrl.indexOf( '/active' ) > -1 ) { %>Actual<% } else {%>All<% } %> tenders</h1>
+                        <h1 class="display-4">
+                            <% if ( req.originalUrl.indexOf( '/active' ) > -1 ) { %>
+                                <%= i18n.TENDERS.PAGE.TITLE.ACTIVE %>
+                            <% } else {%>
+                                <%= i18n.TENDERS.PAGE.TITLE.ALL %>
+                            <% } %>
+                        </h1>
                     </div>
                     <div class="col-sm-6 text-right space-before-10">
                         <button type="button" class="btn btn-info space-before-10 btn-sm">BSc</button>
@@ -36,7 +42,7 @@
                         <div class="card-body text-justify">
                             <%= tender.short_description %>
                             <br>
-                            <a href="/tender/<%= tender._id %>">See the tender</a>
+                            <a href="/tender/<%= tender._id %>"><%= i18n.TENDERS.PAGE.SHOW_TENDER %></a>
                         </div>
                     </div>
                 </div>

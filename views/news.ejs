@@ -23,10 +23,14 @@
                                 <% if ( req.isAuthenticated() ) { %>
                                     <br>
                                     <% if ( req.session.passport.user.permission > 2 ) { %>
-                                        <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteModal" >Delete</button>
+                                        <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteModal" >
+                                            <%= i18n.BUTTONS.DELETE %>
+                                        </button>
                                     <% } %>
                                     <% if ( req.session.passport.user.permission > 0 ) { %>
-                                        <button class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modModal" >Edit</button>
+                                        <button class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modModal" >
+                                            <%= i18n.BUTTONS.EDIT %>
+                                        </button>
                                     <% } %>
                                 <% } %>
                             </div>
@@ -45,7 +49,7 @@
                                 </p>
                             </div>
                             <div class="col-sm-7 space-before-20">
-                                Attachment:
+                                <%= i18n.NEWS.ATTACHMENT %>:
                                 <a href="">datasheet_template</a>,
                                 <a href="">tender_description</a>
                             </div>
@@ -86,8 +90,12 @@
                 Please pay attention to it!
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <%= i18n.BUTTONS.CLOSE %>
+                </button>
+                <button type="submit" class="btn btn-danger">
+                    <%= i18n.BUTTONS.DELETE %>
+                </button>
             </div>
         </div>
         </form>
@@ -102,7 +110,9 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit datas</h5>
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <%= i18n.NEWS.EDIT.TITLE %>
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -111,21 +121,29 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label" for="title">Title</label>
+                            <label class="col-md-4 col-form-label" for="title">
+                                <%= i18n.NEWS.EDIT.DATA.TITLE %>
+                            </label>
                             <input type="text" name="title" class="col-md-8 form-control" id="title" value="<%= res.tpl.news.title %>">
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label" for="short_description">Short description</label>
+                            <label class="col-md-4 col-form-label" for="short_description">
+                                <%= i18n.NEWS.EDIT.DATA.DESCRIPTION.SHORT %>
+                            </label>
                             <input type="text" name="short_description" class="col-md-8 form-control" id="short_description" value="<%= res.tpl.news.short_description %>">
                         </div>
                         <div class="form-group">
-                            <label class="col-form-label" for="long_description">Long description</label>
+                            <label class="col-form-label" for="long_description">
+                                <%= i18n.NEWS.EDIT.DATA.DESCRIPTION.LONG %>
+                            </label>
                             <textarea name="long_description" class="form-control" id="long_description"><%= res.tpl.news.description %></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
-                        <input class="btn btn-info" type="submit" value="Save">
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                            <%= i18n.BUTTONS.CLOSE %>
+                        </button>
+                        <input class="btn btn-info" type="submit" value="<%= i18n.BUTTONS.SAVE %>">
                     </div>
                 </div>
             </form>
