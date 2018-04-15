@@ -11,11 +11,11 @@ module.exports = function (objectrepository) {
         res.tpl.news.save(function (err) {
 
             if (err != null) {
-                res.tpl.error.push(err);
-                console.log("Update news: error");
+                res.tpl.error.add(err);
+                res.tpl.func.logger.error("News update failure " + err);
             } else {
                 req.originalUrl = req.originalUrl.replace("/news/new","/news/" + res.tpl.news._id);
-                console.log("Update news: success");
+                res.tpl.func.logger.info("News update success ( appID: " + res.tpl.app._id + " )");
             }
 
             return next();
