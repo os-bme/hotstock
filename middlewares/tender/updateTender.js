@@ -15,10 +15,10 @@ module.exports = function (objectrepository) {
 
             if (err != null) {
                 res.tpl.error.add(err);
-                console.log("Tender update: error");
+                res.tpl.func.logger.error("Tender update failure " + err);
             } else {
                 req.originalUrl = req.originalUrl.replace("/tender/new","/tender/" + res.tpl.tender._id);
-                console.log("Tender update: success");
+                res.tpl.func.logger.info("Tender update success ( tenderID: " + res.tpl.tender._id + " )");
             }
 
             return next();

@@ -19,13 +19,13 @@ module.exports = function (objectrepository) {
                 console.log("Tender Part update: success");
             }
 
-            return next();
+
+            var url = req.originalUrl.split("/part/");
+
+            res.redirect( url[0] + "/part");
+            return;
 
         });
-
-        var url = req.originalUrl.split("/part/");
-
-        res.redirect( url[0] + "/part");
 
     }
 
