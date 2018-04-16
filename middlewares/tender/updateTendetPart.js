@@ -12,7 +12,7 @@ module.exports = function (objectrepository) {
         res.tpl.tenderPart.save(function (err) {
 
             if (err != null) {
-                res.tpl.error.add(err);
+                res.tpl.error.push(err);
                 console.log("Tender Part update: error");
             } else {
                 req.originalUrl = req.originalUrl.replace("/tender/new","/tender/" + res.tpl.tender._id);

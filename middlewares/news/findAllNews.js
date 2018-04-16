@@ -5,7 +5,7 @@ module.exports = function (objectrepository) {
         objectrepository.newsModel.find({}, function (err, obj) {
 
             if (err != null) {
-                res.tpl.error.add(err);
+                res.tpl.error.push(err);
                 console.log("Find news: error");
             } else {
                 res.tpl.newses = obj;

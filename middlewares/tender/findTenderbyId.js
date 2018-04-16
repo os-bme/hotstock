@@ -15,7 +15,7 @@ module.exports = function (objectRepository, method) {
             objectRepository.tenderModel.findOne( { _id: req.params.id }, function (err, obj) {
 
                 if (err != null) {
-                    res.tpl.error.add(err);
+                    res.tpl.error.push(err);
                     console.log("Find tender by ID: error");
                 } else {
                     res.tpl.tender = obj;
@@ -40,7 +40,7 @@ module.exports = function (objectRepository, method) {
                 function (err, obj) {
 
                     if (err != null) {
-                        res.tpl.error.add(err);
+                        res.tpl.error.push(err);
                         console.log("Find tender by ID: error");
                     } else {
                         res.tpl.tender = obj[0];

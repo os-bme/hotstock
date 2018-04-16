@@ -6,7 +6,7 @@ module.exports = function (objectrepository, method) {
             objectrepository.tenderModel.find({}, function (err, obj) {
 
                 if (err != null) {
-                    res.tpl.error.add(err);
+                    res.tpl.error.push(err);
                     console.log("Find all tender: error");
                 } else {
                     res.tpl.tenders = obj;
@@ -30,7 +30,7 @@ module.exports = function (objectrepository, method) {
                 function (err, obj) {
 
                     if (err != null) {
-                        res.tpl.error.add(err);
+                        res.tpl.error.push(err);
                         console.log("Find all tender: error");
                     } else {
                         res.tpl.tenders = obj;

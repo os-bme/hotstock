@@ -5,14 +5,13 @@ module.exports = function (objectrepository) {
         res.tpl.user.remove(function (err) {
 
             if (err != null) {
-                res.tpl.error.add(err);
+                res.tpl.error.push(err);
                 console.log("User delete: error");
             } else {
                 console.log("User delete: success");
             }
 
             return next();
-
 
         });
     }

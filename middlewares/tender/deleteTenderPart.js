@@ -5,7 +5,7 @@ module.exports = function (objectrepository) {
         res.tpl.tenderPart.remove(function (err) {
 
             if (err != null) {
-                res.tpl.error.add(err);
+                res.tpl.error.push(err);
                 console.log("Tender Part delete: error");
             } else {
                 req.originalUrl = req.originalUrl.replace("/tender/new","/tender/" + res.tpl.tender._id);

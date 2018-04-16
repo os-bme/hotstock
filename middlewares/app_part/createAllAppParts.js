@@ -35,7 +35,7 @@ module.exports = function (objectrepository) {
             function (err) {
 
                 if (err != null) {
-                    res.tpl.error.add(err);
+                    res.tpl.error.push(err);
                     console.log("App Parts update: error");
                 } else {
                     req.originalUrl = req.originalUrl.replace("/tender/new", "/tender/" + res.tpl.tender._id);

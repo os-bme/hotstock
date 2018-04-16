@@ -5,7 +5,7 @@ module.exports = function (objectrepository) {
        objectrepository.appModel.find( { _tender: res.tpl.tender._id }, function (err, obj) {
 
            if (err != null){
-               res.tpl.error.add(err);
+               res.tpl.error.push(err);
                 console.log("Apps find: error");
             } else {
                 res.tpl.apps = obj;
