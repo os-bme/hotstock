@@ -1,4 +1,4 @@
-module.exports = function (objectrepository) {
+module.exports = function (objectRepository) {
 
     return function (req, res, next) {
         // Sikeres azonositas
@@ -18,10 +18,12 @@ module.exports = function (objectrepository) {
                     res.tpl.user.save(function (err) {
                         if (err !== null) {
                             res.tpl.func.logger.error("User creation failure " + err);
+                            res.tpl.func.logger.info("Redirect to \'/auth/err\'");
                             return res.redirect('/auth/err');
                         } else {
                             req.session.passport.user = res.tpl.user;
                             res.tpl.func.logger.info("User creation success ( userID: " + res.tpl.user._id + ", BMEID: " + req.user.internal_id + " )");
+                            res.tpl.func.logger.info("Redirect to \'/\'");
                             return res.redirect('/');
                         }
                     });
@@ -30,6 +32,7 @@ module.exports = function (objectrepository) {
                     req.session.passport.user.permission = obj.permission;
                     req.session.passport.user._id = obj._id;
                     res.tpl.func.logger.info("User search success ( userID: " + res.tpl.user._id + ", BMEID: " + req.user.internal_id + " )");
+                    res.tpl.func.logger.info("Redirect to \'/\'");
                     return res.redirect('/');
                 }
             });
