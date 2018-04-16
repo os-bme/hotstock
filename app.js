@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var moment = require('moment');
 var configuration = require('./config.json');
 var winston = require('winston');
+require('winston-daily-rotate-file');
 
 var passport = require('passport'),
     OAuth2Strategy = require('passport-oauth2');
@@ -54,17 +55,12 @@ app.use(function (req, res, next) {
         logger: logger,
         reqIP: function (req) {
             var ipAddress;
-            // The request may be forwarded from local web server.
             var forwardedIpsStr = req.header('x-forwarded-for');
             if (forwardedIpsStr) {
-                // 'x-forwarded-for' header may return multiple IP addresses in
-                // the format: "client IP, proxy 1 IP, proxy 2 IP" so take the
-                // the first one
                 var forwardedIps = forwardedIpsStr.split(',');
                 ipAddress = forwardedIps[0];
             }
             if (!ipAddress) {
-                // If request was not forwarded
                 ipAddress = req.connection.remoteAddress;
             }
             return ipAddress;
@@ -86,7 +82,7 @@ app.use(function (req, res, next) {
 const {createLogger, format, transports} = winston;
 const {combine, timestamp, label, printf, colorize} = format;
 
-const hotstockFormat = printf(info => {
+const basicLogFormat = printf(info => {
     return `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`;
 });
 
@@ -94,9 +90,12 @@ var logger = createLogger({
     level: 'verbose',
     transports: [
         new transports.Console(),
-        new transports.File({
-            filename: 'log/20180413_Hotstock.log',
-        }),
+        new transports.DailyRotateFile({
+            filename: 'log/Hotstock_%DATE%.log',
+            datePattern: 'YYYY-MM-DD-HH',
+            zippedArchive: false,
+            maxSize: '20m'
+        })
     ]
 });
 
@@ -105,7 +104,7 @@ app.use(function (req, res, next) {
         label({label: res.tpl.func.userID(req)}),
         colorize(),
         timestamp(),
-        hotstockFormat
+        basicLogFormat
     );
     logger.log('verbose', req.path);
     next();
@@ -123,12 +122,13 @@ passport.use(new OAuth2Strategy({
         scope: configuration.SCOPE
     },
     function (accessToken, refreshToken, profile, cb) {
-        console.log(accessToken + '\n' + refreshToken + '\n' + JSON.stringify(profile));
         var request = require('request');
-        request('https://auth.sch.bme.hu/api/profile?access_token=' + accessToken, function (error, response, body) {
-            if (!error && response.statusCode === 200) {
+        request('https://auth.sch.bme.hu/api/profile?access_token=' + accessToken, function (error, res, body) {
+            if (!error && res.statusCode === 200) {
+                logger.info('Oauth2 authentication success ( accessToken: ' + accessToken + " )");
                 return cb(null, JSON.parse(body), null);
             } else {
+                logger.error('Oauth2 authentication failure');
                 return cb(new Error('oauth2 authentication failure'));
             }
         });
@@ -201,5 +201,11 @@ app.use(function (err, req, res, next) {
  *  Start server
  */
 var server = app.listen(process.env.APP_PORT, function () {
-    console.log('Running on :' + process.env.APP_PORT);
+    logger.format = combine(
+        label({label: '   HOTSTOCK APP SERVER  '}),
+        colorize(),
+        timestamp(),
+        basicLogFormat
+    );
+    logger.info('Running on :' + process.env.APP_PORT);
 });
