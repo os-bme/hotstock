@@ -8,9 +8,9 @@ module.exports = function (objectrepository) {
 
             if (err != null) {
                 res.tpl.error.add(err);
-                console.log("Update user permission: error");
+                res.tpl.func.logger.error("User permission update failure " + err);
             } else {
-                console.log("Update user permission: success");
+                res.tpl.func.logger.info("User permission update success ( userID: " + res.tpl.user._id + " )");
             }
 
             return next();

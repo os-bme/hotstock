@@ -20,9 +20,9 @@ module.exports = function (objectrepository) {
 
             if (err != null) {
                 res.tpl.error.add(err);
-                console.log("Update user datas: error");
+                res.tpl.func.logger.error("User update failure " + err);
             } else {
-                console.log("Update user datas: success");
+                res.tpl.func.logger.info("User update success ( userID: " + res.tpl.user._id + " )");
             }
 
             return next();
