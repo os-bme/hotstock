@@ -6,7 +6,7 @@ module.exports = function (objectrepository) {
 
         res.tpl.app.remove(function (err) {
 
-            if (err != null) {
+            if (err !== null) {
                 res.tpl.error.add(err);
                 res.tpl.func.logger.error("Application delete failure " + err);
             } else {

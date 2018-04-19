@@ -11,7 +11,7 @@ module.exports = function (objectrepository) {
         res.tpl.app.register_date = Date.now();
 
         res.tpl.app.save(function (err) {
-            if (err != null) {
+            if (err !== null) {
                 res.tpl.error.add(err);
                 res.tpl.func.logger.error("Application creation failure " + err);
             } else {

@@ -66,7 +66,7 @@ app.use(function (req, res, next) {
             return ipAddress;
         },
         userID: function (req) {
-            if (!req.session.passport) {
+            if (!req.session.passport || !req.session.passport.user) {
                 return "        anonimous       ";
             } else {
                 return req.session.passport.user._id;
