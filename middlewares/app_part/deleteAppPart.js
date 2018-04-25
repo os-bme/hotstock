@@ -5,7 +5,7 @@ module.exports = function (objectrepository) {
         res.tpl.app_part.remove(function (err) {
 
             if (err !== null){
-                res.tpl.error.add(err);
+                res.tpl.error.push(err);
                 console.log("AppPart delete: error");
             } else {
                 console.log("AppPart delete: success");

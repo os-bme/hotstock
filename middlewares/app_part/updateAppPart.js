@@ -12,7 +12,7 @@ module.exports = function (objectrepository) {
         res.tpl.appPart.save(function (err) {
 
             if (err !== null){
-                res.tpl.error.add(err);
+                res.tpl.error.push(err);
                 console.log("AppPart update: error");
             } else {
                 console.log("AppPart update: success");

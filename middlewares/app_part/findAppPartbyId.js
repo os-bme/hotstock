@@ -5,8 +5,8 @@ module.exports = function (objectrepository) {
         objectrepository.appPartModel.findOne({_id: req.params.part})
             .populate('_score')
             .exec(function (err, obj) {
-                if (err !== null) {
-                    res.tpl.error.add(err);
+                if (err != null) {
+                    res.tpl.error.push(err);
                     console.log("AppPart find: error");
                 } else {
                     res.tpl.appPart = obj;

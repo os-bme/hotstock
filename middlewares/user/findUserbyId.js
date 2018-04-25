@@ -5,7 +5,7 @@ module.exports = function (objectrepository) {
         objectrepository.userModel
             .findOne({_id: req.params.id})
             .exec(function (err, obj) {
-                    if (err != null) {
+                    if (err !== null) {
                         res.tpl.error.add(err);
                         res.tpl.func.logger.error("User search failure " + err);
                     } else {

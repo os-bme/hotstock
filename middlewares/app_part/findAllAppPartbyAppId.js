@@ -9,7 +9,7 @@ module.exports = function (objectrepository) {
             .populate('_score')
             .exec(function (err, obj) {
                 if (err !== null) {
-                    res.tpl.error.add(err);
+                    res.tpl.error.push(err);
                     console.log("AppParts find: error");
                 } else {
                     res.tpl.appParts = obj;

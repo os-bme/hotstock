@@ -5,7 +5,7 @@ module.exports = function (objectrepository) {
         res.tpl.score.remove(function (err) {
 
             if (err != null) {
-                res.tpl.error.add(err);
+                res.tpl.error.push(err);
                 console.log("Score deletion: error");
             } else {
                 console.log("Score deletion: success");

@@ -3,10 +3,14 @@ require('dotenv').config();
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
+var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var moment = require('moment');
 var configuration = require('./config.json');
+var winston = require('winston');
+require('winston-daily-rotate-file');
+var i18n = require('i18n-express');
 var winston = require('winston');
 require('winston-daily-rotate-file');
 
@@ -25,8 +29,9 @@ app.set('view engine', 'ejs');
 /**
  *  Cookie and body parser
  */
+app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 /**
@@ -127,7 +132,6 @@ passport.use(new OAuth2Strategy({
         scope: configuration.SCOPE
     },
     function (accessToken, refreshToken, profile, cb) {
-        console.log(accessToken + '\n' + refreshToken + '\n' + JSON.stringify(profile));
         var request = require('request');
         request('https://auth.sch.bme.hu/api/profile?access_token=' + accessToken, function (error, res, body) {
             if (!error && res.statusCode === 200) {
@@ -139,6 +143,14 @@ passport.use(new OAuth2Strategy({
             }
         });
     }));
+
+
+app.use(function (req, res, next) {
+    res.locals.logged_in = req.isAuthenticated();
+    res.locals.active = req.path.split('/')[1];
+    console.log(res.locals.active);
+    next();
+});
 
 passport.serializeUser(function (user, done) {
     done(null, user);
@@ -153,6 +165,17 @@ passport.deserializeUser(function (user, done) {
  */
 app.use('/public', express.static('public'));
 app.use(favicon(path.join(__dirname, 'public', 'hotstockicon.ico')));
+
+/**
+ * I18n
+ */
+app.use(i18n({
+  translationsPath: path.join(__dirname, 'i18n'),
+  siteLangs: ['hu','en'],
+  defaultLang : 'hu',
+  browserEnable: false,
+  textsVarName: 'i18n'
+}));
 
 /**
  * Include routes

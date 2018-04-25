@@ -2,7 +2,7 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        objectrepository.appModel.find({_id: res.tpl.app._id}, function (err, obj) {
+        objectrepository.appModel.find( { _id: res.tpl.app._id }, function (err, obj) {
 
             if (err !== null) {
                 res.tpl.error.add(err);

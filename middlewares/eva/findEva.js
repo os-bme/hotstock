@@ -13,7 +13,7 @@ module.exports = function (objectrepository) {
             function (err, obj) {
 
                 if (err != null) {
-                    res.tpl.error.add(err);
+                    res.tpl.error.push(err);
                     console.log("Evaluator find: error");
                 } else {
                     res.tpl.eva = obj;

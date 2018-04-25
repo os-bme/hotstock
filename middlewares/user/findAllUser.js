@@ -5,7 +5,7 @@ module.exports = function (objectrepository) {
         objectrepository.userModel
             .find({})
             .exec(function (err, obj) {
-                if (err != null) {
+                if (err !== null) {
                     res.tpl.error.add(err);
                     res.tpl.func.logger.error("User listing failure " + err);
                 } else {

@@ -7,7 +7,7 @@ module.exports = function (objectrepository) {
             .populate('_user')
             .populate('_tender')
             .exec(function (err, obj) {
-                if (err !== null){
+                if (err != null){
                     res.tpl.error.add(err);
                     res.tpl.func.logger.error("Application search failure " + err);
                 } else {
