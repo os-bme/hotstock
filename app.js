@@ -125,7 +125,7 @@ passport.use(new OAuth2Strategy({
         var request = require('request');
         request('https://auth.sch.bme.hu/api/profile?access_token=' + accessToken, function (error, res, body) {
             if (!error && res.statusCode === 200) {
-                logger.info('Oauth2 authentication success ( accessToken: ' + accessToken + " )");
+                logger.info('Oauth2 authentication success');
                 return cb(null, JSON.parse(body), null);
             } else {
                 logger.error('Oauth2 authentication failure');
