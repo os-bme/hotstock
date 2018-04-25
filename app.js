@@ -1,4 +1,5 @@
-require('dotenv').config()
+require('dotenv').config();
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -7,6 +8,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var moment = require('moment');
 var configuration = require('./config.json');
+var fileSystem = require('file-system');
+var fs = require('fs');
+var fileUpload = require('express-fileupload');
+var http = require('http');
 
 var passport = require('passport'),
     OAuth2Strategy = require('passport-oauth2');
@@ -24,6 +29,7 @@ app.set('view engine', 'ejs');
  *  Cookie and body parser
  */
 app.use(logger('dev'));
+app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -89,7 +95,9 @@ app.use(function (req, res, next) {
     res.tpl = {};
     res.tpl.error = [];
     res.tpl.func= {
-        moment: moment
+        moment: moment,
+        fileSystem: fileSystem,
+        fs: fs
     };
     return next();
 });

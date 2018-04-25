@@ -21,6 +21,9 @@ var redirectPrevMW = require('../middlewares/general/redirectPrev');
 var redirectMW = require('../middlewares/general/redirect');
 var renderMW = require('../middlewares/general/render');
 
+var uploadProfileImageMW = require('../middlewares/filehandler/uploadProfileImage');
+var downloadProfileImageMW = require('../middlewares/filehandler/downloadProfileImage');
+
 var UserModel = require('../models/users');
 var AppModel = require('../models/apps');
 
@@ -62,7 +65,18 @@ router.post('/:id/mod',
 );
 
 router.post('/:id/img',
-    authSuperAdminMW(objectRepository),
+    authUserMW(objectRepository),
+    permissionSelfOrSuperadminMW(objectRepository),
+    findUserByIdMW(objectRepository),
+    uploadProfileImageMW(objectRepository),
+    redirectPrevMW(objectRepository)
+);
+
+router.get('/:id/img',
+    authUserMW(objectRepository),
+    permissionSelfOrSuperadminMW(objectRepository),
+    findUserByIdMW(objectRepository),
+    downloadProfileImageMW(objectRepository),
     redirectPrevMW(objectRepository)
 );
 

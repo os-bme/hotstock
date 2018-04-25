@@ -26,7 +26,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-3">
-                                <img class="card-img-top" src="http://via.placeholder.com/180x259" alt="Card image cap">
+                                <img class="card-img-top" src="/user/<%= res.tpl.user._id %>/img" alt="Card image cap">
                             </div>
                             <div class="col-sm-9">
                                 <div class="container-fluid space-before-20">
@@ -258,14 +258,14 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/user/<%= res.tpl.user._id %>/img" method="post">
+            <form action="/user/<%= res.tpl.user._id %>/img" method="post" encType="multipart/form-data">
                 <div class="modal-body">
                     <div class="container">
                         <div class="form-group row">
                             <div class="input-group mb-2 space-before-20">
                                 <div class="form-group">
-                                    <label for="exampleFormControlFile1">File input</label>
-                                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                    <label for="profileImage">File input</label>
+                                    <input type="file" class="form-control-file" id="profileImage" name="profileImage" accept="image/*" />
                                 </div>
                             </div>
                             <div class="col-md-12 text-right space-before-20">
