@@ -22,28 +22,18 @@ module.exports = function (objectRepository) {
                             return res.redirect('/auth/err');
                         } else {
                             req.session.passport.user = res.tpl.user;
-<<<<<<< HEAD
-                            res.tpl.func.logger.info("User creation success (userID: " + res.tpl.user._id + ", BMEID: " + req.user.internal_id + ")");
-                            return next();
-=======
                             res.tpl.func.logger.info("User creation success ( userID: " + res.tpl.user._id + ", BMEID: " + req.user.internal_id + " )");
                             res.tpl.func.logger.info("Redirect to \'/\'");
                             return res.redirect('/');
->>>>>>> a32d36dd0088b7e54598296f7dc1be7b00cc3f36
                         }
                     });
                 } else {
                     res.tpl.user = obj;
                     req.session.passport.user.permission = obj.permission;
                     req.session.passport.user._id = obj._id;
-<<<<<<< HEAD
-                    res.tpl.func.logger.info("User search success (userID: " + res.tpl.user._id + ", BMEID: " + req.user.internal_id + ")");
-                    return next();
-=======
                     res.tpl.func.logger.info("User search success ( userID: " + res.tpl.user._id + ", BMEID: " + req.user.internal_id + " )");
                     res.tpl.func.logger.info("Redirect to \'/\'");
                     return res.redirect('/');
->>>>>>> a32d36dd0088b7e54598296f7dc1be7b00cc3f36
                 }
             });
     }
