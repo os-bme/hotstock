@@ -3,19 +3,18 @@ module.exports = function (objectrepository, method) {
     return function (req, res, next) {
 
         if (method === 'all') {
-            objectrepository.tenderModel.find({}, function (err, obj) {
-
-                if (err != null) {
-                    res.tpl.error.push(err);
-                    console.log("Find all tender: error");
-                } else {
-                    res.tpl.tenders = obj;
-                    console.log("Find all tender: success");
-                }
-
-                return next();
-
-            });
+            objectrepository.tenderModel
+                .find({})
+                .exec(function (err, obj) {
+                    if (err != null) {
+                        res.tpl.error.add(err);
+                        res.tpl.func.logger.error("Tender listing failure " + err);
+                    } else {
+                        res.tpl.tenders = obj;
+                        res.tpl.func.logger.info("Tender listing success ( size: " + obj.length + " )");
+                    }
+                    return next();
+                });
         }
 
         if (method === 'active') {
@@ -28,15 +27,13 @@ module.exports = function (objectrepository, method) {
                         ]
                 },
                 function (err, obj) {
-
                     if (err != null) {
-                        res.tpl.error.push(err);
-                        console.log("Find all tender: error");
+                        res.tpl.error.add(err);
+                        res.tpl.func.logger.error("Tender (active) listing failure " + err);
                     } else {
                         res.tpl.tenders = obj;
-                        console.log("Find all tender: success");
+                        res.tpl.func.logger.info("Tender (active) listing success ( size: " + obj.length + " )");
                     }
-
                     return next();
                 }
             );

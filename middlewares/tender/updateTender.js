@@ -14,11 +14,11 @@ module.exports = function (objectrepository) {
         res.tpl.tender.save(function (err) {
 
             if (err != null) {
-                res.tpl.error.push(err);
-                console.log("Tender update: error");
+                res.tpl.error.add(err);
+                res.tpl.func.logger.error("Tender update failure " + err);
             } else {
                 req.originalUrl = req.originalUrl.replace("/tender/new","/tender/" + res.tpl.tender._id);
-                console.log("Tender update: success");
+                res.tpl.func.logger.info("Tender update success ( tenderID: " + res.tpl.tender._id + " )");
             }
 
             return next();

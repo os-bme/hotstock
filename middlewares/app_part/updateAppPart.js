@@ -2,7 +2,7 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        if ( res.tpl.score != undefined ){
+        if ( res.tpl.score !== undefined ){
             res.tpl.appPart._score = res.tpl.score._id;
         }
 
@@ -11,7 +11,7 @@ module.exports = function (objectrepository) {
 
         res.tpl.appPart.save(function (err) {
 
-            if (err != null){
+            if (err !== null){
                 res.tpl.error.push(err);
                 console.log("AppPart update: error");
             } else {

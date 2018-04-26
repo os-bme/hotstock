@@ -1,7 +1,8 @@
 module.exports = function (objectrepository, url) {
 
     return function (req, res, next) {
-        res.redirect( '/' + url );
+        res.tpl.func.logger.info("Redirect to \'/" + url + "\'");
+        return res.redirect( '/' + url );
     };
 
 };
