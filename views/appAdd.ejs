@@ -61,7 +61,7 @@
                                             <% } %>
 
                                             <% if ( tender_part.type == 3 ) { %>
-                                                <input type="file" class="col-11 h6 form-control-file" name="<%= tender_part._id %>" id="exampleFormControlFile1" disabled>
+                                                <input type="file" class="col-11 h6 form-control-file" name="<%= tender_part._id %>" id="exampleFormControlFile1"  <% if ( tender_part.required ) { %> required <% } %>  >
                                             <% } %>
 
                                             <% if ( tender_part.type == 4 ) { %>
