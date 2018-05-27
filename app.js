@@ -31,7 +31,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(fileUpload());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
 /**
@@ -94,7 +94,7 @@ passport.deserializeUser(function (user, done) {
 app.use(function (req, res, next) {
     res.tpl = {};
     res.tpl.error = [];
-    res.tpl.func= {
+    res.tpl.func = {
         moment: moment,
         fileSystem: fileSystem,
         fs: fs
@@ -137,14 +137,14 @@ app.use('/score', scoreRoute);
  */
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -159,5 +159,8 @@ app.use(function(err, req, res, next) {
  *  Start server
  */
 var server = app.listen(process.env.APP_PORT, function () {
-  console.log('Running on :'+process.env.APP_PORT);
+    //Run initial setup
+    var setup = require('./setup');
+    setup(fs);
+    console.log('Running on :' + process.env.APP_PORT);
 });
