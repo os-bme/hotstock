@@ -21,6 +21,9 @@ var redirectPrevMW = require('../middlewares/general/redirectPrev');
 var renderMW = require('../middlewares/general/render');
 var redirectMW = require('../middlewares/general/redirect');
 
+var uploadTenderImageMW = require('../middlewares/filehandler/uploadTenderImage');
+var downloadTenderImageMW = require('../middlewares/filehandler/downloadTenderImage');
+
 var UserModel = require('../models/users');
 var TenderModel = require('../models/tenders');
 var TenderPartModel = require('../models/tender_parts');
@@ -63,6 +66,7 @@ router.post('/:id/mod',
     authEditorMW(objectRepository),
     findTenderByIdMW(objectRepository, 'mod'),
     updateTenderMW(objectRepository),
+    uploadTenderImageMW(objectRepository),
     redirectPrevMW(objectRepository)
 );
 
@@ -108,6 +112,10 @@ router.post('/:id/part/:partId/del',
 router.get('/:id',
     findTenderByIdMW(objectRepository, 'list'),
     renderMW(objectRepository, 'tender')
+);
+
+router.get('/:id/img',
+    downloadTenderImageMW(objectRepository)
 );
 
 module.exports = router;
