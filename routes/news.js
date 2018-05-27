@@ -15,6 +15,8 @@ var redirectPrevMW = require('../middlewares/general/redirectPrev');
 var renderMW = require('../middlewares/general/render');
 var redirectMW = require('../middlewares/general/redirect');
 
+var downloadNewsImageMW = require('../middlewares/filehandler/downloadNewsImage');
+
 var UserModel = require('../models/users');
 var NewsModel = require('../models/news');
 
@@ -53,6 +55,10 @@ router.post('/:id/del',
 router.get('/:id',
     findNewsByIdMW(objectRepository, 'list'),
     renderMW(objectRepository, 'news')
+);
+
+router.get('/:id/img',
+    downloadNewsImageMW(objectRepository)
 );
 
 module.exports = router;
