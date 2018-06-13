@@ -4,51 +4,27 @@ module.exports = function (objectRepository, method) {
 
     return function (req, res, next) {
 
-
+        // TODO: Correct tender creation
         if (req.params.id === 'new') {
             res.tpl.tender = new objectRepository.tenderModel();
             console.log("Find tender by id: new created");
             return next();
         }
 
-        if (method === 'mod') {
-            objectRepository.tenderModel.findOne( { _id: req.params.id }, function (err, obj) {
-
-                if (err != null) {
-                    res.tpl.error.add(err);
-                    console.log("Find tender by ID: error");
-                } else {
-                    res.tpl.tender = obj;
-                    console.log("Find tender by ID: success");
-                }
-                return next();
-            })
-        }
-
-        if (method === 'list') {
-            objectRepository.tenderModel.aggregate(
-                { $match: {
-                    _id: ObjectId(req.params.id)
-                }},
-                { $lookup: {
-                    from: 'users',
-                    localField: '_publisher',
-                    foreignField: '_id',
-                    as: 'publisher'
-                }},
-                { $unwind: '$publisher'},
-                function (err, obj) {
-
+        if (method === 'mod' || method === 'list') {
+            objectRepository.tenderModel
+                .findOne({_id: req.params.id})
+                .populate('_publisher')
+                .exec(function (err, obj) {
                     if (err != null) {
                         res.tpl.error.add(err);
-                        console.log("Find tender by ID: error");
+                        res.tpl.func.logger.error("Tender search failure " + err);
                     } else {
-                        res.tpl.tender = obj[0];
-                        console.log("Find tender by ID: success");
+                        res.tpl.tender = obj;
+                        res.tpl.func.logger.info("Tender search success ( tenderID: " + res.tpl.tender._id + " )");
                     }
                     return next();
-                }
-            );
+                });
         }
 
     }

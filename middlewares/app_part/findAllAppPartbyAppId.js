@@ -8,8 +8,8 @@ module.exports = function (objectrepository) {
             .populate('_tender_part')
             .populate('_score')
             .exec(function (err, obj) {
-                if (err != null) {
-                    res.tpl.error.add(err);
+                if (err !== null) {
+                    res.tpl.error.push(err);
                     console.log("AppParts find: error");
                 } else {
                     res.tpl.appParts = obj;

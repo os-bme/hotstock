@@ -4,17 +4,18 @@ module.exports = function (objectrepository) {
 
         res.tpl.app = new objectrepository.appModel();
 
+        // TODO: Correct app creation
         res.tpl.app._tender = res.tpl.tender._id;
         res.tpl.app._user = req.session.passport.user._id;
         res.tpl.app.status = 0;
         res.tpl.app.register_date = Date.now();
 
         res.tpl.app.save(function (err) {
-            if (err != null){
+            if (err !== null) {
                 res.tpl.error.add(err);
-                console.log("App creation: error");
+                res.tpl.func.logger.error("Application creation failure " + err);
             } else {
-                console.log("App creation: success");
+                res.tpl.func.logger.info("Application creation success ( appID: " + res.tpl.app._id + " )");
             }
             return next();
         });

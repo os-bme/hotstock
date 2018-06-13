@@ -47,6 +47,7 @@ router.post('/:id/mod',
 
 router.post('/:id/del',
     authSuperAdminMW(objectRepository),
+    findNewsByIdMW(objectRepository, 'mod'),
     deleteNewsMW(objectRepository),
     redirectMW(objectRepository, "news/all")
 );

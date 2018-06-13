@@ -1,5 +1,4 @@
-require('dotenv').config();
-
+require('dotenv').config()
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -8,6 +7,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var moment = require('moment');
 var configuration = require('./config.json');
+var winston = require('winston');
+require('winston-daily-rotate-file');
+var i18n = require('i18n-express');
+var winston = require('winston');
+require('winston-daily-rotate-file');
 var fileSystem = require('file-system');
 var fs = require('fs');
 var fileUpload = require('express-fileupload');
@@ -50,6 +54,79 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /**
+ * Create .error and .tpl on res
+ */
+app.use(function (req, res, next) {
+    res.tpl = {};
+    res.tpl.error = [];
+    res.tpl.func = {
+        moment: moment,
+        logger: logger,
+        fileSystem: fileSystem,
+        fs: fs,
+        reqIP: function (req) {
+            var ipAddress;
+            // The request may be forwarded from local web server.
+            var forwardedIpsStr = req.header('x-forwarded-for');
+            if (forwardedIpsStr) {
+                // 'x-forwarded-for' header may return multiple IP addresses in
+                // the format: "client IP, proxy 1 IP, proxy 2 IP" so take the
+                // the first one
+                var forwardedIps = forwardedIpsStr.split(',');
+                ipAddress = forwardedIps[0];
+            }
+            if (!ipAddress) {
+                // If request was not forwarded
+                ipAddress = req.connection.remoteAddress;
+            }
+            return ipAddress;
+        },
+        userID: function (req) {
+            if (!req.session.passport || !req.session.passport.user) {
+                return "        anonimous       ";
+            } else {
+                return req.session.passport.user._id;
+            }
+        }
+    };
+    return next();
+});
+
+/**
+ *  Logger
+ */
+const {createLogger, format, transports} = winston;
+const {combine, timestamp, label, printf, colorize} = format;
+
+const hotstockFormat = printf(info => {
+    return `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`;
+});
+
+var logger = createLogger({
+    level: 'verbose',
+    transports: [
+        new transports.Console(),
+        new transports.DailyRotateFile({
+            filename: 'log/Hotstock_%DATE%.log',
+            datePattern: 'YYYY-MM-DD-HH',
+            zippedArchive: false,
+            maxSize: '20m'
+        })
+    ]
+});
+
+app.use(function (req, res, next) {
+    logger.format = combine(
+        label({label: res.tpl.func.userID(req)}),
+        colorize(),
+        timestamp(),
+        hotstockFormat
+    );
+    logger.log('verbose', req.path);
+    next();
+});
+
+/**
  *  OAuth2
  */
 passport.use(new OAuth2Strategy({
@@ -61,12 +138,13 @@ passport.use(new OAuth2Strategy({
         scope: configuration.SCOPE
     },
     function (accessToken, refreshToken, profile, cb) {
-        console.log(accessToken + '\n' + refreshToken + '\n' + JSON.stringify(profile));
         var request = require('request');
-        request('https://auth.sch.bme.hu/api/profile?access_token=' + accessToken, function (error, response, body) {
-            if (!error && response.statusCode === 200) {
+        request('https://auth.sch.bme.hu/api/profile?access_token=' + accessToken, function (error, res, body) {
+            if (!error && res.statusCode === 200) {
+                logger.info('Oauth2 authentication success ( accessToken: ' + accessToken + " )");
                 return cb(null, JSON.parse(body), null);
             } else {
+                logger.error('Oauth2 authentication failure');
                 return cb(new Error('oauth2 authentication failure'));
             }
         });
@@ -89,24 +167,21 @@ passport.deserializeUser(function (user, done) {
 });
 
 /**
- * Create .error and .tpl on res
- */
-app.use(function (req, res, next) {
-    res.tpl = {};
-    res.tpl.error = [];
-    res.tpl.func = {
-        moment: moment,
-        fileSystem: fileSystem,
-        fs: fs
-    };
-    return next();
-});
-
-/**
  * Public directory
  */
 app.use('/public', express.static('public'));
 app.use(favicon(path.join(__dirname, 'public', 'hotstockicon.ico')));
+
+/**
+ * I18n
+ */
+app.use(i18n({
+  translationsPath: path.join(__dirname, 'i18n'),
+  siteLangs: ['hu','en'],
+  defaultLang : 'hu',
+  browserEnable: false,
+  textsVarName: 'i18n'
+}));
 
 /**
  * Include routes
@@ -143,7 +218,9 @@ app.use(function (req, res, next) {
     next(err);
 });
 
-// error handler
+/**
+ *  Error handler
+ */
 app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
@@ -162,5 +239,12 @@ var server = app.listen(process.env.APP_PORT, function () {
     //Run initial setup
     var setup = require('./setup');
     setup(fs);
-    console.log('Running on :' + process.env.APP_PORT);
+
+    logger.format = combine(
+        label({label: '   HOTSTOCK APP SERVER  '}),
+        colorize(),
+        timestamp(),
+        basicLogFormat
+    );
+    logger.info('Running on :' + process.env.APP_PORT);
 });

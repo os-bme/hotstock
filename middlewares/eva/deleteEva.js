@@ -5,7 +5,7 @@ module.exports = function (objectrepository) {
         res.tpl.eva.remove(function (err) {
 
             if (err != null) {
-                res.tpl.error.add(err);
+                res.tpl.error.push(err);
                 console.log("Evaluator delete: error");
             } else {
                 console.log("Evaluator delete: success");

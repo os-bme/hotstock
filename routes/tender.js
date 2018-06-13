@@ -54,6 +54,7 @@ router.get('/add',
 );
 
 /* POST delete tender */
+// TODO: Delete tender_parts, apps, app_parts too
 router.post('/:id/del',
     authSuperAdminMW(objectRepository),
     findTenderByIdMW(objectRepository, 'mod'),

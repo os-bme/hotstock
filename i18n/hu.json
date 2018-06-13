@@ -1,0 +1,79 @@
+{
+	"WELCOME_MSG" : "Üdv a Hotstock pályázatis portálon!",
+	"WELCOME_DESCRIPTION" : "Ez egy opensource portál, további információkat a Rólunk menüpontban találsz",
+	"NEWS": {
+		"MENU": {
+			"ITEM" : "Hírek",
+			"NEW" : "Új",
+			"ALL" : "Összes hír"
+		},
+		"PAGE": {
+			"TITLE" : "Összes hír"
+		},
+		"EDIT": {
+			"TITLE" : "Adatok szerkesztése",
+			"DATA": {
+				"TITLE" : "Cím",
+				"DESCRIPTION" : {
+					"SHORT" : "Rövid leírás",
+					"LONG" : "Hosszú leírás"
+				}
+			}
+		},
+		"ATTACHMENT" : "Csatolmányok"
+	},
+	"TENDERS": {
+		"MENU": {
+			"ITEM" : "Pályázatok",
+			"NEW" : "Új",
+			"ALL" : "Összes"
+		},
+		"PAGE": {
+			"TITLE": {
+				"ACTIVE": "Elérhető pályázatok",
+				"ALL" : "Összes pályázat"
+			},
+			"SHOW_TENDER": "Ugrás a pályázatra"
+		}
+	},
+	"APPLICATIONS": {
+		"MENU": {
+			"ITEM" : "Jelentkezések",
+			"UNSCORED" : "Elbírálatlan"
+		}
+	},
+	"USERS": {
+		"MENU": {
+			"ITEM" : "Felhasználók"
+		},
+		"SHOW": {
+			"FIRSTNAME" : "Keresztnév",
+			"LASTNAME" : "Vezetéknév"
+		}
+	},
+	"TAGS": {
+		"MENU": {
+			"ITEM" : "Cimkék"
+		}
+	},
+	"ABOUT": {
+		"MENU": {
+			"ITEM" : "Rólunk"
+		}
+	},
+	"CONFIG": {
+		"MENU" :{
+			"PROFILE" : "Profilom",
+			"APPLICATIONS" : "Jelentkezéseim",
+			"LOG_OUT" : "Kijelentkezés",
+			"LOG_IN" : "Bejelentkezés"
+		}
+	},
+	"BUTTONS": {
+		"EDIT" : "Szerkesztés",
+		"DELETE" : "Törlés",
+		"PERMISSIONS" : "Jogosultságok",
+		"CLOSE" : "Bezárás",
+		"SAVE" : "Mentés"
+	}
+}

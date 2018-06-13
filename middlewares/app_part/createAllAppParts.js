@@ -8,11 +8,11 @@ module.exports = function (objectrepository) {
 
         res.tpl.tenderParts.forEach(function (tenderPart) {
 
-            if (req.body[tenderPart._id] == undefined) {
+            if (req.body[tenderPart._id] === undefined) {
                 req.body[tenderPart._id] = '';
             }
 
-            if (req.body[tenderPart._id] == '' && tenderPart.required) {
+            if (req.body[tenderPart._id] === '' && tenderPart.required) {
                     var err = new Error('Missing required field');
                     err.status = 400;
                     return next(err);
@@ -34,8 +34,8 @@ module.exports = function (objectrepository) {
         AppPartModel.insertMany(res.tpl.appParts,
             function (err) {
 
-                if (err != null) {
-                    res.tpl.error.add(err);
+                if (err !== null) {
+                    res.tpl.error.push(err);
                     console.log("App Parts update: error");
                 } else {
                     req.originalUrl = req.originalUrl.replace("/tender/new", "/tender/" + res.tpl.tender._id);

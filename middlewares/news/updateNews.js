@@ -12,10 +12,10 @@ module.exports = function (objectrepository) {
 
             if (err != null) {
                 res.tpl.error.add(err);
-                console.log("Update news: error");
+                res.tpl.func.logger.error("News update failure " + err);
             } else {
                 req.originalUrl = req.originalUrl.replace("/news/new","/news/" + res.tpl.news._id);
-                console.log("Update news: success");
+                res.tpl.func.logger.info("News update success ( newsID: " + res.tpl.news._id + " )");
             }
 
             return next();
