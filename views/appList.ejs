@@ -48,7 +48,7 @@
 
                 <% res.tpl.apps.forEach( function (app) { %>
                     <tr>
-                        <td><%= app.tender.title %></td>
+                        <td><%= app._tender.title %></td>
                         <td class="text-center"><%= app._id %></td>
                         <td class="text-center"><%= res.tpl.func.moment(app.register_date).format('YYYY-MM-DD HH:mm') %></td>
                         <td class="text-center"><%= app.final_score %></td>

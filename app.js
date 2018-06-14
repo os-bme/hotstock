@@ -1,4 +1,5 @@
-require('dotenv').config()
+require('dotenv').config();
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -7,7 +8,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var moment = require('moment');
 var configuration = require('./config.json');
-var winston = require('winston');
 require('winston-daily-rotate-file');
 var i18n = require('i18n-express');
 var winston = require('winston');
@@ -240,11 +240,14 @@ var server = app.listen(process.env.APP_PORT, function () {
     var setup = require('./setup');
     setup(fs);
 
+    // TODO: find basicLogFormat
+    /*
     logger.format = combine(
         label({label: '   HOTSTOCK APP SERVER  '}),
         colorize(),
         timestamp(),
         basicLogFormat
     );
+    */
     logger.info('Running on :' + process.env.APP_PORT);
 });
