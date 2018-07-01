@@ -21,7 +21,6 @@ var redirectPrevMW = require('../middlewares/general/redirectPrev');
 var renderMW = require('../middlewares/general/render');
 var redirectMW = require('../middlewares/general/redirect');
 
-var uploadTenderImageMW = require('../middlewares/filehandler/uploadTenderImage');
 var downloadTenderImageMW = require('../middlewares/filehandler/downloadTenderImage');
 var updateTenderImageMW = require('../middlewares/filehandler/updateTenderImage');
 
