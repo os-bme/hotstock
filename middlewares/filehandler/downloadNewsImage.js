@@ -6,12 +6,12 @@ module.exports = function (objectrepository) {
 
         res.tpl.func.fileSystem.recurseSync('uploads/images/news', [req.params.id + '.*'], function (filepath, relative, filename) {
             newsImagePath = 'uploads/images/news/' + filename;
-            console.log('Tender image search success');
+            res.tpl.func.logger.verbose("News image search success (newsID: " + req.params.id + ")");
         });
 
         if (newsImagePath === undefined) {
             newsImagePath = 'public/assets/vikhklogo.png';
-            console.log('Tender image search failure');
+            res.tpl.func.logger.verbose("News image search failure (newsID: " + req.params.id + ")");
         }
 
         var stat = res.tpl.func.fs.statSync(newsImagePath);

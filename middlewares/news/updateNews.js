@@ -15,7 +15,7 @@ module.exports = function (objectrepository) {
                 res.tpl.func.logger.error("News update failure " + err);
             } else {
                 req.originalUrl = req.originalUrl.replace("/news/new","/news/" + res.tpl.news._id);
-                res.tpl.func.logger.info("News update success ( newsID: " + res.tpl.news._id + " )");
+                res.tpl.func.logger.info("News update success (newsID: " + res.tpl.news._id + ")");
             }
 
             return next();

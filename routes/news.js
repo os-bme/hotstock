@@ -16,6 +16,7 @@ var renderMW = require('../middlewares/general/render');
 var redirectMW = require('../middlewares/general/redirect');
 
 var downloadNewsImageMW = require('../middlewares/filehandler/downloadNewsImage');
+var updateNewsImageMW = require('../middlewares/filehandler/updateNewsImage');
 
 var UserModel = require('../models/users');
 var NewsModel = require('../models/news');
@@ -41,6 +42,7 @@ router.get('/add',
 router.post('/:id/mod',
     authEditorMW(objectRepository),
     findNewsByIdMW(objectRepository, 'mod'),
+    updateNewsImageMW(objectRepository),
     updateNewsMW(objectRepository),
     redirectPrevMW(objectRepository)
 );
