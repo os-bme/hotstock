@@ -23,6 +23,7 @@ var redirectMW = require('../middlewares/general/redirect');
 
 var uploadTenderImageMW = require('../middlewares/filehandler/uploadTenderImage');
 var downloadTenderImageMW = require('../middlewares/filehandler/downloadTenderImage');
+var updateTenderImageMW = require('../middlewares/filehandler/updateTenderImage');
 
 var UserModel = require('../models/users');
 var TenderModel = require('../models/tenders');
@@ -67,7 +68,7 @@ router.post('/:id/mod',
     authEditorMW(objectRepository),
     findTenderByIdMW(objectRepository, 'mod'),
     updateTenderMW(objectRepository),
-    uploadTenderImageMW(objectRepository),
+    updateTenderImageMW(objectRepository),
     redirectPrevMW(objectRepository)
 );
 
