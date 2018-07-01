@@ -6,12 +6,13 @@ module.exports = function (objectrepository) {
 
         res.tpl.func.fileSystem.recurseSync('uploads/images/profile', [req.params.id + '.*'], function (filepath, relative, filename) {
             profileImagePath = 'uploads/images/profile/' + filename;
-            console.log('Profile image search success');
         });
 
         if (profileImagePath === undefined) {
             profileImagePath = 'public/assets/vikhklogo.png';
-            console.log('Profile image search failure');
+            res.tpl.func.logger.verbose("Profile image search failure (userID: " + req.params.id + ")");
+        } else {
+            res.tpl.func.logger.verbose("Profile image search success (userID: " + req.params.id + ")");
         }
 
         var stat = res.tpl.func.fs.statSync(profileImagePath);
@@ -24,6 +25,7 @@ module.exports = function (objectrepository) {
         var readStream = res.tpl.func.fileSystem.createReadStream(profileImagePath);
         readStream.pipe(res);
 
+        // Don't return with next()! End of middleware chain!
         return;
     };
 

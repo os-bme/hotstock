@@ -5,10 +5,9 @@ module.exports = function (objectrepository) {
             res.tpl.func.logger.info("New image for news is not uploaded (newsID: " + res.tpl.news._id + ")");
             return next();
         }
+
         res.tpl.func.logger.info("New image for news is uploaded (newsID: " + res.tpl.news._id + ")");
-
         var newsImagePath = undefined;
-
         res.tpl.func.fileSystem.recurseSync('uploads/images/news', [req.params.id + '.*'], function (filepath, relative, filename) {
             newsImagePath = 'uploads/images/news/' + filename;
         });
@@ -17,6 +16,7 @@ module.exports = function (objectrepository) {
             res.tpl.func.logger.verbose("News image search failure (newsID: " + res.tpl.news._id + ")");
         } else {
             res.tpl.func.logger.verbose("News image search success (newsID: " + res.tpl.news._id + ")");
+
             res.tpl.func.fs.unlink(newsImagePath , function (err) {
                 if (err){
                     res.tpl.func.logger.error("Image update for news failed, old image delete failure (newsID: " + res.tpl.news._id + ")");
