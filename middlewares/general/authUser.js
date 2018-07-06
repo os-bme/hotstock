@@ -12,6 +12,7 @@ module.exports = function (objectrepository) {
             return next(err);
         }
 
+        res.tpl.func.logger.verbose("User authenticated (permission level: " + req.session.passport.user.permission + ")");
         return next();
 
     };

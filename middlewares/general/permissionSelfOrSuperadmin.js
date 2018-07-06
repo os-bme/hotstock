@@ -12,6 +12,8 @@ module.exports = function (objectrepository) {
             return next(err);
         }
 
+
+        res.tpl.func.logger.verbose("Admin or Owner authenticated (permission level: " + req.session.passport.user.permission + ")");
         return next();
 
     };
