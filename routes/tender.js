@@ -23,6 +23,7 @@ var redirectMW = require('../middlewares/general/redirect');
 
 var downloadTenderImageMW = require('../middlewares/filehandler/downloadTenderImage');
 var updateTenderImageMW = require('../middlewares/filehandler/updateTenderImage');
+var updateTenderAttachmentsMW = require('../middlewares/filehandler/updateTenderAttachments');
 
 var UserModel = require('../models/users');
 var TenderModel = require('../models/tenders');
@@ -57,7 +58,7 @@ router.get('/add',
 // TODO: Delete tender_parts, apps, app_parts too
 router.post('/:id/del',
     authSuperAdminMW(objectRepository),
-    findTenderByIdMW(objectRepository, 'mod'),
+    findTenderByIdMW(objectRepository),
     deleteTenderMW(objectRepository),
     redirectMW(objectRepository, "tender/all")
 );
@@ -65,9 +66,10 @@ router.post('/:id/del',
 /* POST modify tender */
 router.post('/:id/mod',
     authEditorMW(objectRepository),
-    findTenderByIdMW(objectRepository, 'mod'),
+    findTenderByIdMW(objectRepository),
     updateTenderMW(objectRepository),
     updateTenderImageMW(objectRepository),
+    updateTenderAttachmentsMW(objectRepository),
     redirectPrevMW(objectRepository)
 );
 
@@ -80,7 +82,7 @@ router.get('/:id/app',
 /* GET tender's parts list */
 router.get('/:id/part',
     authAdminMW(objectRepository),
-    findTenderByIdMW(objectRepository, 'list'),
+    findTenderByIdMW(objectRepository),
     findTenderPartsMW(objectRepository),
     renderMW(objectRepository, 'tenderParts')
 );
@@ -88,7 +90,7 @@ router.get('/:id/part',
 /* POST add tender's new part */
 router.post('/:id/part/add',
     authAdminMW(objectRepository),
-    findTenderByIdMW(objectRepository, 'mod'),
+    findTenderByIdMW(objectRepository),
     addTenderPartMW(objectRepository),
     updateTenderPartMW(objectRepository)            // also refresh page
 );
@@ -96,7 +98,7 @@ router.post('/:id/part/add',
 /* POST mod tender's part */
 router.post('/:id/part/:partId/mod',
     authAdminMW(objectRepository),
-    findTenderByIdMW(objectRepository, 'mod'),
+    findTenderByIdMW(objectRepository),
     findTenderPartbyIDMW(objectRepository),
     updateTenderPartMW(objectRepository)            // also refresh page
 );
@@ -104,14 +106,14 @@ router.post('/:id/part/:partId/mod',
 /* POST del tender's part */
 router.post('/:id/part/:partId/del',
     authSuperAdminMW(objectRepository),
-    findTenderByIdMW(objectRepository, 'mod'),
+    findTenderByIdMW(objectRepository),
     findTenderPartbyIDMW(objectRepository),
     deleteTenderPartMW(objectRepository)            // also refresh page
 );
 
 /* GET tender's page */
 router.get('/:id',
-    findTenderByIdMW(objectRepository, 'list'),
+    findTenderByIdMW(objectRepository),
     renderMW(objectRepository, 'tender')
 );
 
