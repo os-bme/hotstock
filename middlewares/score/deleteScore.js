@@ -4,11 +4,13 @@ module.exports = function (objectrepository) {
 
         res.tpl.score.remove(function (err) {
 
+            var scoreID = res.tpl.score._id;
+
             if (err != null) {
                 res.tpl.error.push(err);
-                console.log("Score deletion: error");
+                res.tpl.func.logger.error("Score deletion failure " + err);
             } else {
-                console.log("Score deletion: success");
+                res.tpl.func.logger.info("Score deletion (scoreID: " + scoreID + ")");
             }
 
             return next();

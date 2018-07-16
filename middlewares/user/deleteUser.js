@@ -10,7 +10,7 @@ module.exports = function (objectrepository) {
                 res.tpl.error.add(err);
                 res.tpl.func.logger.error("User delete failure " + err);
             } else {
-                res.tpl.func.logger.info("User delete success ( userID: " + userID + " )");
+                res.tpl.func.logger.info("User delete success (userID: " + userID + ")");
             }
 
             return next();

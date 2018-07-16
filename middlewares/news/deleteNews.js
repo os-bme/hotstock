@@ -4,17 +4,16 @@ module.exports = function (objectRepository) {
 
         var newsID = res.tpl.news._id;
 
-        objectRepository.newsModel.findOne({_id: req.params.id}).remove(function (err) {
-
-            if (err !== null) {
-                res.tpl.error.add(err);
-                res.tpl.func.logger.error("News delete failure " + err);
-            } else {
-                res.tpl.func.logger.info("News delete success ( newsID: " + newsID + " )");
-            }
-
-            return next();
-
-        });
+        objectRepository.newsModel
+            .findOne({_id: req.params.id})
+            .remove(function (err) {
+                if (err !== null) {
+                    res.tpl.error.push(err);
+                    res.tpl.func.logger.error("News delete failure " + err);
+                } else {
+                    res.tpl.func.logger.info("News delete success (newsID: " + newsID + ")");
+                }
+                return next();
+            });
     }
 };

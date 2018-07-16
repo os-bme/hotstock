@@ -2,13 +2,15 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        res.tpl.app_part.remove(function (err) {
+        var appPartID = res.tpl.appPart._id;
+
+        res.tpl.appPart.remove(function (err) {
 
             if (err !== null){
                 res.tpl.error.push(err);
-                console.log("AppPart delete: error");
+                res.tpl.func.logger.error("Application delete failure " + err);
             } else {
-                console.log("AppPart delete: success");
+                res.tpl.func.logger.info("AppPart delete success (appPartID: " + appPartID + ")");
             }
             return next();
         });

@@ -10,7 +10,7 @@ module.exports = function (objectrepository) {
                         res.tpl.func.logger.error("User search failure " + err);
                     } else {
                         res.tpl.user = obj;
-                        res.tpl.func.logger.info("User search success ( userID: " + res.tpl.user._id + " )");
+                        res.tpl.func.logger.info("User search success (userID: " + res.tpl.user._id + ")");
                     }
                     return next();
                 }

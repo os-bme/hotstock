@@ -1,8 +1,8 @@
-module.exports = function (objectrepository) {
+module.exports = function (objectRepository) {
 
     return function (req, res, next) {
 
-        res.tpl.app = new objectrepository.appModel();
+        res.tpl.app = new objectRepository.appModel();
 
         // TODO: Correct app creation
         res.tpl.app._tender = res.tpl.tender._id;
