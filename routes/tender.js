@@ -28,11 +28,13 @@ var updateTenderAttachmentsMW = require('../middlewares/filehandler/updateTender
 var UserModel = require('../models/users');
 var TenderModel = require('../models/tenders');
 var TenderPartModel = require('../models/tender_parts');
+var TenderAttachmentModel = require('../models/tender_attachments');
 
 var objectRepository = {
     userModel: UserModel,
     tenderModel: TenderModel,
-    tenderPartModel: TenderPartModel
+    tenderPartModel: TenderPartModel,
+    tenderAttachmentModel: TenderAttachmentModel
 };
 
 /* GET active tenders list */
