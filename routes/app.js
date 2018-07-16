@@ -54,14 +54,14 @@ router.get('/unscored',
 
 router.get('/add/:id',
     authUserMW(objectRepository),
-    findTenderbyIDMW(objectRepository, 'mod'),
+    findTenderbyIDMW(objectRepository),
     findTenderPartsbyTenderIdMW(objectRepository),
     renderMW(objectRepository, 'appAdd')
 );
 
 router.post('/add/:id',
     authUserMW(objectRepository),
-    findTenderbyIDMW(objectRepository, 'mod'),
+    findTenderbyIDMW(objectRepository),
     findTenderPartsbyTenderIdMW(objectRepository),
     findMyUserMW(objectRepository),
     createAppMW(objectRepository),
