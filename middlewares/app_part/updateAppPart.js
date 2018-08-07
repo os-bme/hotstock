@@ -11,12 +11,13 @@ module.exports = function (objectrepository) {
 
         res.tpl.appPart.save(function (err) {
 
-            if (err !== null){
+            if (err !== null) {
                 res.tpl.error.push(err);
-                console.log("AppPart update: error");
-            } else {
-                console.log("AppPart update: success");
+                res.tpl.func.logger.error("Application Part save failure " + err);
+                return next(err);
             }
+
+            res.tpl.func.logger.info("Application Part save success (appPartID: " + res.tpl.appPart._id + ")");
             return next();
 
         });

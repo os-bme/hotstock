@@ -16,20 +16,19 @@ module.exports = function (objectrepository) {
                     var err = new Error('Missing required field');
                     err.status = 400;
                     return next(err);
+                }
+            } else {
+                res.tpl.appPart = new objectrepository.appPartModel();
+
+                res.tpl.appPart._tender_part = tenderPart._id;
+                res.tpl.appPart._app = res.tpl.app._id;
+                res.tpl.appPart.content = req.body[tenderPart._id];
+                res.tpl.appPart.status = 0;
+
+                res.tpl.appParts.push(res.tpl.appPart);
             }
 
-            res.tpl.appPart = new objectrepository.appPartModel();
-
-            res.tpl.appPart._tender_part = tenderPart._id;
-            res.tpl.appPart._app = res.tpl.app._id;
-            res.tpl.appPart.content = req.body[tenderPart._id];
-            res.tpl.appPart.status = 0;
-
-            res.tpl.appParts.push(res.tpl.appPart);
-
         });
-
-        console.log(AppPartModel.type);
 
         AppPartModel.insertMany(res.tpl.appParts,
             function (err) {

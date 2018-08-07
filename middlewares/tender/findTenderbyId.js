@@ -1,16 +1,18 @@
-var ObjectId = require('../../db').Types.ObjectId;
-
 module.exports = function (objectRepository) {
 
     return function (req, res, next) {
+
+        if ( req.params.id.trim() === "new".trim() ){
+            req.params.id = null;
+        }
 
         objectRepository.tenderModel
             .findOne({_id: req.params.id})
             .exec(function (err, obj) {
                 if (err != null) {
-                    res.tpl.error.add(err);
+                    res.tpl.error.push(err);
                     res.tpl.func.logger.error("Tender search failure " + err);
-                    return;
+                    return next(err);
                 }
 
                 if (obj === null){

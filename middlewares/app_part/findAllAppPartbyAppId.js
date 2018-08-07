@@ -10,10 +10,10 @@ module.exports = function (objectrepository) {
             .exec(function (err, obj) {
                 if (err !== null) {
                     res.tpl.error.push(err);
-                    console.log("AppParts find: error");
+                    res.tpl.func.logger.error("Application Parts search failure " + err);
                 } else {
                     res.tpl.appParts = obj;
-                    console.log("AppParts find: success");
+                    res.tpl.func.logger.info("Application Parts search success ( length: " + res.tpl.appParts.length + " )");
                 }
                 return next();
             });

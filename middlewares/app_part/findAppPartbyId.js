@@ -1,17 +1,18 @@
-module.exports = function (objectrepository) {
+module.exports = function (objectRepository) {
 
     return function (req, res, next) {
 
-        objectrepository.appPartModel.findOne({_id: req.params.part})
+        objectRepository.appPartModel.findOne({_id: req.params.part})
             .populate('_score')
             .exec(function (err, obj) {
                 if (err != null) {
                     res.tpl.error.push(err);
-                    console.log("AppPart find: error");
-                } else {
-                    res.tpl.appPart = obj;
-                    console.log("AppPart find: success");
+                    res.tpl.func.logger.error("Application Part search failure " + err);
+                    return next(err);
                 }
+
+                res.tpl.appPart = obj;
+                res.tpl.func.logger.info("Application Part search success ( appPartID: " + res.tpl.appPart._id + " )");
                 return next();
             });
 
