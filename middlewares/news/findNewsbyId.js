@@ -1,31 +1,30 @@
-var ObjectId = require('../../db').Types.ObjectId;
-
-module.exports = function (objectRepository, method) {
+module.exports = function (objectRepository) {
 
     return function (req, res, next) {
 
-        // TODO: Correct news creation
-        if (req.params.id === 'new') {
-            res.tpl.news = new objectRepository.newsModel();
-            console.log("Find news by id: new created");
-            return next();
+        if (req.params.id.trim() === "new".trim()) {
+            req.params.id = null;
+            console.log(req.params.id);
         }
 
-        if (method === 'mod' || method === 'list') {
-            objectRepository.newsModel
-                .findOne({_id: req.params.id})
-                .populate('_publisher')
-                .exec(function (err, obj) {
-                    if (err != null) {
-                        res.tpl.error.add(err);
-                        res.tpl.func.logger.error("News search failure " + err);
-                    } else {
-                        res.tpl.news = obj;
-                        res.tpl.func.logger.info("News search success ( newsID: " + res.tpl.news._id + " )");
-                    }
-                    return next();
-                });
-        }
+        objectRepository.newsModel
+            .findOne({_id: req.params.id})
+            .exec(function (err, obj) {
+                if (err != null) {
+                    res.tpl.error.add(err);
+                    res.tpl.func.logger.error("News search failure " + err);
+                    return next(err);
+                }
+
+                if (obj === null) {
+                    res.tpl.func.logger.verbose("News search success (not found)");
+                } else {
+                    obj.populate('_publisher');
+                    res.tpl.news = obj;
+                    res.tpl.func.logger.info("News search success ( newsID: " + res.tpl.news._id + " )");
+                }
+                return next();
+            });
 
     }
 };
