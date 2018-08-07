@@ -102,7 +102,7 @@ const hotstockFormat = printf(info => {
     return `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`;
 });
 
-var logger = createLogger({
+logger = createLogger({
     level: 'verbose',
     transports: [
         new transports.Console(),
@@ -117,7 +117,7 @@ var logger = createLogger({
 
 app.use(function (req, res, next) {
     logger.format = combine(
-        label({label: res.tpl.func.userID(req)}),
+        label({label: res.tpl.func.userID(req, res)}),
         colorize(),
         timestamp(),
         hotstockFormat
@@ -240,14 +240,11 @@ var server = app.listen(process.env.APP_PORT, function () {
     var setup = require('./setup');
     setup(fs);
 
-    // TODO: find basicLogFormat
-    /*
     logger.format = combine(
         label({label: '   HOTSTOCK APP SERVER  '}),
         colorize(),
         timestamp(),
-        basicLogFormat
+        hotstockFormat
     );
-    */
     logger.info('Running on :' + process.env.APP_PORT);
 });
