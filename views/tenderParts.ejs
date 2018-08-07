@@ -34,9 +34,6 @@
                     <td class="text-center"><%= tenderPart.description %></td>
                     <td class="text-center">
                         <% switch (tenderPart.type) {
-                        case 0: %>
-                        Attachment
-                        <% break;
                         case 1: %>
                         Short text
                         <% break;
@@ -110,7 +107,6 @@
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label" for="type">Type</label>
                             <select class="col-md-4 form-control" id="type" name="type" required>
-                                <option value="0">Attachment</option>
                                 <option value="1">Short text</option>
                                 <option value="2">Long text</option>
                                 <option value="3">Document</option>
@@ -126,11 +122,6 @@
                                 <label class="checkbox-inline"><input type="checkbox" value="true" name="required"
                                                                       id="required">Required</label>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label" for="exampleFormControlFile1">File input</label>
-                            <input type="file" class="col-sm-8  form-control-file" id="exampleFormControlFile1"
-                                   disabled>
                         </div>
                     </div>
                 </div>
@@ -172,12 +163,6 @@
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label" for="type">Type</label>
                             <select class="col-md-4 form-control" id="type" name="type" required>
-                                <option value="0"
-                                        <% if (part.type == 0) { %>
-                                        selected
-                                        <% } %>
-                                >Attachment
-                                </option>
                                 <option value="1"
                                         <% if (part.type == 1) { %>
                                         selected

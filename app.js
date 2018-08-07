@@ -65,25 +65,14 @@ app.use(function (req, res, next) {
         fileSystem: fileSystem,
         fs: fs,
         reqIP: function (req) {
-            var ipAddress;
-            // The request may be forwarded from local web server.
-            var forwardedIpsStr = req.header('x-forwarded-for');
-            if (forwardedIpsStr) {
-                // 'x-forwarded-for' header may return multiple IP addresses in
-                // the format: "client IP, proxy 1 IP, proxy 2 IP" so take the
-                // the first one
-                var forwardedIps = forwardedIpsStr.split(',');
-                ipAddress = forwardedIps[0];
-            }
-            if (!ipAddress) {
-                // If request was not forwarded
-                ipAddress = req.connection.remoteAddress;
-            }
-            return ipAddress;
+            return  req.connection.remoteAddress ||
+                req.socket.remoteAddress ||
+                (req.connection.socket ? req.connection.socket.remoteAddress : null) ||
+                req.headers['x-forwarded-for'];
         },
-        userID: function (req) {
+        userID: function (req, res) {
             if (!req.session.passport || !req.session.passport.user) {
-                return "        anonimous       ";
+                return res.tpl.func.reqIP(req);
             } else {
                 return req.session.passport.user._id;
             }

@@ -2,6 +2,7 @@ var Schema = require('mongoose').Schema;
 var db = require( '../db' );
 
 var ScoreModel = db.model( 'Score', {
+    status: String,
     value: Number,
     comment: String,
     _evaluator: {

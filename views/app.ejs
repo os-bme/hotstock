@@ -14,10 +14,12 @@
                                    href="/tender/<%= res.tpl.app._tender._id %>"><%= res.tpl.app._tender.title %></a>
                             </div>
                             <div class="col-sm-4 text-right">
-                                <% if ( req.session.passport.user.permission > 2 || (res.tpl.app._tender.end_datetime >= Date.now() && req.session.passport.user.internal_id == res.tpl.app._user.bme_id) ) { %>
+                                <% if ( req.session.passport.user.permission > 2 || req.session.passport.user.internal_id == res.tpl.app._user.bme_id ) { %>
                                     <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteModal">
                                         Delete
                                     </button>
+                                <% } %>
+                                <% if ( req.session.passport.user.permission > 2 || (res.tpl.app._tender.end_datetime >= Date.now() && req.session.passport.user.internal_id == res.tpl.app._user.bme_id) ) { %>
                                     <a class="btn btn-outline-secondary btn-sm" href="/app/<%= res.tpl.app._id %>/mod">
                                         Edit
                                     </a>
@@ -26,7 +28,7 @@
                                 <a class="btn btn-outline-secondary btn-sm" href="/user/<%= res.tpl.app._user._id %>"><%= res.tpl.app._user.name %></a>
                                 <% } %>
                                 <h6 class="space-before-10">
-                                    ID: <%= res.tpl.app._id %>
+                                    ApplicationID: <%= res.tpl.app._id %>
                                 </h6>
                             </div>
                         </div>
@@ -81,25 +83,25 @@
                                     <div class="d-flex justify-content-between">
                                         <% if ( appPart._tender_part.scorable ) { %>
                                             <div class="p-2 align-self-center">
-                                                <% if ( appPart._score != undefined && appPart._score.value != null ) { %>
-                                                    <h5 data-toggle="tooltip" data-placement="top" title="<%= appPart._score.comment %>"><%= appPart._score.value %> point</h5>
+                                                <% if ( appPart._final_score != undefined && appPart._final_score.value != null ) { %>
+                                                    <h5 data-toggle="tooltip" data-placement="top" title="<%= appPart._final_score.comment %>"><%= appPart._final_score.value %> point</h5>
                                                 <% } %>
                                             </div>
 
                                             <div class="p-2 align-self-center">
-                                                <% if ( appPart._score != undefined ) { %>
-                                                    <h5 data-toggle="tooltip" data-placement="top" title="<%= appPart._score.comment %>">
-                                                        <% switch (appPart.status) {
-                                                            case 0: %>
+                                                <% if ( appPart._final_score != undefined ) { %>
+                                                    <h5 data-toggle="tooltip" data-placement="top" title="<%= appPart._final_score.comment %>">
+                                                        <% switch (appPart._final_score.status) {
+                                                            case '0': %>
                                                                 Checked
                                                                 <% break;
-                                                            case 1: %>
+                                                            case '1': %>
                                                                 Processing
                                                                 <% break;
-                                                            case 2: %>
+                                                            case '2': %>
                                                                 Accepted
                                                                 <% break;
-                                                            case 3: %>
+                                                            case '3': %>
                                                                 Rejected
                                                                 <% break;
                                                         } %>
@@ -107,9 +109,11 @@
                                                 <% } %>
                                             </div>
                                             <div class="p-2 align-self-start">
-                                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
-                                                        data-target="#scoreModal<%= appPart._id %>">Evaluate
+                                                <% if ( req.session.passport.user.permission > 2 ) { %>
+                                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#scoreModal<%= appPart._id %>">
+                                                    Evaluate
                                                 </button>
+                                                <% } %>
                                             </div>
                                         <% } %>
                                     </div>
@@ -134,7 +138,7 @@
                     <li class="list-group-item">
                         <div class="d-flex justify-content-around">
                             <div class="p-2 align-self-center">
-                                <h3><%= res.tpl.app.final_score %></h3>
+                                <h3><%= res.tpl.app._final_score %></h3>
                             </div>
                             <div class="p-2 align-self-center">
                                 <button type="button" class="btn btn-secondary">Final evaluation</button>
@@ -177,12 +181,12 @@
 
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label" for="score">Score</label>
-                            <input type="number" name="value" class="col-md-8 form-control" id="score" <% if ( appPart._score != undefined ) { %> value="<%= appPart._score.value %>" <% } %> >
+                            <input type="number" name="value" class="col-md-8 form-control" id="score" <% if ( appPart._final_score != undefined ) { %> value="<%= appPart._final_score.value %>" <% } %> >
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label" for="comment">Comment</label>
-                            <input type="text" name="comment" class="col-md-8 form-control" id="comment" <% if ( appPart._score != undefined ) { %> value="<%= appPart._score.comment %>" <% } %> >
+                            <input type="text" name="comment" class="col-md-8 form-control" id="comment" <% if ( appPart._final_score != undefined ) { %> value="<%= appPart._final_score.comment %>" <% } %> >
                         </div>
 
                     </div>
@@ -197,6 +201,8 @@
 </div>
 <% }}) %>
 
+
+<% if ( req.session.passport.user.permission > 2 ) { %>
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -221,5 +227,6 @@
         </form>
     </div>
 </div>
+<% } %>
 
 <% include pageFooter %>
