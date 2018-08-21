@@ -46,17 +46,19 @@
                 </thead>
                 <tbody>
 
-                <% res.tpl.apps.forEach( function (app) { %>
-                    <tr>
-                        <td><%= app._tender.title %></td>
-                        <td class="text-center"><%= app._id %></td>
-                        <td class="text-center"><%= res.tpl.func.moment(app.register_date).format('YYYY-MM-DD HH:mm') %></td>
-                        <td class="text-center"><%= app.final_score %></td>
-                        <td class="text-right">
-                            <a class="btn btn-secondary btn-sm" href="/app/<%= app._id %>">Application</a>
-                        </td>
-                    </tr>
-                <% }); %>
+                <% if (res.tpl.apps !== null && res.tpl.apps !== undefined ) { %>
+                    <% res.tpl.apps.forEach( function (app) { %>
+                        <tr>
+                            <td><%= app._tender.title %></td>
+                            <td class="text-center"><%= app._id %></td>
+                            <td class="text-center"><%= res.tpl.func.moment(app.register_date).format('YYYY-MM-DD HH:mm') %></td>
+                            <td class="text-center"><%= app.final_score %></td>
+                            <td class="text-right">
+                                <a class="btn btn-secondary btn-sm" href="/app/<%= app._id %>">Application</a>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } %>
                 </tbody>
             </table>
         </div>
