@@ -1,6 +1,9 @@
 {
 	"WELCOME_MSG" : "Üdv a Hotstock pályázatis portálon!",
 	"WELCOME_DESCRIPTION" : "Ez egy opensource portál, további információkat a Rólunk menüpontban találsz",
+	"HOME": {
+		"ITEM": "Kezdőlap"
+	},
 	"NEWS": {
 		"MENU": {
 			"ITEM" : "Hírek",

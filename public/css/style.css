@@ -84,3 +84,7 @@ html, body{
 .pagination a{
   color: orangered;
 }
+
+.gj-calendar-bootstrap{
+  z-index: 10000;
+}
